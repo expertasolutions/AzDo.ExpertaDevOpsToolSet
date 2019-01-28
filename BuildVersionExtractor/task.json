@@ -6,9 +6,6 @@
     "helpMarkDown": "",
     "category": "Utility",
     "preview": true,
-    "visibility": [
-        "Build", "Release"
-    ],
     "author": "Solutions Experta Inc.",
     "version": {
         "Major": "__major__",
