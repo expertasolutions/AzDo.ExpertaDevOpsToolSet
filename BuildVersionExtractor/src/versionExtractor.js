@@ -16,7 +16,7 @@ try {
     console.log("stringToAnalyze: " + stringToAnalyze);
 
     var versionRegex = "(\d{1,}).(\d{1,}).(\d{1,})";
-    result = stringToAnalyze.match(versionRegex);
+    var result = stringToAnalyze.match(versionRegex);
     console.log(result.value);
 
     major = result[1];
