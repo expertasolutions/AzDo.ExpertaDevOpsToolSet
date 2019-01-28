@@ -41,7 +41,6 @@
   "files": [
       { "path": "BuildVersionExtractor" }
   ],
-  "public": true,
   "contributions": [
       {
           "id": "custom-build-release-task",
