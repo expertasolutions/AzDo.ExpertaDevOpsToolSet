@@ -7,7 +7,7 @@
     "category": "Utility",
     "preview": true,
     "visibility": [
-        "Release"
+        "Build", "Release"
     ],
     "author": "Solutions Experta Inc.",
     "version": {
