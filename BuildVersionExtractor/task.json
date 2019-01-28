@@ -1,0 +1,42 @@
+{
+  "id": "37b832a0-5455-42d5-9265-878d9e2b5084",
+    "name": "VersionExtractor",
+    "friendlyName": "VersionExtractor",
+    "description": "Task to extract version number digit from a string",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "preview": true,
+    "visibility": [
+        "Release"
+    ],
+    "author": "Solutions Experta Inc.",
+    "version": {
+        "Major": "__major__",
+        "Minor": "__minor__",
+        "Patch": "__patch__"
+    },
+    "instanceNameFormat": "Version extractor digit",
+    "groups": [],
+    "inputs": [
+        {
+          "name": "stringToAnalyse",
+          "type": "string",
+          "label": "String to extract version number",
+          "helpMarkDown": "",
+          "defaultValue": "",
+          "required": true
+        }
+    ],
+    "outputVariables" : [
+      { "name": "versionMajor", "description": "Version major number" },
+      { "name": "versionMinor", "description": "Version minor number" },
+      { "name": "versionPath", "description": "Version patch number" },
+      { "name": "fullVersionNumber", "description" : "Full version number string"}
+    ],
+    "execution": {
+        "Node": {
+          "target": "src//versionExtractor.js",
+          "argumentFormat": ""
+        }
+      }
+}
