@@ -14,7 +14,7 @@ Available tasks:
 	<tbody>
 		<tr>
 			<td>Master</td>
-			<td><[![Build status](https://dev.azure.com/experta/ExpertaSolutions/_apis/build/status/GitHub-ExpertaDevOpsToolSet-CI)](https://dev.azure.com/experta/ExpertaSolutions/_build/latest?definitionId=200)</td>
+			<td><img src="https://dev.azure.com/experta/ExpertaSolutions/_apis/build/status/GitHub-ExpertaDevOpsToolSet-CI?branchName=master"/></td>
 		</tr>
 	</tbody>
 </table>

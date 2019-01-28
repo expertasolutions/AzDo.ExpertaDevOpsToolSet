@@ -27,8 +27,8 @@
     "outputVariables" : [
       { "name": "versionMajor", "description": "Version major number" },
       { "name": "versionMinor", "description": "Version minor number" },
-      { "name": "versionPath", "description": "Version patch number" },
-      { "name": "fullVersionNumber", "description" : "Full version number string"}
+      { "name": "versionPatch", "description": "Version patch number" },
+      { "name": "fullVersion", "description" : "Full version number string"}
     ],
     "execution": {
         "Node": {
