@@ -16,7 +16,7 @@
     "groups": [],
     "inputs": [
         {
-          "name": "stringToAnalyse",
+          "name": "stringToAnalyze",
           "type": "string",
           "label": "String to extract version number",
           "helpMarkDown": "",
