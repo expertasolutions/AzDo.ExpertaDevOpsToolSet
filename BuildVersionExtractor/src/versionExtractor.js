@@ -15,7 +15,7 @@ try {
     var stringToAnalyze = tl.getInput("stringToAnalyze", true);
     console.log("stringToAnalyze: " + stringToAnalyze);
 
-    var result = stringToAnalyze.match("(\d{1,}).(\d{1,}).(\d{1,})");
+    var result = stringToAnalyze.match("([0-9]{1,}).([0-9]{1,}).([0-9]{1,})");
     console.log(result);
 
     major = result[1];
