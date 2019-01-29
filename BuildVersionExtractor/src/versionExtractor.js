@@ -17,7 +17,7 @@ try {
 
     var versionRegex = "(\d{1,}).(\d{1,}).(\d{1,})";
     var result = stringToAnalyze.match(versionRegex);
-    console.log(result.value);
+    console.log(result);
 
     major = result[1];
     minor = result[2];
@@ -30,7 +30,7 @@ try {
     tl.setVariable("versionMajor", major);
     tl.setVariable("versionMinor", minor);
     tl.setVariable("versionPatch", patch);
-    tl.setVariable("fullVersion", result.value);
+    tl.setVariable("fullVersion", result[0]);
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
