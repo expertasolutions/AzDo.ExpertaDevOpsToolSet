@@ -13,7 +13,8 @@ var tl = require('vsts-task-lib');
 
 try {
     var stringToAnalyze = tl.getInput("stringToAnalyze", true);
-    console.log("stringToAnalyze: " + stringToAnalyze);
+    
+    console.log("Current string analyzed: " + stringToAnalyze);
 
     var result = stringToAnalyze.match("([0-9]{1,}).([0-9]{1,}).([0-9]{1,})");
 
@@ -21,6 +22,8 @@ try {
     var minor = result[2];
     var patch = result[3];
 
+    console.log("Version string details:");
+    console.log("");
     console.log("fullVersion: " + result[0]);
     console.log("versionMajor: " + major);
     console.log("versinMinor: " + minor);
