@@ -40,4 +40,8 @@ Available tasks:
 </table>
 
 #Task Output variables
-Both task returns the output variable ($ReferenceName.azureAdApplicationId)
+- VersionExtrator
+	- versionMajor
+	- versionMinor
+	- versionPatch
+	- fullVersion
