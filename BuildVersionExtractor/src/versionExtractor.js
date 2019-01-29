@@ -15,8 +15,7 @@ try {
     var stringToAnalyze = tl.getInput("stringToAnalyze", true);
     console.log("stringToAnalyze: " + stringToAnalyze);
 
-    var versionRegex = "(\d{1,}).(\d{1,}).(\d{1,})";
-    var result = stringToAnalyze.match(versionRegex);
+    var result = stringToAnalyze.match("(\d{1,}).(\d{1,}).(\d{1,})");
     console.log(result);
 
     major = result[1];
