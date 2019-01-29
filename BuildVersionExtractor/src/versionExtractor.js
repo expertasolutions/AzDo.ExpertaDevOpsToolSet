@@ -18,13 +18,14 @@ try {
     var result = stringToAnalyze.match("([0-9]{1,}).([0-9]{1,}).([0-9]{1,})");
     console.log(result);
 
-    major = result[1];
-    minor = result[2];
-    patch = result[3];
+    var major = result[1];
+    var minor = result[2];
+    var patch = result[3];
 
-    console.log(major);
-    console.log(minor);
-    console.log(patch);
+    console.log("fullVersion: " + result[0]);
+    console.log("versionMajor: " + major);
+    console.log("versinMinor: " + minor);
+    console.log("versionPatch: " + patch);
 
     tl.setVariable("versionMajor", major);
     tl.setVariable("versionMinor", minor);
