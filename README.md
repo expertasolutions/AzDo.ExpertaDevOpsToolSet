@@ -39,7 +39,7 @@ Available tasks:
 	</tbody>
 </table>
 
-# Task Output variables
+## Task Output variables
 - VersionExtrator
 	- versionMajor
 	- versionMinor
