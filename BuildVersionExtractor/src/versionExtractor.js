@@ -16,7 +16,6 @@ try {
     console.log("stringToAnalyze: " + stringToAnalyze);
 
     var result = stringToAnalyze.match("([0-9]{1,}).([0-9]{1,}).([0-9]{1,})");
-    console.log(result);
 
     var major = result[1];
     var minor = result[2];
