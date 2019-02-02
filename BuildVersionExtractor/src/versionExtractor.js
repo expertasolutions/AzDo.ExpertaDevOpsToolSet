@@ -26,7 +26,7 @@ try {
     console.log("");
     console.log("fullVersion: " + result[1]);
     console.log("versionMajor: " + major);
-    console.log("versinMinor: " + minor);
+    console.log("versionMinor: " + minor);
     console.log("versionPatch: " + patch);
 
     tl.setVariable("versionMajor", major);
