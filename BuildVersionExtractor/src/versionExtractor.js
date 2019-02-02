@@ -16,15 +16,15 @@ try {
     
     console.log("Current string analyzed: " + stringToAnalyze);
 
-    var result = stringToAnalyze.match("([0-9]{1,}).([0-9]{1,}).([0-9]{1,})");
+    var result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]{1,}).([0-9]{1,}))");
 
-    var major = result[1];
-    var minor = result[2];
-    var patch = result[3];
+    var major = result[2];
+    var minor = result[3];
+    var patch = result[4];
 
     console.log("Version string details:");
     console.log("");
-    console.log("fullVersion: " + result[0]);
+    console.log("fullVersion: " + result[1]);
     console.log("versionMajor: " + major);
     console.log("versinMinor: " + minor);
     console.log("versionPatch: " + patch);
