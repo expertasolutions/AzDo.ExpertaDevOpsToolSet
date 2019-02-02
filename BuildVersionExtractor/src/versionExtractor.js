@@ -32,7 +32,7 @@ try {
     tl.setVariable("versionMajor", major);
     tl.setVariable("versionMinor", minor);
     tl.setVariable("versionPatch", patch);
-    tl.setVariable("fullVersion", result[0]);
+    tl.setVariable("fullVersion", result[1]);
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
