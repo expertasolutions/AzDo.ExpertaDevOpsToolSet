@@ -16,6 +16,9 @@ try {
     var templateFile = tl.getInput("templateFile", true);
     var parameterFile = tl.getInput("parameterFile", true);
 
+    console.log("Template file: " + templateFile);
+    console.log("Parameter file:" + parameterFile);
+
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
