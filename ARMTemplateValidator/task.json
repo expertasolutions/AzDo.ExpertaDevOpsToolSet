@@ -24,6 +24,14 @@
           "required": true
         },
         {
+          "name": "resourceGroup",
+          "label": "Resource Group to deploy",
+          "type": "pickList",
+          "defaultValue": "",
+          "required": true,
+          "helpMarkDown": ""
+        },
+        {
           "name": "templateFile",
           "type": "filePath",
           "label": "Template file to analyze",
@@ -39,6 +47,15 @@
           "defaultValue": "",
           "required": true
         }
+    ],
+    "dataSourceBindinds" : [
+      {
+        "target": "resourceGroupName",
+        "endpointId": "$(azureSubscriptionEndpoint)",
+        "endpointUrl": "{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/resources?api-version=2018-05-01",
+        "resultSelector": "jsonpath:$.value[*]",
+        "resultTemplate": "{{{ #extractResource id resourcegroups}}}"
+      }
     ],
     "execution": {
         "Node": {

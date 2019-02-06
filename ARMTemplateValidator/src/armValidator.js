@@ -22,10 +22,12 @@ try {
     var servicePrincipalKey = tl.getEndpointAuthorizationParameter(azureEndpointSubscription, "serviceprincipalkey", false);
     var tenantId = tl.getEndpointAuthorizationParameter(azureEndpointSubscription,"tenantid", false);
 
+    var resourceGroup = tl.getInput("resourceGroup", true);
     var templateFile = tl.getInput("templateFile", true);
     var parameterFile = tl.getInput("parameterFile", true);
 
     console.log("Subscription Id:   " + subcriptionId);
+    console.log("Resource Group:    " + resourceGroup);
     console.log("Template file:     " + templateFile);
     console.log("Parameter file:    " + parameterFile);
 
@@ -34,7 +36,7 @@ try {
         noProfile: true
     });
 
-    pwsh.addCommand(__dirname  + "/armValidator.ps1 -subscriptionId '" + subcriptionId + "'"
+    pwsh.addCommand(__dirname  + "/armValidator.ps1 -subscriptionId '" + subcriptionId + "' -resourceGroupName '" + resourceGroup + "'"
         + " -templateFile '" + templateFile + "' -parameterFile '" + parameterFile + "'"
     ).then(function(){
         return pwsh.invoke();
