@@ -7,5 +7,6 @@ param(
   [string]$parameterFile
 )
 
+write-host $subscriptionId
 write-host $templateFile
 write-host $parameterFile

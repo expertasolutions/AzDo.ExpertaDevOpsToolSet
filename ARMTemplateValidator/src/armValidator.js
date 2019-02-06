@@ -25,15 +25,16 @@ try {
     var templateFile = tl.getInput("templateFile", true);
     var parameterFile = tl.getInput("parameterFile", true);
 
-    console.log("Template file: " + templateFile);
-    console.log("Parameter file:" + parameterFile);
+    console.log("Subscription Id:   " + subcriptionId);
+    console.log("Template file:     " + templateFile);
+    console.log("Parameter file:    " + parameterFile);
 
     var pwsh = new shell({
         executionPolicy: 'Bypass',
         noProfile: true
     });
 
-    pwsh.addCommand(__dirname  + "/createAzureApp.ps1 -subscriptionId '" + subcriptionId + "'"
+    pwsh.addCommand(__dirname  + "/armValidator.ps1 -subscriptionId '" + subcriptionId + "'"
         + " -templateFile '" + templateFile + "' -parameterFile '" + parameterFile + "'"
     ).then(function(){
         return pwsh.invoke();
