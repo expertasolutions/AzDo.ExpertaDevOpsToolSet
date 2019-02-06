@@ -22,7 +22,7 @@ try {
     var servicePrincipalKey = tl.getEndpointAuthorizationParameter(azureEndpointSubscription, "serviceprincipalkey", false);
     var tenantId = tl.getEndpointAuthorizationParameter(azureEndpointSubscription,"tenantid", false);
 
-    var resourceGroup = tl.getInput("resourceGroup", true);
+    var resourceGroup = tl.getInput("resourceGroupName", true);
     var templateFile = tl.getInput("templateFile", true);
     var parameterFile = tl.getInput("parameterFile", true);
 

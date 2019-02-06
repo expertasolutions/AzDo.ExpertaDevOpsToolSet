@@ -24,7 +24,7 @@
           "required": true
         },
         {
-          "name": "resourceGroup",
+          "name": "resourceGroupName",
           "label": "Resource Group to deploy",
           "type": "pickList",
           "defaultValue": "",
