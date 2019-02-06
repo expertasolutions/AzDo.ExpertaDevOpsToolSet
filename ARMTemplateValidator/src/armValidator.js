@@ -37,6 +37,7 @@ try {
     });
 
     pwsh.addCommand(__dirname  + "/armValidator.ps1 -subscriptionId '" + subcriptionId + "' -resourceGroupName '" + resourceGroup + "'"
+        + " -servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' -tenantId '" + tenantId + "'"
         + " -templateFile '" + templateFile + "' -parameterFile '" + parameterFile + "'"
     ).then(function(){
         return pwsh.invoke();
