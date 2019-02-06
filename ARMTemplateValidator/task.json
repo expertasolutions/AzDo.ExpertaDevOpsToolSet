@@ -16,6 +16,14 @@
     "groups": [],
     "inputs": [
         {
+          "name": "azureSubscriptionEndpoint",
+          "type": "connectedService:AzureRM",
+          "label": "Azure subscription",
+          "helpMarkDown": "Select the Azure Resource Manager subscription, which contains Azure Container Registry.Note: To configure new service connection, select the Azure subscription from the list and click 'Authorize'. If your subscription is not listed or if you want to use an existing Service Principal, you can setup an Azure service connection using 'Add' or 'Manage' button.",
+          "defaultValue": "",
+          "required": true
+        },
+        {
           "name": "templateFile",
           "type": "filePath",
           "label": "Template file to analyze",
