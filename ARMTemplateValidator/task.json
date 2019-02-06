@@ -1,0 +1,41 @@
+{
+  "id": "37b832a0-5455-42d5-9265-878d9e2b5084",
+    "name": "ARMTemplateValidator",
+    "friendlyName": "ARMTemplateValidator",
+    "description": "Validate a ARM template and parameter file",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "preview": true,
+    "author": "Solutions Experta Inc.",
+    "version": {
+        "Major": "__major__",
+        "Minor": "__minor__",
+        "Patch": "__patch__"
+    },
+    "instanceNameFormat": "ARM Template validator",
+    "groups": [],
+    "inputs": [
+        {
+          "name": "templateFileToAnalyaze",
+          "type": "string",
+          "label": "Template file to analyze",
+          "helpMarkDown": "",
+          "defaultValue": "",
+          "required": true
+        }, 
+        {
+          "name": "parameterFile",
+          "type": "string",
+          "label": "Parameter file to validate",
+          "helpMarkDown": "",
+          "defaultValue": "",
+          "required": true
+        }
+    ],
+    "execution": {
+        "Node": {
+          "target": "src//armValidator.js",
+          "argumentFormat": ""
+        }
+      }
+}

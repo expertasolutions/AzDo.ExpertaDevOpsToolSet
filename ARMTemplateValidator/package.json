@@ -1,8 +1,8 @@
 {
-  "name": "VersionExtractor",
+  "name": "ARMTemplateValidator",
   "version": "1.0.0",
-  "description": "Task to extract version number digit from a string",
-  "main": "versionExtractor.js",
+  "description": "Validate a ARM template and parameter file",
+  "main": "armValidator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

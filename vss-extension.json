@@ -39,7 +39,8 @@
   },
   "preview":true,
   "files": [
-      { "path": "BuildVersionExtractor" }
+      { "path": "BuildVersionExtractor" }, 
+      { "path": "ARMTemplateValidator"}
   ],
   "contributions": [
       {
@@ -50,6 +51,16 @@
           ],
           "properties": {
               "name": "BuildVersionExtractor"
+          }
+      }, 
+      {
+          "id": "arm-template-validator-task",
+          "type": "ms.vss-distributed-task.task",
+          "targets":[
+              "ms.vss-distributed-task.tasks"
+          ],
+          "properties":{
+              "name":"ARMTemplateValidator"
           }
       }
   ]
