@@ -26,7 +26,7 @@
         {
           "name": "resourceGroupName",
           "label": "Resource Group to deploy",
-          "type": "pickList",
+          "type": "string",
           "defaultValue": "",
           "required": true,
           "helpMarkDown": ""
@@ -47,15 +47,6 @@
           "defaultValue": "",
           "required": true
         }
-    ],
-    "dataSourceBindinds" : [
-      {
-        "target": "resourceGroupName",
-        "endpointId": "$(azureSubscriptionEndpoint)",
-        "endpointUrl": "{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/resourcegroups?api-version=2018-05-01",
-        "resultSelector": "jsonpath:$.value[*]",
-        "resultTemplate": "{{{ #extractResource id name}}}"
-      }
     ],
     "execution": {
         "Node": {
