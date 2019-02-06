@@ -13,3 +13,7 @@ write-host $subscriptionId
 write-host $resourceGroupName
 write-host $templateFile
 write-host $parameterFile
+
+$result = az group deployment validate -g $resourceGroupName --template-file $templateFile --parameters $parameterName --subscription $subscriptionId | ConvertFrom-Json
+
+write-host $result
