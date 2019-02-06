@@ -54,7 +54,7 @@
         "endpointId": "$(azureSubscriptionEndpoint)",
         "endpointUrl": "{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/resourcegroups?api-version=2018-05-01",
         "resultSelector": "jsonpath:$.value[*]",
-        "resultTemplate": "{{{ #extractResource id resourcegroups}}}"
+        "resultTemplate": "{{{ #extractResource id name}}}"
       }
     ],
     "execution": {
