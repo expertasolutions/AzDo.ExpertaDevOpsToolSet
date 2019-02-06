@@ -12,7 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tl = require('vsts-task-lib');
 
 try {
-    console.log("Not implemented yet");
+    
+    var templateFile = tl.getInput("templateFile", true);
+    var parameterFile = tl.getInput("parameterFile", true);
+
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }

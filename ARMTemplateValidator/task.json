@@ -16,8 +16,8 @@
     "groups": [],
     "inputs": [
         {
-          "name": "templateFileToAnalyaze",
-          "type": "string",
+          "name": "templateFile",
+          "type": "filePath",
           "label": "Template file to analyze",
           "helpMarkDown": "",
           "defaultValue": "",
@@ -25,7 +25,7 @@
         }, 
         {
           "name": "parameterFile",
-          "type": "string",
+          "type": "filePath",
           "label": "Parameter file to validate",
           "helpMarkDown": "",
           "defaultValue": "",
