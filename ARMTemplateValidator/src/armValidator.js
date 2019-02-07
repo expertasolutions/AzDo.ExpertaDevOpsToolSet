@@ -48,11 +48,12 @@ try {
         var regx = "(File Error): ([\\D\\d]*)";
         var result = output.match(regx);
         var errorMessage = result[2]
+        console.log(result);
 
-        if(errorMessage != "none") {
-            tl.setResult(tl.TaskResult.Failed, errorMessage);
-        } else {
+        if(errorMessage == "none") {
             console.log("ok");
+        } else {
+            tl.setResult(tl.TaskResult.Failed, errorMessage);
         }
         pwsh.dispose();
     }).catch(function(err){
