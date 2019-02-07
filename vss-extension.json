@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "ExpertaDevOpsToolsSet",
-  "name": "Experta DevOps Tools set package",
+  "name": "Experta DevOps Toolset",
   "version": "0.0.0",
   "publisher": "expertaPreview",
   "targets": [
