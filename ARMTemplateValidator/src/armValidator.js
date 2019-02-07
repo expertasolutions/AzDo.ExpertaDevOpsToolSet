@@ -49,9 +49,11 @@ try {
         var result = output.match(regx);
         var errorMessage = result[2]
 
-        if(errorMessage != "none")
+        if(errorMessage != "none") {
             tl.setResult(tl.TaskResult.Failed, errorMessage);
-
+        } else {
+            console.log("ok");
+        }
         pwsh.dispose();
     }).catch(function(err){
         console.log(err);
