@@ -29,7 +29,7 @@ try {
     console.log("Subscription Id:   " + subcriptionId);
     console.log("Resource Group:    " + resourceGroup);
     console.log("Template file:     " + templateFile);
-    console.log("Parameter file:    " + parameterFile);
+    console.log("Parameters file:    " + parameterFile);
 
     var pwsh = new shell({
         executionPolicy: 'Bypass',
@@ -47,7 +47,7 @@ try {
 
         var regx = "(File Error): ([\\D\\d]*)";
         var result = output.match(regx);
-        var errorMessage = result[2]
+        var errorMessage = result[2].replace("\n","");
         console.log(result);
 
         if(errorMessage == "none") {
