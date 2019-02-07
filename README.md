@@ -2,7 +2,6 @@ Experta Solutions DevOps custom tasks tools set
 
 Available tasks:
 - VersionExtractor
-- ARMTemplateValidator
 
 ## Builds status
 <table>
