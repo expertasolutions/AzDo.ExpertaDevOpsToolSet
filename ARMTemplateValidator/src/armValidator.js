@@ -42,9 +42,16 @@ try {
     ).then(function(){
         return pwsh.invoke();
     })
-    .then(function(output){
+    .then(function(output) {
         console.log(output);
-        
+
+        var regx = "(File Error): ([\\D\\d]*)";
+        var result = output.match(regx);
+        var errorMessage = result[2]
+
+        if(errorMessage != "none")
+            tl.setResult(tl.TaskResult.Failed, errorMessage);
+
         pwsh.dispose();
     }).catch(function(err){
         console.log(err);

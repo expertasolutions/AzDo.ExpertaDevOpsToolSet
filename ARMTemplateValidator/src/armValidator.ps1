@@ -15,16 +15,19 @@ param(
   [string]$parameterFile
 )
 
-write-host $subscriptionId
-write-host $resourceGroupName
-write-host $templateFile
-write-host $parameterFile
-
 $loginResult = az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --tenant $tenantId
 $setSubResult = az account set --subscription $subscriptionId
 
-$result = az group deployment validate -g $resourceGroupName --template-file "$templateFile" --parameters "$parameterFile" --subscription $subscriptionId | ConvertFrom-Json
-
-write-host $result
+$hasError = ""
+try {
+  $result = az group deployment validate -g $resourceGroupName --template-file "$templateFile" --parameters "$parameterFile" --subscription $subscriptionId | ConvertFrom-Json
+  if($result.error.length -eq 0){
+    write-host "File Error: none"
+  } else {
+    write-host "File Error: $($result.error)"
+  }
+} catch {
+  $hasError = "File Error: $($_)"
+}
 
 $logoutResult = az account clear
