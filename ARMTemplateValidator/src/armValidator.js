@@ -48,7 +48,6 @@ try {
         var regx = "(File Error): ([\\D\\d]*)";
         var result = output.match(regx);
         var errorMessage = result[2].replace("\n","");
-        console.log(result);
 
         if(errorMessage == "none") {
             console.log("ok");
