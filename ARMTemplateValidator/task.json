@@ -8,9 +8,9 @@
     "preview": true,
     "author": "Solutions Experta Inc.",
     "version": {
-        "Major": "__major__",
-        "Minor": "__minor__",
-        "Patch": "__patch__"
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 0
     },
     "instanceNameFormat": "ARM Template validator",
     "groups": [],

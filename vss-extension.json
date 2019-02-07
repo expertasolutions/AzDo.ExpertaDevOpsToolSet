@@ -2,8 +2,8 @@
   "manifestVersion": 1,
   "id": "ExpertaDevOpsToolsSet",
   "name": "Experta DevOps Tools set package",
-  "version": "__major__.__minor__.__patch__",
-  "publisher": "experta",
+  "version": "0.0.0",
+  "publisher": "expertaPreview",
   "targets": [
       {
           "id": "Microsoft.VisualStudio.Services"
@@ -37,7 +37,6 @@
     "details": { "path": "README.md" },
     "license": { "path": "license" }
   },
-  "preview":true,
   "files": [
       { "path": "BuildVersionExtractor" }, 
       { "path": "ARMTemplateValidator"}
