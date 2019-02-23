@@ -43,6 +43,7 @@ try {
     ).then(function() {
         return pwsh.invoke();
     }).then(function(output){
+        console.log("az acr output: ")
         console.log(output);
         pwsh.dispose();
     }).catch(function(err){
