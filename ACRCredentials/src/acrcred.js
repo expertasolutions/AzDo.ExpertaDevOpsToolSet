@@ -46,7 +46,7 @@ try {
         let result = JSON.parse(output);
 
         tl.setVariable("username", result.username, true);
-        tl.setVariables("password", result.passwords[0].value, true);
+        tl.setVariable("password", result.passwords[0].value, true);
         tl.setVariable("password2", result.passwords[1].value, true);        
 
         pwsh.dispose();
