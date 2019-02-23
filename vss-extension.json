@@ -39,7 +39,7 @@
   },
   "files": [
       { "path": "BuildVersionExtractor" },
-      { "path": "ACRCredential" }
+      { "path": "ACRCredentials" }
   ],
   "contributions": [
       {
