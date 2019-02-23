@@ -12,7 +12,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tl = require('azure-pipelines-task-lib');
 
 try {
-
+    var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
+    var resourceGroupName = tl.getInput("resourceGroupName", true);
+    var containerRegistry = tl.getInput("containerRegistry", true);
+    var actionType = tl.getInput("actionType", true);
+    
+    console.log("Azure Subscription Id: " + azureSubscriptionEndpoint);
+    console.log("Resource Group: " + resourceGroupName);
+    console.log("Container Registry: " + containerRegistry);
+    console.log("Action Type: " + actionType);
+    
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }

@@ -32,7 +32,7 @@
           "helpMarkDown": ""
         },
         {
-          "name": "acrRegistry",
+          "name": "containerRegistry",
           "label": "Azure Container Registry",
           "type": "pickList",
           "defaultValue":"",
@@ -43,10 +43,10 @@
           "name": "actionType",
           "label": "Action type",
           "type": "pickList",
-          "defaultValue": "Create / Update",
+          "defaultValue": "show",
           "options": {
-            "createUpdate": "Create / Update",
-            "remove": "Remove"
+            "show": "Show",
+            "renew": "Renew"
           },
           "required": false
         }
