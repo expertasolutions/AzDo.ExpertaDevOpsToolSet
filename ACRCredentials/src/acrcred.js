@@ -18,7 +18,8 @@ try {
     var subcriptionId = tl.getEndpointDataParameter(azureSubscriptionEndpoint, "subscriptionId", false);
     var servicePrincipalId = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint, "serviceprincipalid", false);
     var servicePrincipalKey = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint, "serviceprincipalkey", false);
-    
+    var tenantId = tl.getEndpointAuthorizationParameter(azureEndpointSubscription,"tenantid", false);
+
     var resourceGroupName = tl.getInput("resourceGroupName", true);
     var containerRegistry = tl.getInput("containerRegistry", true);
     var actionType = tl.getInput("actionType", true);
@@ -26,6 +27,7 @@ try {
     console.log("Azure Subscription Id: " + subcriptionId);
     console.log("ServicePrincipalId: " + servicePrincipalId);
     console.log("ServicePrincipalKey: " + servicePrincipalKey);
+    console.log("Tenant Id: " + tenantId);
     console.log("Resource Group: " + resourceGroupName);
     console.log("Container Registry: " + containerRegistry);
     console.log("Action Type: " + actionType);
@@ -34,6 +36,7 @@ try {
 
     pwsh.addCommand(__dirname  + "/acrcred.ps1 -subscriptionId '" + subcriptionId
         + "' -servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
+        + "'-tenantId '" + tenantId + "' "
         + "-resourceGroupName '" + resourceGroupName + "' "
         + "-containerRegistry '" + containerRegistry + "' "
         + "-actionType '" + actionType + "' "

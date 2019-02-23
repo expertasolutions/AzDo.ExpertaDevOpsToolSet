@@ -6,10 +6,12 @@ param(
 , [Parameter(Mandatory=$true, Position=3)]
   [string]$servicePrincipalKey
 , [Parameter(Mandatory=$true, Position=4)]
-  [string]$resourceGroupName
+  [string]$tenantId
 , [Parameter(Mandatory=$true, Position=5)]
-  [string]$containerRegistry
+  [string]$resourceGroupName
 , [Parameter(Mandatory=$true, Position=6)]
+  [string]$containerRegistry
+, [Parameter(Mandatory=$true, Position=7)]
   [string]$actionType
 )
 
