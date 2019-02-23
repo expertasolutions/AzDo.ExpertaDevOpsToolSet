@@ -10,17 +10,43 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
+var shell = require('node-powershell');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
+    
+    var subcriptionId = tl.getEndpointDataParameter(azureSubscriptionEndpoint, "subscriptionId", false);
+    var servicePrincipalId = tl.getEndpointAuthorizationParameter(azureEndpointSubscription, "serviceprincipalid", false);
+    var servicePrincipalKey = tl.getEndpointAuthorizationParameter(azureEndpointSubscription, "serviceprincipalkey", false);
+    
     var resourceGroupName = tl.getInput("resourceGroupName", true);
     var containerRegistry = tl.getInput("containerRegistry", true);
     var actionType = tl.getInput("actionType", true);
     
-    console.log("Azure Subscription Id: " + azureSubscriptionEndpoint);
+    console.log("Azure Subscription Id: " + subcriptionId);
+    console.log("ServicePrincipalId: " + servicePrincipalId);
+    console.log("ServicePrincipalKey: " + servicePrincipalKey);
     console.log("Resource Group: " + resourceGroupName);
     console.log("Container Registry: " + containerRegistry);
     console.log("Action Type: " + actionType);
+
+    var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
+
+    pwsh.addCommand(__dirname  + "/acrcred.ps1 -subscriptionId '" + subcriptionId
+        + "' -servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
+        + "-resourceGroupName '" + resourceGroupName + "' "
+        + "-containerRegistry '" + containerRegistry + "' "
+        + "-actionType '" + actionType + "' "
+    ).then(function() {
+        return pwsh.invoke();
+    }).then(function(output){
+        console.log(output);
+        pwsh.dispose();
+    }).catch(function(err){
+        console.log(err);
+        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+        pwsh.dispose();
+    });
     
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
