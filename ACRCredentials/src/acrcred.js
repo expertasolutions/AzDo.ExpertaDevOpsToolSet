@@ -44,7 +44,6 @@ try {
     ).then(function() {
         return pwsh.invoke();
     }).then(function(output){
-        // TODO: Decrypt the output 
         let result = JSON.parse(output);
 
         tl.setVariable("username", result.username, true);
