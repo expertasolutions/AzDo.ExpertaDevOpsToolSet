@@ -13,6 +13,8 @@ param(
   [string]$containerRegistry
 , [Parameter(Mandatory=$true, Position=7)]
   [string]$actionType
+, [Parameter(Mandatory=$true, Position=8)]
+  [string]$pwdName
 )
 
 $loginResult = az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --tenant $tenantId

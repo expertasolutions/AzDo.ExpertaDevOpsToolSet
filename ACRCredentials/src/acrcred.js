@@ -23,6 +23,7 @@ try {
     var resourceGroupName = tl.getInput("resourceGroupName", true);
     var containerRegistry = tl.getInput("containerRegistry", true);
     var actionType = tl.getInput("actionType", true);
+    var passwordToRenew = tl.getInput("pwdName", true);
     
     console.log("Azure Subscription Id: " + subcriptionId);
     console.log("ServicePrincipalId: " + servicePrincipalId);
@@ -31,6 +32,7 @@ try {
     console.log("Resource Group: " + resourceGroupName);
     console.log("Container Registry: " + containerRegistry);
     console.log("Action Type: " + actionType);
+    console.log("Password Name: " + passwordToRenew);
 
     // TODO: Use npm module to interact with azure container registry
     var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
@@ -41,6 +43,7 @@ try {
         + "-resourceGroupName '" + resourceGroupName + "' "
         + "-containerRegistry '" + containerRegistry + "' "
         + "-actionType '" + actionType + "' "
+        + "-pwdName '" + passwordToRenew + "' "
     ).then(function() {
         return pwsh.invoke();
     }).then(function(output){

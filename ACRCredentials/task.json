@@ -49,6 +49,15 @@
             "renew": "Renew"
           },
           "required": false
+        },
+        {
+          "name": "pwdName",
+          "label": "Password name to renew",
+          "type": "string",
+          "defaultValue": "*",
+          "required:": true,
+          "groupName": "",
+          "visibleRule": "actionType = renew"
         }
     ],
     "dataSourceBindings" : [
