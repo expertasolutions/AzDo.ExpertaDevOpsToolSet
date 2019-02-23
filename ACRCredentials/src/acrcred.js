@@ -43,15 +43,11 @@ try {
     ).then(function() {
         return pwsh.invoke();
     }).then(function(output){
-        console.log("az acr output: ")
-        console.log(output);
-
         let result = JSON.parse(output);
 
-        console.log("object output");
-        console.log(result.username);
-        console.log(result.passwords[0].name + " = " + result.passwords[0].value);
-        console.log(result.passwords[1].name + " = " + result.passwords[1].value);
+        tl.setVariable("username", result.username, true);
+        tl.setVariables("password", result.passwords[0].value, true);
+        tl.setVariable("password2", result.passwords[1].value, true);        
 
         pwsh.dispose();
     }).catch(function(err){

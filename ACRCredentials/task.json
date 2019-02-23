@@ -68,6 +68,7 @@
       }
     ],
     "outputVariables" : [
+      { "username": "username" },
       { "name": "password" },
       { "name": "password2" }
     ],
