@@ -15,6 +15,10 @@ param(
   [string]$actionType
 )
 
+write-host $subscriptionId
+write-host $resourceGroupName
+write-host $containerRegistry
+
 $loginResult = az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --tenant $tenantId
 $setSubResult = az account set --subscription $subscriptionId
 
