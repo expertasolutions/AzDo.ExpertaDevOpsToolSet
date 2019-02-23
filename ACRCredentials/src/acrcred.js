@@ -32,6 +32,7 @@ try {
     console.log("Container Registry: " + containerRegistry);
     console.log("Action Type: " + actionType);
 
+    // TODO: Use npm module to interact with azure container registry
     var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
 
     pwsh.addCommand(__dirname  + "/acrcred.ps1 -subscriptionId '" + subcriptionId + "' "
@@ -43,6 +44,7 @@ try {
     ).then(function() {
         return pwsh.invoke();
     }).then(function(output){
+        // TODO: Decrypt the output 
         let result = JSON.parse(output);
 
         tl.setVariable("username", result.username, true);
