@@ -22,7 +22,7 @@ write-host $containerRegistry
 $loginResult = az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --tenant $tenantId
 $setSubResult = az account set --subscription $subscriptionId
 
-$result = az acr credential show -n $containerRegistry -g $resourceGroupName --subscription $subscriptionId
-write-host $result
+#$result = az acr credential show -n $containerRegistry -g $resourceGroupName --subscription $subscriptionId
+#write-host $result
 
 $logoutResult = az account clear
