@@ -18,7 +18,13 @@ param(
 $loginResult = az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --tenant $tenantId
 $setSubResult = az account set --subscription $subscriptionId
 
-$result = az acr credential show -n $containerRegistry -g $resourceGroupName --subscription $subscriptionId
-write-host $result
+if($actionType -eq "show") {
+  $result = az acr credential show -n $containerRegistry -g $resourceGroupName --subscription $subscriptionId
+  write-host $result
+} else {
+  
+  $result = az acr credential show -n $containerRegistry -g $resourceGroupName --subscription $subscriptionId
+  write-host $result
+}
 
 $logoutResult = az account clear
