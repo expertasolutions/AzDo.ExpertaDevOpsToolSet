@@ -12,27 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tl = require('azure-pipelines-task-lib');
 
 try {
-    var stringToAnalyze = tl.getInput("stringToAnalyze", true);
-    
-    console.log("Current string analyzed: " + stringToAnalyze);
 
-    var result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]{1,}).([0-9]{1,}))");
-
-    var major = result[2];
-    var minor = result[3];
-    var patch = result[4];
-
-    console.log("Version string details:");
-    console.log("");
-    console.log("fullVersion: " + result[1]);
-    console.log("versionMajor: " + major);
-    console.log("versionMinor: " + minor);
-    console.log("versionPatch: " + patch);
-
-    tl.setVariable("versionMajor", major);
-    tl.setVariable("versionMinor", minor);
-    tl.setVariable("versionPatch", patch);
-    tl.setVariable("fullVersion", result[1]);
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
