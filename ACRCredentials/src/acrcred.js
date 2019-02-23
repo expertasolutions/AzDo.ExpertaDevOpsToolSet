@@ -34,9 +34,9 @@ try {
 
     var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
 
-    pwsh.addCommand(__dirname  + "/acrcred.ps1 -subscriptionId '" + subcriptionId
-        + "' -servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
-        + "'-tenantId '" + tenantId + "' "
+    pwsh.addCommand(__dirname  + "/acrcred.ps1 -subscriptionId '" + subcriptionId + "' "
+        + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
+        + "-tenantId '" + tenantId + "' "
         + "-resourceGroupName '" + resourceGroupName + "' "
         + "-containerRegistry '" + containerRegistry + "' "
         + "-actionType '" + actionType + "' "
