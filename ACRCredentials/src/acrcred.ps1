@@ -24,6 +24,20 @@ if($actionType -eq "show") {
   $result = az acr credential show -n $containerRegistry -g $resourceGroupName --subscription $subscriptionId
   write-host $result
 } else {
+  $info = az acr credential show -n $containerRegistry -g $resourceGroupName --subscription $subscriptionId | ConvertFrom-Json
+
+  if($pwdName -eq "*"){
+    $info.passwords | ForEach-Object {
+      $renewResult = az acr credential renew -n $containerRegistry --password-name $_.name -g $resourceGroupName --subscription $subscriptionId
+    }
+  } else {
+    $renewPwd = $info.passwords | Where-Object { $_.name -eq $pwdName }
+    if($renewPwd.length -eq 0){
+      ThrowError -ExceptionName "Error: Password named not found"
+    } else {
+      $renewResult = az acr credential renew -n $containerRegistry --password-name $pwdName -g $resourceGroupName --subscription $subscriptionId
+    }
+  }
   
   $result = az acr credential show -n $containerRegistry -g $resourceGroupName --subscription $subscriptionId
   write-host $result
