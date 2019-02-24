@@ -43,7 +43,18 @@ if($registerMode -eq "aksSecret"){
 
   $acrId = $(az acr show --name $containerRegistry --resource-group $acrResourceGroup --subscription $subscriptionId --query "id" --output tsv)
   write-host $acrId
-  az role assignment create --assignee $clientId --role acrpull --scope $acrId
+
+  #check if the roles already assigns
+  $roleExists = (az role assignment list --all --subscription $subscriptionId | ConvertFrom-Json) | Where-Object {$_.roleDefinitionName -eq "AcrPull" -and $_.principalName -like "*$($acrId)" } 
+
+  if($roleExists.length -eq 0){
+    write-host "Role pending assignation..." -NoNewline
+    az role assignment create --assignee $clientId --role acrpull --scope $acrId
+    write-host " Done"
+  }
+  else {
+    write-host "Role already assigned"
+  }
 }
 
 $logoutResult = az account clear
