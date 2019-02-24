@@ -47,7 +47,7 @@ try {
         + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
         + "-tenantId '" + tenantId + "' "
         + "-registerMode '" + registerMode + "' "
-        + "-acrResourceGroup '" + acrResourceGroupName + "' "
+        + "-acrResourceGroup '" + acrResourceGroup + "' "
         + "-containerRegistry '" + containerRegistry + "' "
         + "-aksResourceGroup '" + aksResourceGroup + " '"
         + "-aksCluster '" + aksCluster + "' "
