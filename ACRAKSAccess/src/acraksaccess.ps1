@@ -48,7 +48,9 @@ if($registerMode -eq "aksSecret"){
   write-host $acrId
 
   #check if the roles already assigns
-  $roleExists = az role assignment list --all --subscription $subscriptionId | ConvertFrom-Json | Where-Object {$_.roleDefinitionName -eq "AcrPull" -and $_.principalName -like "*$($acrId)" } 
+  $result = az role assignment list --all --subscription $subscriptionId | ConvertFrom-Json
+  write-host $result
+  $roleExists = $result | Where-Object {$_.roleDefinitionName -eq "AcrPull" -and $_.principalName -like "*$acrId" } 
   write-host $roleExists
 
   if($roleExists.length -eq 0){
