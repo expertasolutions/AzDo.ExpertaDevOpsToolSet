@@ -25,8 +25,8 @@ try {
     var containerRegistry = tl.getInput("containerRegistry", true);
     var aksResourceGroup = tl.getInput("aksResourceGroupName", true);
     var aksCluster = tl.getInput("aksCluster", true);
-    var acrUsername = tl.getInput("acrUsername", true);
-    var acrPassword = tl.getInput("acrPassword", true);
+    var acrUsername = tl.getInput("acrUsername", false);
+    var acrPassword = tl.getInput("acrPassword", false);
 
     console.log("Azure Subscription Id: " + subcriptionId);
     console.log("ServicePrincipalId: " + servicePrincipalId);
