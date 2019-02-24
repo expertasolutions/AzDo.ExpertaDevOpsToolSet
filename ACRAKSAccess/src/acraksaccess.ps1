@@ -35,10 +35,11 @@ if($registerMode -eq "aksSecret"){
 } else { # RBAC access mode
   write-host "RBAC Access mode"
   
-  $clientId = $(az aks show -g $aksResourceGroup --name $aksCluster --query "servicePrincipalProfile.clientId" --output tsv --subscription $subscriptionId)
+  $clientId = $(az aks show --resource-group $aksResourceGroup --name $aksCluster --subscription $subscriptionId --query "servicePrincipalProfile.clientId" --output tsv)
   write-host $clientId
 
-  $acrId = $(az acr show --name $containerRegistry -g $acrResourceGroup --query "id" --output tsv --subscription $subscriptionId)
+  $acrId = $(az acr show --name $containerRegistry --resource-group $acrResourceGroup --subscription $subscriptionId --query "id" --output tsv)
+  write-host $acrId
   az role assignment create --assignee $clientId --role acrpull --scope $acrId
 }
 
