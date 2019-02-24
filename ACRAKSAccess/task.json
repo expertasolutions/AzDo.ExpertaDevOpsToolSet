@@ -24,8 +24,19 @@
           "required": true
         },
         {
-          "name": "resourceGroupName",
-          "label": "DNS Zone resource group name",
+          "name": "registrerMode",
+          "label": "Access mode",
+          "type": "pickList",
+          "defaultValue": "RBAC",
+          "options": {
+            "rbac": "RBAC",
+            "aksSecret": "AKS Secret"
+          },
+          "required": false
+        },
+        {
+          "name": "acrResourceGroupName",
+          "label": "Container registry resource group",
           "type": "pickList",
           "defaultValue": "",
           "required": true,
@@ -39,20 +50,39 @@
           "required": true
         },
         {
-          "name": "actionType",
-          "label": "Action type",
+          "name": "aksResourceGroupName",
+          "label": "Azure Kubernetes cluster resource group",
           "type": "pickList",
-          "defaultValue": "show",
-          "options": {
-            "show": "Show",
-            "renew": "Renew"
-          },
-          "required": false
+          "defaultValue": "",
+          "helpMarkDown": ""
+        },
+        {
+          "name": "aksCluster",
+          "label": "Azure Kubernetes cluster",
+          "type": "pickList",
+          "defaultValue": "",
+          "helpMarkDown": ""
+        },
+        {
+          "name": "acrUsername",
+          "label": "Azure Container Registry username",
+          "type": "string",
+          "defaultValue": "",
+          "helpMarkDown" :"",
+          "visibleRule": "registrerMode = aksSecret"
+        },
+        {
+          "name": "acrPasswordToken",
+          "label": "Azure Container Registry Password Token",
+          "type": "string",
+          "defaultValue": "",
+          "helpMarkDown" :"",
+          "visibleRule": "registrerMode = aksSecret"
         }
     ],
     "dataSourceBindings" : [
       {
-        "target": "resourceGroupName",
+        "target": "acrResourceGroupName",
         "endpointId": "$(azureSubscriptionEndpoint)",
         "endpointUrl": "{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/providers/Microsoft.ContainerRegistry/registries?api-version=2017-10-01",
         "resultSelector": "jsonpath:$.value[*]",
@@ -61,9 +91,23 @@
       {
         "target":"containerRegistry",
         "endpointId":"$(azureSubscriptionEndpoint)",
-        "endpointUrl":"{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/resourceGroups/$(resourceGroupName)/providers/Microsoft.ContainerRegistry/registries?api-version=2017-10-01",
+        "endpointUrl":"{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/resourceGroups/$(acrResourceGroupName)/providers/Microsoft.ContainerRegistry/registries?api-version=2017-10-01",
         "resultSelector":"jsonpath:$.value[*]",
         "resultTemplate":"{{{name}}}"
+      },
+      {
+        "target":"aksResourceGroupName",
+        "endpointId":"$(azureSubscriptionEndpoint)",
+        "endpointUrl": "{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/providers/Microsoft.ContainerService/managedClusters?api-version=2017-08-31",
+        "resultSelector": "jsonpath:$.value[*]",
+        "resultTemplate": "{{{ #extractResource id resourcegroups}}}"
+      },
+      {
+        "target":"aksCluster",
+        "endpointId":"$(azureSubscriptionEndpoint)",
+        "endpointUrl": "{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/resourceGroups/$(aksResourceGroupName)/providers/Microsoft.ContainerService/managedClusters?api-version=2017-08-31",
+        "resultSelector": "jsonpath:$.value[*]",
+        "resultTemplate": "{{{name}}}"
       }
     ],
     "outputVariables" : [],
