@@ -38,10 +38,12 @@ if($registerMode -eq "aksSecret"){
   write-host "'$aksResourceGroup'"
   write-host $aksCluster
   write-host $subscriptionId
-  write-host "Looking for aks cluster ..."
+  write-host ""
+  write-host "Looking for Azure Kubernetes service cluster ..."
   $clientId = $(az aks show --resource-group $aksResourceGroup --name $aksCluster --subscription $subscriptionId --query "servicePrincipalProfile.clientId" --output tsv)
   write-host $clientId
 
+  write-host "Looking for Azure container registry"
   $acrId = $(az acr show --name $containerRegistry --resource-group $acrResourceGroup --subscription $subscriptionId --query "id" --output tsv)
   write-host $acrId
 
