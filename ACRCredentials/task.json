@@ -29,14 +29,20 @@
           "type": "pickList",
           "defaultValue": "",
           "required": true,
-          "helpMarkDown": ""
+          "helpMarkDown": "",
+          "properties": {
+            "EditableOptions":true
+          }
         },
         {
           "name": "containerRegistry",
           "label": "Azure Container Registry",
           "type": "pickList",
           "defaultValue":"",
-          "required": true
+          "required": true,
+          "properties": {
+            "EditableOptions":true
+          }
         },
         {
           "name": "actionType",

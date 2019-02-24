@@ -40,28 +40,40 @@
           "type": "pickList",
           "defaultValue": "",
           "required": true,
-          "helpMarkDown": ""
+          "helpMarkDown": "",
+          "properties": {
+            "EditableOptions":true
+          }
         },
         {
           "name": "containerRegistry",
           "label": "Azure Container Registry",
           "type": "pickList",
           "defaultValue":"",
-          "required": true
+          "required": true,
+          "properties": {
+            "EditableOptions":true
+          }
         },
         {
           "name": "aksResourceGroupName",
           "label": "Azure Kubernetes cluster resource group",
           "type": "pickList",
           "defaultValue": "",
-          "helpMarkDown": ""
+          "helpMarkDown": "",
+          "properties": {
+            "EditableOptions":true
+          }
         },
         {
           "name": "aksCluster",
           "label": "Azure Kubernetes cluster",
           "type": "pickList",
           "defaultValue": "",
-          "helpMarkDown": ""
+          "helpMarkDown": "",
+          "properties": {
+            "EditableOptions":true
+          }
         },
         {
           "name": "acrUsername",
