@@ -37,13 +37,12 @@ if($registerMode -eq "aksSecret"){
   write-host "'$aksResourceGroup'"
   write-host $aksCluster
   write-host $subscriptionId
-  az aks show --resource-group $aksResourceGroup --name $aksCluster --subscription $subscriptionId
   $clientId = $(az aks show --resource-group $aksResourceGroup --name $aksCluster --subscription $subscriptionId --query "servicePrincipalProfile.clientId" --output tsv)
   write-host $clientId
 
-  #$acrId = $(az acr show --name $containerRegistry --resource-group $acrResourceGroup --subscription $subscriptionId --query "id" --output tsv)
-  #write-host $acrId
-  #az role assignment create --assignee $clientId --role acrpull --scope $acrId
+  $acrId = $(az acr show --name $containerRegistry --resource-group $acrResourceGroup --subscription $subscriptionId --query "id" --output tsv)
+  write-host $acrId
+  az role assignment create --assignee $clientId --role acrpull --scope $acrId
 }
 
 $logoutResult = az account clear

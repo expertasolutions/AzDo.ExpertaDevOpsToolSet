@@ -49,7 +49,7 @@ try {
         + "-registerMode '" + registerMode + "' "
         + "-acrResourceGroup '" + acrResourceGroup + "' "
         + "-containerRegistry '" + containerRegistry + "' "
-        + "-aksResourceGroup '" + aksResourceGroup + " '"
+        + "-aksResourceGroup '" + aksResourceGroup + "' "
         + "-aksCluster '" + aksCluster + "' "
         + "-acrUsername '" + acrUsername + "' "
         + "-acrPwd '" + acrPassword + "' "
