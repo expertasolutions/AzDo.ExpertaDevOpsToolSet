@@ -38,6 +38,7 @@ if($registerMode -eq "aksSecret"){
   write-host "'$aksResourceGroup'"
   write-host $aksCluster
   write-host $subscriptionId
+  write-host "Looking for aks cluster ..."
   $clientId = $(az aks show --resource-group $aksResourceGroup --name $aksCluster --subscription $subscriptionId --query "servicePrincipalProfile.clientId" --output tsv)
   write-host $clientId
 
