@@ -36,8 +36,7 @@
           "label": "Azure Container Registry",
           "type": "pickList",
           "defaultValue":"",
-          "required": true,
-          "groupName": ""
+          "required": true
         },
         {
           "name": "actionType",
@@ -56,7 +55,6 @@
           "type": "string",
           "defaultValue": "*",
           "required:": true,
-          "groupName": "",
           "visibleRule": "actionType = renew"
         }
     ],
