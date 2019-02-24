@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 
-var tl = require('vsts-task-lib');
+var tl = require('azure-pipelines-task-lib');
 
 try {
     var stringToAnalyze = tl.getInput("stringToAnalyze", true);

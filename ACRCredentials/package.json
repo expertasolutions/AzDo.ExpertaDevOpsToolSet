@@ -1,5 +1,5 @@
 {
-  "name": "VersionExtractor",
+  "name": "ACRCredential",
   "version": "1.0.0",
   "description": "Task to extract version number digit from a string",
   "main": "versionExtractor.js",
@@ -9,6 +9,7 @@
   "author": "Solutions Experta Inc.",
   "license": "MIT",
   "dependencies": {
+    "node-powershell": "^3.3.1",
     "azure-pipelines-task-lib": "^2.7.0"
   }
 }
