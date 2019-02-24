@@ -22,7 +22,7 @@ $setSubResult = az account set --subscription $subscriptionId
 
 $acrInfo = az acr show --name $containerRegistry -r $resourceGroupName --subscription $subscriptionId | ConvertFrom-Json
 if(-not $acrInfo.adminUserEnabled){
-  throw "Container registry named '$containerRegistry' doesn't have adminUser configured"
+  throw "Container registry named '$containerRegistry' does not have adminUser configured"
 }
 
 if($actionType -eq "show") {
