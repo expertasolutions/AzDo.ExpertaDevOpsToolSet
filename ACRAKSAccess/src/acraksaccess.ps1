@@ -28,6 +28,7 @@ $setSubResult = az account set --subscription $subscriptionId
 
 if($registerMode -eq "aksSecret"){
   write-host "AKS Secret mode"
+  throw "Not implemented yet"
   $acrInfo = az acr show --name $containerRegistry -g $acrResourceGroup --subscription $subscriptionId | ConvertFrom-Json
   if(-not $acrInfo.adminUserEnabled){
     throw "Container registry named '$containerRegistry' does not have adminUser configured"
