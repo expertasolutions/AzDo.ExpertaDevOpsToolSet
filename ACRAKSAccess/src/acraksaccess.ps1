@@ -10,7 +10,7 @@ param(
 , [Parameter(Mandatory=$true, Position=5)]
   [string]$registerMode
 , [Parameter(Mandatory=$true, Position=6)]
-  [string]$acrResourceGroupName
+  [string]$acrResourceGroup
 , [Parameter(Mandatory=$true, Position=7)]
   [string]$containerRegistry
 , [Parameter(Mandatory=$true, Position=8)]
@@ -28,7 +28,7 @@ $setSubResult = az account set --subscription $subscriptionId
 
 if($registerMode -eq "aksSecret"){
   write-host "AKS Secret mode"
-  $acrInfo = az acr show --name $containerRegistry -g $resourceGroupName --subscription $subscriptionId | ConvertFrom-Json
+  $acrInfo = az acr show --name $containerRegistry -g $acrResourceGroup --subscription $subscriptionId | ConvertFrom-Json
   if(-not $acrInfo.adminUserEnabled){
     throw "Container registry named '$containerRegistry' does not have adminUser configured"
   }
@@ -38,7 +38,7 @@ if($registerMode -eq "aksSecret"){
   $clientId = $(az aks show -g $aksResourceGroup --name $aksCluster --query "servicePrincipalProfile.clientId" --output tsv --subscription $subscriptionId)
   write-host $clientId
 
-  $acrId = $(az acr show --name $containerRegistry -g $acrResourceGroupName --query "id" --output tsv --subscription $subscriptionId)
+  $acrId = $(az acr show --name $containerRegistry -g $acrResourceGroup --query "id" --output tsv --subscription $subscriptionId)
   az role assignment create --assignee $clientId --role acrpull --scope $acrId
 }
 
