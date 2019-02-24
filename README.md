@@ -42,3 +42,7 @@ Available tasks:
 	- versionMinor
 	- versionPatch
 	- fullVersion
+- ACRCredentials
+	- username
+	- password
+	- password2
