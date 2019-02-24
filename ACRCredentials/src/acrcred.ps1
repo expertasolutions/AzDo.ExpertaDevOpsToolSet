@@ -21,7 +21,7 @@ $loginResult = az login --service-principal -u $servicePrincipalId -p $servicePr
 $setSubResult = az account set --subscription $subscriptionId
 
 $acrInfo = az acr show --name $containerRegistry -r $resourceGroupName --subscription $subscriptionId | ConvertFrom-Json
-if(-not $acrInfo.adminUserEnabled){
+if($acrInfo.adminUserEnabled -eq $false){
   throw "Container registry named '$containerRegistry' does not have adminUser configured"
 }
 
