@@ -20,6 +20,11 @@ param(
 $loginResult = az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --tenant $tenantId
 $setSubResult = az account set --subscription $subscriptionId
 
+$acrInfo = az acr show --name $containerRegistry -r $resourceGroupName --subscription $subscriptionId | ConvertFrom-Json
+if(-not $acrInfo.adminUserEnabled){
+  throw "Container registry named '$containerRegistry' doesn't have adminUser configured"
+}
+
 if($actionType -eq "show") {
   $result = az acr credential show -n $containerRegistry -g $resourceGroupName --subscription $subscriptionId
   write-host $result
