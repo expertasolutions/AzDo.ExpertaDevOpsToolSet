@@ -33,7 +33,7 @@ try {
     console.log("ServicePrincipalKey: " + servicePrincipalKey);
     console.log("Tenant Id: " + tenantId);
     console.log("Register mode: " + registerMode);
-    console.log("ACR Resource Group: " + acrResourceGroup);
+    console.log("ACR Resource Group: '" + acrResourceGroup + "'");
     console.log("Container Registry: " + containerRegistry);
     console.log("AKS Resource Group: " + aksResourceGroup);
     console.log("AKS Cluster: " + aksCluster);

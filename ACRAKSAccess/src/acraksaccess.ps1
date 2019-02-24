@@ -34,7 +34,7 @@ if($registerMode -eq "aksSecret"){
   }
 } else { # RBAC access mode
   write-host "RBAC Access mode"
-  write-host $aksResourceGroup
+  write-host "'$aksResourceGroup'"
   write-host $aksCluster
   write-host $subscriptionId
   az aks show --resource-group $aksResourceGroup --name $aksCluster --subscription $subscriptionId
