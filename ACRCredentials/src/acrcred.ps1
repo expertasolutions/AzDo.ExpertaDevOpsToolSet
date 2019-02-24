@@ -33,7 +33,7 @@ if($actionType -eq "show") {
   } else {
     $renewPwd = $info.passwords | Where-Object { $_.name -eq $pwdName }
     if($renewPwd.length -eq 0){
-      ThrowError -ExceptionName "Error: Password named not found"
+      Throw -ExceptionMessage "Error: Password named not found"
     } else {
       $renewResult = az acr credential renew -n $containerRegistry --password-name $pwdName -g $resourceGroupName --subscription $subscriptionId
     }
