@@ -43,7 +43,7 @@ try {
     // TODO: Use npm module to interact with azure container registry
     var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
 
-    pwsh.addCommand(__dirname  + "/acrcred.ps1 -subscriptionId '" + subcriptionId + "' "
+    pwsh.addCommand(__dirname  + "/acraksaccess.ps1 -subscriptionId '" + subcriptionId + "' "
         + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
         + "-tenantId '" + tenantId + "' "
         + "-registerMode '" + registerMode + "' "
