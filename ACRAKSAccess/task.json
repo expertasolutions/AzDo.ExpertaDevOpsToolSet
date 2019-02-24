@@ -24,7 +24,7 @@
           "required": true
         },
         {
-          "name": "registrerMode",
+          "name": "registerMode",
           "label": "Access mode",
           "type": "pickList",
           "defaultValue": "RBAC",
