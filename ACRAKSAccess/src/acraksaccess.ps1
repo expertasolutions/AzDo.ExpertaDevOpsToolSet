@@ -53,7 +53,7 @@ if($registerMode -eq "aksSecret"){
   $myTest = $result | Where-Object { $_.roleDefinitionName -eq "AcrPull" -and $_.principalName -like "*$acrId" }
   write-host $myTest.length
 
-  $roleExists = $result | Where-Object {$_.roleDefinitionName -eq "AcrPull" -and $_.principalName -like "*$acrId" }
+  $roleExists = $result | Where-Object {$_.roleDefinitionName -eq "AcrPull" }
   $roleExists | ForEach-Object {
     write-host $_.principalName
   }
