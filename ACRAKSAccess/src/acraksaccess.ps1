@@ -39,13 +39,14 @@ if($registerMode -eq "aksSecret"){
   write-host $aksCluster
   write-host $subscriptionId
   write-host ""
-  write-host "Looking for Azure Kubernetes service cluster ..."
+  write-host "Looking for Azure Kubernetes service cluster ..." -NoNewline
   $clientId = $(az aks show --resource-group $aksResourceGroup --name $aksCluster --subscription $subscriptionId --query "servicePrincipalProfile.clientId" --output tsv)
-  write-host $clientId
+  write-host " clientId '$clientId' found"
   write-host ""
-  write-host "Looking for Azure container registry"
+
+  write-host "Looking for Azure container registry ..." -NoNewline
   $acrId = $(az acr show --name $containerRegistry --resource-group $acrResourceGroup --subscription $subscriptionId --query "id" --output tsv)
-  write-host $acrId
+  write-host "registry '$acrId' found"
 
   #check if the roles already assigns
   $result = $(az role assignment list --all --subscription $subscriptionId) | ConvertFrom-Json
@@ -54,12 +55,8 @@ if($registerMode -eq "aksSecret"){
   write-host $myTest.length
 
   $roleExists = $result | Where-Object {$_.roleDefinitionName -eq "AcrPull" }
-  $roleExists | ForEach-Object {
-    write-host $_.principalName
-  }
-  write-host "roleExists: $roleExists"
 
-  if($myTest.length -eq 0){
+  if($roleExists.length -eq 0){
     write-host "Role pending assignation..." -NoNewline
     $result = az role assignment create --assignee $clientId --role acrpull --scope $acrId
     write-host " Done"
