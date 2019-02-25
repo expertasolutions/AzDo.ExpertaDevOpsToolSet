@@ -49,7 +49,6 @@ if($registerMode -eq "aksSecret"){
 
   #check if the roles already assigns
   $result = $(az role assignment list --all --subscription $subscriptionId) | ConvertFrom-Json
-  write-host "result = $result"
 
   $myTest = $result | Where-Object { $_.roleDefinitionName -eq "AcrPull" }
 
