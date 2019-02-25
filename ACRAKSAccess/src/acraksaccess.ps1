@@ -46,6 +46,7 @@ if($registerMode -eq "aksSecret"){
 
   write-host "Looking for Azure container registry ..." -NoNewline
   $acrId = $(az acr show --name $containerRegistry --resource-group $acrResourceGroup --subscription $subscriptionId --query "id" --output tsv)
+  write-host $acrId
   $acrName = $(az acr show --name $containerRegistry --resource-group $acrResourceGroup --subscription $subscriptionId --query "name" --output tsv)
   write-host " Registry '$acrName' found"
 
