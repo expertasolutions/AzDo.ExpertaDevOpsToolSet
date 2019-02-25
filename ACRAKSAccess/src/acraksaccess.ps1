@@ -50,8 +50,7 @@ if($registerMode -eq "aksSecret"){
   #check if the roles already assigns
   $result = $(az role assignment list --all --subscription $subscriptionId) | ConvertFrom-Json
 
-  $myTest = $result | Where-Object { $_.roleDefinitionName -eq "AcrPull" }
-
+  $myTest = $result | Where-Object { $_.roleDefinitionName -eq "AcrPull" -and $_.principalName -like "*$acrId" }
   write-host $myTest.length
 
   $roleExists = $result | Where-Object {$_.roleDefinitionName -eq "AcrPull" -and $_.principalName -like "*$acrId" }
@@ -60,7 +59,7 @@ if($registerMode -eq "aksSecret"){
   }
   write-host "roleExists: $roleExists"
 
-  if($roleExists.length -eq 0){
+  if($myTest.length -eq 0){
     write-host "Role pending assignation..." -NoNewline
     $result = az role assignment create --assignee $clientId --role acrpull --scope $acrId
     write-host " Done"
