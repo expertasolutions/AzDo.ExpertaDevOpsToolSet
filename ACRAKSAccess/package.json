@@ -1,8 +1,8 @@
 {
-  "name": "ACRCredential",
+  "name": "ACRAKSAccess",
   "version": "1.0.0",
-  "description": "Task to extract version number digit from a string",
-  "main": "acrcred.js",
+  "description": "Set ACR Access to Kubernetes cluster",
+  "main": "acraksaccess.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
