@@ -46,12 +46,13 @@ if($registerMode -eq "aksSecret"){
 
   write-host "Looking for Azure container registry ..." -NoNewline
   $acrId = $(az acr show --name $containerRegistry --resource-group $acrResourceGroup --subscription $subscriptionId --query "id" --output tsv)
-  write-host "registry '$acrId' found"
+  $acrName = $(az acr show --name $containerRegistry --resource-group $acrResourceGroup --subscription $subscriptionId --query "name" --output tsv)
+  write-host " Registry '$acrName' found"
 
   #check if the roles already assigns
   $result = $(az role assignment list --all --subscription $subscriptionId) | ConvertFrom-Json
 
-  $myTest = $result | Where-Object { $_.roleDefinitionName -eq "AcrPull" -and $_.principalName -like "*$acrId" }
+  $myTest = $result | Where-Object { $_.roleDefinitionName -eq "AcrPull" -and $_.principalName -like "*$acrName" }
   write-host $myTest.length
 
   $roleExists = $result | Where-Object {$_.roleDefinitionName -eq "AcrPull" }
