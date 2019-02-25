@@ -32,7 +32,7 @@
             "rbac": "RBAC",
             "aksSecret": "AKS Secret"
           },
-          "required": false
+          "required": true
         },
         {
           "name": "acrResourceGroupName",
