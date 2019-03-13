@@ -14,11 +14,10 @@ param(
 $loginResult = az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --tenant $tenantId
 $setSubResult = az account set --subscription $subscriptionId
 
-$acrInfo = az acr show --name $containerRegistry -g $resourceGroupName --subscription $subscriptionId | ConvertFrom-Json
-if(-not $acrInfo.adminUserEnabled){
-  throw "Container registry named '$containerRegistry' does not have adminUser configured"
-}
+$result = az resource list --namespace microsoft.insights --resource-type components --subscription $subscriptionId | ConvertFrom-Json
+$appInsight = $result | Where-Object { $_.name -eq "$(AppName)$(envName)" }
 
-
+$id = az resource show --id $appInsight.id --query properties.InstrumentationKey --o tsv --Subscription $subscriptionId
+write-host "Instrmentation Key: $id"
 
 $logoutResult = az account clear
