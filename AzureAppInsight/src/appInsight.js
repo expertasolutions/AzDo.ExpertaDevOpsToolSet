@@ -20,30 +20,22 @@ try {
     var servicePrincipalKey = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint, "serviceprincipalkey", false);
     var tenantId = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint,"tenantid", false);
 
-    var resourceGroupName = tl.getInput("resourceGroupName", true);
-    var containerRegistry = tl.getInput("containerRegistry", true);
-    var actionType = tl.getInput("actionType", true);
-    var passwordToRenew = tl.getInput("pwdName", true);
+    var azureAppInsightName = tl.getInput("azureAppInsightName", true);
+    
     
     console.log("Azure Subscription Id: " + subcriptionId);
     console.log("ServicePrincipalId: " + servicePrincipalId);
     console.log("ServicePrincipalKey: " + servicePrincipalKey);
     console.log("Tenant Id: " + tenantId);
-    console.log("Resource Group: " + resourceGroupName);
-    console.log("Container Registry: " + containerRegistry);
-    console.log("Action Type: " + actionType);
-    console.log("Password Name: " + passwordToRenew);
+    console.log("AppInsight Name: " + azureAppInsightName)
 
     // TODO: Use npm module to interact with azure container registry
     var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
 
-    pwsh.addCommand(__dirname  + "/acrcred.ps1 -subscriptionId '" + subcriptionId + "' "
+    pwsh.addCommand(__dirname  + "/appInsight.ps1 -subscriptionId '" + subcriptionId + "' "
         + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
         + "-tenantId '" + tenantId + "' "
-        + "-resourceGroupName '" + resourceGroupName + "' "
-        + "-containerRegistry '" + containerRegistry + "' "
-        + "-actionType '" + actionType + "' "
-        + "-pwdName '" + passwordToRenew + "' "
+        + "-appInsigthName '" + azureAppInsightName + "' "
     ).then(function() {
         return pwsh.invoke();
     }).then(function(output){
