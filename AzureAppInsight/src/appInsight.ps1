@@ -15,7 +15,9 @@ $loginResult = az login --service-principal -u $servicePrincipalId -p $servicePr
 $setSubResult = az account set --subscription $subscriptionId
 
 $result = az resource list --namespace microsoft.insights --resource-type components --subscription $subscriptionId | ConvertFrom-Json
+$result
 $appInsight = $result | Where-Object { $_.name -eq "$appInsightName" }
+$appInsight
 
 $id = az resource show --id $appInsight.id --query properties.InstrumentationKey --o tsv --Subscription $subscriptionId
 write-host "Instrmentation Key: $id"
