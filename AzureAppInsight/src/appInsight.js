@@ -35,7 +35,7 @@ try {
     pwsh.addCommand(__dirname  + "/appInsight.ps1 -subscriptionId '" + subcriptionId + "' "
         + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
         + "-tenantId '" + tenantId + "' "
-        + "-appInsigthName '" + azureAppInsightName + "' "
+        + "-appInsightName '" + azureAppInsightName + "' "
     ).then(function() {
         return pwsh.invoke();
     }).then(function(output){
