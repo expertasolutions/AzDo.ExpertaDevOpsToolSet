@@ -4,6 +4,7 @@ Experta Solutions DevOps custom tasks tools set
 - VersionExtractor
 - ACRCredentials
 - ACRAKSAccess
+- AzureAppInsight
 
 ## Builds status
 <table>

@@ -40,7 +40,8 @@
   "files": [
       { "path": "BuildVersionExtractor" },
       { "path": "ACRCredentials" },
-      { "path": "ACRAKSAccess" }
+      { "path": "ACRAKSAccess" },
+      { "path": "AzureAppInsight" }
   ],
   "contributions": [
       {
@@ -71,6 +72,16 @@
         ],
         "properties": {
             "name": "acraksaccess"
+        }
+      },
+      {
+        "id": "azappinsight-build-release-task",
+        "type": "ms.vss-distributed-task.task",
+        "targets": [
+            "ms.vss-distributed-task.tasks"
+        ],
+        "properties": {
+            "name": "azureAppInsight"
         }
       }
   ]
