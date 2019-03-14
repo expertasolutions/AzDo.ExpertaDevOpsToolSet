@@ -22,7 +22,6 @@ try {
 
     var azureAppInsightName = tl.getInput("azureAppInsightName", true);
     
-    
     console.log("Azure Subscription Id: " + subcriptionId);
     console.log("ServicePrincipalId: " + servicePrincipalId);
     console.log("ServicePrincipalKey: " + servicePrincipalKey);
