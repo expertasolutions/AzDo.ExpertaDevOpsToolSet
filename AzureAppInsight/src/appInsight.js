@@ -38,7 +38,6 @@ try {
     ).then(function() {
         return pwsh.invoke();
     }).then(function(output){
-        console.log(output);
 
         let result = JSON.parse(output);
         tl.setVariable("instrumentationKey", result.properties.InstrumentationKey, true);       
