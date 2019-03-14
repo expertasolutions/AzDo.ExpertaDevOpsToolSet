@@ -40,11 +40,8 @@ try {
     }).then(function(output){
         console.log(output);
 
-        //let result = JSON.parse(output);
-
-        //tl.setVariable("username", result.username, true);
-        //tl.setVariable("password", result.passwords[0].value, true);
-        //tl.setVariable("password2", result.passwords[1].value, true);        
+        let result = JSON.parse(output);
+        tl.setVariable("instrumentationKey", result.InstrumentationKey, true);       
 
         pwsh.dispose();
     }).catch(function(err){
