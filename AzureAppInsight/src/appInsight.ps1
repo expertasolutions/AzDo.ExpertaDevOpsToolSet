@@ -14,7 +14,9 @@ param(
 $loginResult = az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --tenant $tenantId
 $setSubResult = az account set --subscription $subscriptionId
 
-$result = az resource list --namespace microsoft.insights --resource-type components --subscription $subscriptionId | ConvertFrom-Json
+az resource list --namespace microsoft.insights --resource-type components --subscription $subscriptionId
+
+$result = (az resource list --namespace microsoft.insights --resource-type components --subscription $subscriptionId) | ConvertFrom-Json
 $result
 $appInsight = $result | Where-Object { $_.name -eq "$appInsightName" }
 $appInsight
