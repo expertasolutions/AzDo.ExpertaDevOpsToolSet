@@ -41,7 +41,7 @@ try {
         console.log(output);
 
         let result = JSON.parse(output);
-        tl.setVariable("instrumentationKey", result.InstrumentationKey, true);       
+        tl.setVariable("instrumentationKey", result.properties.InstrumentationKey, true);       
 
         pwsh.dispose();
     }).catch(function(err){
