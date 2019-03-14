@@ -40,7 +40,7 @@ try {
     }).then(function(output){
 
         let result = JSON.parse(output);
-        tl.setVariable("instrumentationKey", result.properties.InstrumentationKey, true);       
+        tl.setVariable("instrumentationKey", result.properties.InstrumentationKey, false);       
 
         pwsh.dispose();
     }).catch(function(err){
