@@ -9,11 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var tl = require('azure-pipelines-task-lib');
+var fs = required('fs');
 
 try {
     var fileToConvert = tl.getInput("fileToConvert", true);
     
     console.log("fileToConvert: " + fileToConvert);
+
+    var fileContent = rs.readFileSync(fileToConvert, 'utf8');
+    console.log(fileContent);
 
     tl.setVariable("base64Content", "na");
 } catch (err) {
