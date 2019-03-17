@@ -16,7 +16,7 @@ try {
     
     console.log("fileToConvert: " + fileToConvert);
 
-    var fileContent = rs.readFileSync(fileToConvert, 'utf8');
+    var fileContent = fs.readFileSync(fileToConvert, 'utf8');
     console.log(fileContent);
 
     tl.setVariable("base64Content", "na");
