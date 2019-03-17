@@ -41,7 +41,8 @@
       { "path": "BuildVersionExtractor" },
       { "path": "ACRCredentials" },
       { "path": "ACRAKSAccess" },
-      { "path": "AzureAppInsight" }
+      { "path": "AzureAppInsight" },
+      { "path": "FileContentToBase64" }
   ],
   "contributions": [
       {
@@ -82,6 +83,16 @@
         ],
         "properties": {
             "name": "azureAppInsight"
+        }
+      },
+      {
+        "id": "filecontenttobase64-build-release-task",
+        "type": "ms.vss-distributed-task.task",
+        "targets": [
+            "ms.vss-distributed-task.tasks"
+        ],
+        "properties": {
+            "name": "fileContentToBase64"
         }
       }
   ]
