@@ -13,7 +13,6 @@ var fs = require('fs');
 
 try {
     var fileToConvert = tl.getInput("fileToConvert", true);
-    
     console.log("fileToConvert: " + fileToConvert);
 
     var fileContent = fs.readFileSync(fileToConvert, 'utf8');
