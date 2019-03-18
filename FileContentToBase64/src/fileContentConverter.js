@@ -17,10 +17,7 @@ try {
     console.log("fileToConvert: " + fileToConvert);
 
     var fileContent = fs.readFileSync(fileToConvert, 'utf8');
-    console.log(fileContent);
-
-    var base64File = btoa(fileContent);
-    console.log(base64File);
+    var base64File = Buffer.from(fileContent).toString('base64');
 
     tl.setVariable("base64Content", base64File);
 } catch (err) {
