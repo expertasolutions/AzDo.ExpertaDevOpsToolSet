@@ -5,6 +5,7 @@ Experta Solutions DevOps custom tasks tools set
 - ACRCredentials
 - ACRAKSAccess
 - AzureAppInsight
+- FileContentToBase64
 
 ## Builds status
 <table>
