@@ -49,3 +49,5 @@ Experta Solutions DevOps custom tasks tools set
 	- username
 	- password
 	- password2
+- FileContentToBase64
+	- base64Content
