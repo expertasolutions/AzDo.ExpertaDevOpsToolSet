@@ -19,7 +19,10 @@ try {
     var fileContent = fs.readFileSync(fileToConvert, 'utf8');
     console.log(fileContent);
 
-    tl.setVariable("base64Content", "na");
+    var base64File = btoa(fileContent);
+    console.log(base64File);
+
+    tl.setVariable("base64Content", base64File);
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
