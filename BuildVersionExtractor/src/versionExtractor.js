@@ -22,9 +22,12 @@ try {
     var minor = result[3];
     var patch = result[4];
 
+    var minFullVersion = major + minor + patch;
+
     console.log("Version string details:");
     console.log("");
     console.log("fullVersion: " + result[1]);
+    console.log("fullVersionMin: " + minFullVersion);
     console.log("versionMajor: " + major);
     console.log("versionMinor: " + minor);
     console.log("versionPatch: " + patch);
@@ -32,6 +35,7 @@ try {
     tl.setVariable("versionMajor", major);
     tl.setVariable("versionMinor", minor);
     tl.setVariable("versionPatch", patch);
+    tl.getVariable("fullVersionMin", minFullVersion);
     tl.setVariable("fullVersion", result[1]);
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');

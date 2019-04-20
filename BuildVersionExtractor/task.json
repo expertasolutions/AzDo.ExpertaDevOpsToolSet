@@ -27,6 +27,7 @@
       { "name": "versionMajor", "description": "Version major number" },
       { "name": "versionMinor", "description": "Version minor number" },
       { "name": "versionPatch", "description": "Version patch number" },
+      { "name": "fullVersionMin", "description": "Full version number without dot"},
       { "name": "fullVersion", "description" : "Full version number string"}
     ],
     "execution": {
