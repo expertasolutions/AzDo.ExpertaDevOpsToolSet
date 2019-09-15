@@ -13,12 +13,17 @@ var tl = require('azure-pipelines-task-lib');
 var shell = require('node-powershell');
 
 try {
-    var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
-    
-    var subcriptionId = tl.getEndpointDataParameter(azureSubscriptionEndpoint, "subscriptionId", false);
-    var servicePrincipalId = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint, "serviceprincipalid", false);
-    var servicePrincipalKey = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint, "serviceprincipalkey", false);
-    var tenantId = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint,"tenantid", false);
+    var acrSubscriptionEndpoint = tl.getInput("acrSubscriptionEndpoint", true);
+    var acrSubcriptionId = tl.getEndpointDataParameter(acrSubscriptionEndpoint, "subscriptionId", false);
+    var acrServicePrincipalId = tl.getEndpointAuthorizationParameter(acrSubscriptionEndpoint, "serviceprincipalid", false);
+    var acrServicePrincipalKey = tl.getEndpointAuthorizationParameter(acrSubscriptionEndpoint, "serviceprincipalkey", false);
+    var acrTenantId = tl.getEndpointAuthorizationParameter(acrSubscriptionEndpoint,"tenantid", false);
+
+    var aksSubscriptionEndpoint = tl.getInput("aksSubscriptionEndpoint", true);
+    var aksSubcriptionId = tl.getEndpointDataParameter(aksSubscriptionEndpoint, "subscriptionId", false);
+    var aksServicePrincipalId = tl.getEndpointAuthorizationParameter(aksSubscriptionEndpoint, "serviceprincipalid", false);
+    var aksServicePrincipalKey = tl.getEndpointAuthorizationParameter(aksSubscriptionEndpoint, "serviceprincipalkey", false);
+    var aksTenantId = tl.getEndpointAuthorizationParameter(aksSubscriptionEndpoint,"tenantid", false);
 
     var registerMode = tl.getInput("registerMode", true);
     var acrResourceGroup = tl.getInput("acrResourceGroupName", true);
@@ -28,10 +33,20 @@ try {
     var acrUsername = tl.getInput("acrUsername", false);
     var acrPassword = tl.getInput("acrPassword", false);
 
-    console.log("Azure Subscription Id: " + subcriptionId);
-    console.log("ServicePrincipalId: " + servicePrincipalId);
-    console.log("ServicePrincipalKey: " + servicePrincipalKey);
-    console.log("Tenant Id: " + tenantId);
+    /* ACR Subscription Informations */
+    console.log("ACR Azure Subscription Id: " + acrSubcriptionId);
+    console.log("ACR ServicePrincipalId: " + acrServicePrincipalId);
+    console.log("ACR ServicePrincipalKey: " + acrServicePrincipalKey);
+    console.log("ACR Tenant Id: " + acrTenantId);
+    /* End of ACR Subscription Informations */
+
+    /* AKS Subscription Informations */
+    console.log("AKS Azure Subscription Id: " + aksSubcriptionId);
+    console.log("AKS ServicePrincipalId: " + aksServicePrincipalId);
+    console.log("AKS ServicePrincipalKey: " + aksServicePrincipalKey);
+    console.log("AKS Tenant Id: " + aksTenantId);
+    /* End of AKS Subscription Informations */
+
     console.log("Register mode: " + registerMode);
     console.log("ACR Resource Group: '" + acrResourceGroup + "'");
     console.log("Container Registry: " + containerRegistry);
@@ -43,9 +58,9 @@ try {
     // TODO: Use npm module to interact with azure container registry
     var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
 
-    pwsh.addCommand(__dirname  + "/acraksaccess.ps1 -subscriptionId '" + subcriptionId + "' "
-        + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
-        + "-tenantId '" + tenantId + "' "
+    pwsh.addCommand(__dirname  + "/acraksaccess.ps1 -acrSubscriptionId '" + acrSubcriptionId + "' "
+        + "-acrServicePrincipalId '" + acrServicePrincipalId + "' -acrServicePrincipalKey '" + acrServicePrincipalKey + "' "
+        + "-acrTenantId '" + acrTenantId + "' "
         + "-registerMode '" + registerMode + "' "
         + "-acrResourceGroup '" + acrResourceGroup + "' "
         + "-containerRegistry '" + containerRegistry + "' "
@@ -53,6 +68,7 @@ try {
         + "-aksCluster '" + aksCluster + "' "
         + "-acrUsername '" + acrUsername + "' "
         + "-acrPwd '" + acrPassword + "' "
+        + "-aksSubscriptionId '" + aksSubcriptionId + "' "
         ).then(function() {
         return pwsh.invoke();
     }).then(function(output){
