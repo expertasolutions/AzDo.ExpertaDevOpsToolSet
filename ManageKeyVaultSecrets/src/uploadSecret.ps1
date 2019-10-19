@@ -22,7 +22,7 @@ $secrets = (Get-Content $secretFilePath | ConvertFrom-Json)
 $secrets | ForEach-Object {
   $secret = $_
   Write-Host "Adding $($secret.secret) to KeyVault ..."
-  az keyvault secret set --vault-name $keyVaultName --name $secret.secret --value $secret.value | Out-Null
+  az keyvault secret set --vault-name $keyVaul --name $secret.secret --value $secret.value | Out-Null
 }
 
 $logoutResult = az account clear
