@@ -25,7 +25,7 @@
         },
         {
           "name": "resourceGroupName",
-          "label": "Azure Container Registry resource group",
+          "label": "Azure KeyVault resource group",
           "type": "pickList",
           "defaultValue": "",
           "required": true,
