@@ -47,7 +47,7 @@
         {
           "name": "secretFilePath",
           "label": "Secret file path",
-          "type": "string",
+          "type": "filePath",
           "defaultValue": "",
           "required": true,
           "helpMarkDown": ""
