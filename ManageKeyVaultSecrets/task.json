@@ -59,7 +59,7 @@
         "endpointId": "$(azureSubscriptionEndpoint)",
         "endpointUrl": "{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/providers/Microsoft.KeyVault/vaults?api-version=2018-02-14",
         "resultSelector": "jsonpath:$.value[*]",
-        "resultTemplate": "{{{name}}}"
+        "resultTemplate": "{{{ #extractResource id resourcegroups}}}"
       },
       {
         "target": "keyVaultName",
