@@ -44,12 +44,6 @@ try {
     ).then(function() {
         return pwsh.invoke();
     }).then(function(output){
-        let result = JSON.parse(output);
-
-        tl.setVariable("username", result.username, true);
-        tl.setVariable("password", result.passwords[0].value, true);
-        tl.setVariable("password2", result.passwords[1].value, true);        
-
         pwsh.dispose();
     }).catch(function(err){
         console.log(err);
