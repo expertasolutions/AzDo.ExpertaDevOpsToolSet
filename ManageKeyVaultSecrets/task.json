@@ -34,33 +34,23 @@
           }
         },
         {
-          "name": "containerRegistry",
-          "label": "Azure Container Registry",
+          "name": "keyVaultName",
+          "label": "Azure KeyVault",
           "type": "pickList",
-          "defaultValue":"",
+          "defaultValue": "",
           "required": true,
+          "helpMarkDown":"",
           "properties": {
             "EditableOptions":true
           }
         },
         {
-          "name": "actionType",
-          "label": "Action type",
-          "type": "pickList",
-          "defaultValue": "show",
-          "options": {
-            "show": "Show",
-            "renew": "Renew"
-          },
-          "required": false
-        },
-        {
-          "name": "pwdName",
-          "label": "Password name to renew",
+          "name": "secretFilePath",
+          "label": "Secret file path",
           "type": "string",
-          "defaultValue": "*",
-          "required:": true,
-          "visibleRule": "actionType = renew"
+          "defaultValue": "",
+          "required": true,
+          "helpMarkDown": ""
         }
     ],
     "dataSourceBindings" : [
@@ -72,9 +62,9 @@
         "resultTemplate": "{{{ #extractResource id resourcegroups}}}"
       },
       {
-        "target":"containerRegistry",
+        "target": "keyVaultName",
         "endpointId":"$(azureSubscriptionEndpoint)",
-        "endpointUrl":"{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/resourceGroups/$(resourceGroupName)/providers/Microsoft.ContainerRegistry/registries?api-version=2017-10-01",
+        "endpointUrl":"{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/resourceGroups/$(resourceGroupName)/providers/Microsoft.KeyVault/vaults?api-version=2018-02-14",
         "resultSelector":"jsonpath:$.value[*]",
         "resultTemplate":"{{{name}}}"
       }

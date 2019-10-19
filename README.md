@@ -6,6 +6,7 @@ Experta Solutions DevOps custom tasks tools set
 - ACRAKSAccess
 - AzureAppInsight
 - FileContentToBase64
+- ManageKeyVaultSecrets
 
 ## Builds status
 <table>
@@ -51,3 +52,5 @@ Experta Solutions DevOps custom tasks tools set
 	- password2
 - FileContentToBase64
 	- base64Content
+- ManageKeyVaultSecrets
+	- tdb
