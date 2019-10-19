@@ -32,7 +32,6 @@ try {
     console.log("Key Vault: " + keyVault);
     console.log("Secret File Path: '" + secretsFilePath + "'");
 
-    // TODO: Use npm module to interact with azure container registry
     var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
 
     pwsh.addCommand(__dirname  + "/uploadSecret.ps1 -subscriptionId '" + subcriptionId + "' "
