@@ -21,7 +21,7 @@ try {
     var tenantId = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint,"tenantid", false);
 
     var resourceGroupName = tl.getInput("resourceGroupName", true);
-    var keyVault = tl.getInput("keyVault", true);
+    var keyVault = tl.getInput("keyVaultName", true);
     var secretsFilePath = tl.getInput("secretsFilePath", true);
     
     console.log("Azure Subscription Id: " + subcriptionId);
