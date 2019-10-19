@@ -42,7 +42,8 @@
       { "path": "ACRCredentials" },
       { "path": "ACRAKSAccess" },
       { "path": "AzureAppInsight" },
-      { "path": "FileContentToBase64" }
+      { "path": "FileContentToBase64" },
+      { "path": "ManageKeyVaultSecrets" }
   ],
   "contributions": [
       {
@@ -93,6 +94,16 @@
         ],
         "properties": {
             "name": "fileContentToBase64"
+        }
+      },
+      {
+        "id": "managekeyvaultsecrets-build-release-task",
+        "type": "ms.vss-distributed-task.task",
+        "targets": [
+            "ms.vss-distributed-task.tasks"
+        ],
+        "properties": {
+            "name": "manageKeyVaultSecrets"
         }
       }
   ]
