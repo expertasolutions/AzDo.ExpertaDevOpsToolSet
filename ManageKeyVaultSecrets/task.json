@@ -45,8 +45,8 @@
           }
         },
         {
-          "name": "secretFilePath",
-          "label": "Secret file path",
+          "name": "secretsFilePath",
+          "label": "Secrets file path",
           "type": "filePath",
           "defaultValue": "",
           "required": true,
@@ -69,11 +69,7 @@
         "resultTemplate":"{{{name}}}"
       }
     ],
-    "outputVariables" : [
-      { "name": "username" },
-      { "name": "password" },
-      { "name": "password2" }
-    ],
+    "outputVariables" : [],
     "execution": {
         "Node": {
           "target": "src//uploadSecret.js",

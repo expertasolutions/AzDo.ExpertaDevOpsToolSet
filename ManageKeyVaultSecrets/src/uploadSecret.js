@@ -21,18 +21,16 @@ try {
     var tenantId = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint,"tenantid", false);
 
     var resourceGroupName = tl.getInput("resourceGroupName", true);
-    var containerRegistry = tl.getInput("containerRegistry", true);
-    var actionType = tl.getInput("actionType", true);
-    var passwordToRenew = tl.getInput("pwdName", true);
+    var keyVault = tl.getInput("keyVault", true);
+    var secretsFilePath = tl.getInput("secretsFilePath", true);
     
     console.log("Azure Subscription Id: " + subcriptionId);
     console.log("ServicePrincipalId: " + servicePrincipalId);
     console.log("ServicePrincipalKey: " + servicePrincipalKey);
     console.log("Tenant Id: " + tenantId);
     console.log("Resource Group: " + resourceGroupName);
-    console.log("Container Registry: " + containerRegistry);
-    console.log("Action Type: " + actionType);
-    console.log("Password Name: " + passwordToRenew);
+    console.log("Key Vault: " + keyVault);
+    console.log("Secret File Path: '" + secretsFilePath + "'");
 
     // TODO: Use npm module to interact with azure container registry
     var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
@@ -41,9 +39,8 @@ try {
         + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
         + "-tenantId '" + tenantId + "' "
         + "-resourceGroupName '" + resourceGroupName + "' "
-        + "-containerRegistry '" + containerRegistry + "' "
-        + "-actionType '" + actionType + "' "
-        + "-pwdName '" + passwordToRenew + "' "
+        + "-keyVault '" + keyVault + "' "
+        + "-secretFilePath '" + secretsFilePath + "'"
     ).then(function() {
         return pwsh.invoke();
     }).then(function(output){
