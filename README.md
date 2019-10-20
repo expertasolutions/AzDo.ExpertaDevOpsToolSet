@@ -20,5 +20,3 @@ Experta Solutions DevOps custom tasks tools set
 	- password2
 - FileContentToBase64
 	- base64Content
-- ManageKeyVaultSecrets
-	- tdb
