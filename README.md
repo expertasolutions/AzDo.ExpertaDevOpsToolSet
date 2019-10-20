@@ -1,5 +1,3 @@
-Experta Solutions DevOps custom tasks tools set
-
 ## Available tasks:
 - VersionExtractor
 - ACRCredentials
