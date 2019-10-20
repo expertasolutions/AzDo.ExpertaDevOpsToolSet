@@ -37,6 +37,28 @@
     "details": { "path": "README.md" },
     "license": { "path": "license" }
   },
+  "badges":[
+    {
+      "href":"https://dev.azure.com/experta/ExpertaSolutions/_build?definitionId=49",
+      "uri": "https://dev.azure.com/experta/ExpertaSolutions/_apis/build/status/Azure%20DevOps%20Extensions/GitHub%20-%20ExpertaSolutions/GitHub-ExpertaDevOpsToolSet-CI?branchName=master" ,
+      "description":"master branch build"
+    },
+    {
+      "href": "https://dev.azure.com/experta/ExpertaSolutions/_release?definitionId=17",
+      "uri": "https://vsrm.dev.azure.com/experta/_apis/public/Release/badge/5b43050d-0a01-4269-ace5-9e22c920391c/17/53",
+      "description": "Public"
+    },
+    {
+      "href": "https://dev.azure.com/experta/ExpertaSolutions/_release?definitionId=17",
+      "uri": "https://vsrm.dev.azure.com/experta/_apis/public/Release/badge/5b43050d-0a01-4269-ace5-9e22c920391c/17/52",
+      "description": "Private"
+    },
+    {
+      "href": "https://dev.azure.com/experta/ExpertaSolutions/_release?definitionId=17",
+      "uri": "https://vsrm.dev.azure.com/experta/_apis/public/Release/badge/5b43050d-0a01-4269-ace5-9e22c920391c/17/60",
+      "description": "Private Preview"
+    }
+  ],
   "files": [
       { "path": "BuildVersionExtractor" },
       { "path": "ACRCredentials" },
