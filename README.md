@@ -1,5 +1,5 @@
 # Purpose & description
-Current Solutions Experta Inc customs Azure DevOps tasks tools set. Theses tasks has been specifially created for our needs and why not shared it for the entire community.
+This is our current customs Azure DevOps tasks toolbox. Theses tasks has been specifially created for our needs and why not shared it for the entire community.
 Eventually, we will publish each of these tasks separately. If you have any comment/suggestion, please feel free to share it with us.
 
 # Tasks included
