@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
 var shell = require('node-powershell');
-var fs = required('fs');
+var fs = require('fs');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -40,8 +40,9 @@ try {
         } else {
             console.log("file exists !!");
         }
-    })
+    });
 
+    /*
     var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
 
     pwsh.addCommand(__dirname  + "/uploadSecret.ps1 -subscriptionId '" + subcriptionId + "' "
@@ -59,7 +60,7 @@ try {
         tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
         pwsh.dispose();
     });
-    
+    */
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
