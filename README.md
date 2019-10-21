@@ -31,6 +31,7 @@
 - instrumentationKey
 
 ## FileContentToBase64
+![FileContentToBase64](_screenShots/FileContentToBase64.png)
 ### Output variables
 - base64Content
 
