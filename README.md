@@ -1,53 +1,56 @@
-Experta Solutions DevOps custom tasks tools set
+# Purpose & description
+This is our current customs Azure DevOps tasks toolbox. Theses tasks has been specifially created for our needs and why not shared it for the entire community.
+Eventually, we will publish each of these tasks separately. If you have any comment/suggestion, please feel free to share it with us.
 
-## Available tasks:
-- VersionExtractor
-- ACRCredentials
-- ACRAKSAccess
-- AzureAppInsight
-- FileContentToBase64
+# Tasks include
 
-## Builds status
-<table>
-	<thead>
-		<tr>
-			<th>Branch</th>
-			<th>Status</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>Master</td>
-			<td><img src="https://dev.azure.com/experta/ExpertaSolutions/_apis/build/status/GitHub-ExpertaDevOpsToolSet-CI?branchName=master"/></td>
-		</tr>
-	</tbody>
-</table>
+## VersionExtractor
+![VersionExtrator](_screenShots/VersionExtrator_v1.png)
+#### Output variables
+- versionMajor
+- versionMinor
+- versionPatch
+- fullVersion
+#### Important
+*** Build name require to have v0.0.0 format ***
 
-## Release status
-<table>
-	<thead>
-	<tr>
-		<th>Branch</th>
-		<th>Release status</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>VS-Marketplace</td>
-		<td><img src="https://vsrm.dev.azure.com/experta/_apis/public/Release/badge/5b43050d-0a01-4269-ace5-9e22c920391c/17/53"/></td>
-	</tr>
-	</tbody>
-</table>
+## ACRCredentials
+![ACRCredentials](_screenShots/acrCredential_v1.png)
+## Action Type
+- Show: Get the current credentials information
+- Renew: Renew the current credentials information access
+#### Output variables
+- username
+- password
+- password2
 
-## Task Output variables
-- VersionExtrator
-	- versionMajor
-	- versionMinor
-	- versionPatch
-	- fullVersion
-- ACRCredentials
-	- username
-	- password
-	- password2
-- FileContentToBase64
-	- base64Content
+## ACRAKSAccess
+![ACRAKSAccess](_screenShots/ACRAKSAccess_v2.png)
+
+## AzureAppInsight
+![AppInsight](_screenShots/appInsight_v2.png)
+#### Output variables
+- instrumentationKey
+
+## FileContentToBase64
+![FileContentToBase64](_screenShots/FileContentToBase64_v2.png)
+#### Output variables
+- base64Content
+
+## ManageKeyVaultSecrets
+![ManageKeyVaultSecrets](_screenShots/manageKeyVaultSecrets_v2-preview.png)
+#### Secrets file path (expected file format content)
+```json
+[
+	{
+		"secret": "my_first_secret",
+		"value": "my_first_secret_value"
+	},
+	{
+		"secret": "my_second_secret",
+		"value": "my_second_secret_value"
+	}
+]
+```
+#### Important
+*** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
