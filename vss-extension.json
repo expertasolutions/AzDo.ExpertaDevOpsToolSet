@@ -56,7 +56,7 @@
       { "path": "AzureAppInsight" },
       { "path": "FileContentToBase64" },
       { "path": "ManageKeyVaultSecrets" },
-      { "path": "_screenShots" }
+      { "path": "_screenShots", "addressable": true }
   ],
   "contributions": [
       {
