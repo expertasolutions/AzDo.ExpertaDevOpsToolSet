@@ -7,11 +7,14 @@
 - ManageKeyVaultSecrets
 
 ## VersionExtractor
+![VersionExtrator](_screenShots/VersionExtrator_v1.png)
 ### Output variables
 - versionMajor
 - versionMinor
 - versionPatch
 - fullVersion
+### Important
+*** Build name require to have v0.0.0 format ***
 
 ## ACRCredentials
 ### Output variables
@@ -42,5 +45,5 @@
 	}
 ]
 ```
-### Important:
+### Important
 *** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
