@@ -7,7 +7,7 @@
 - ManageKeyVaultSecrets
 
 # ManageKeyVaultSecrets
-## Define your secrets file content
+### Define your secrets file content
 ```json
 [
 	{
@@ -20,6 +20,9 @@
 	}
 ]
 ```
+
+### Important:
+*** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault
 
 ## Task Output variables
 - VersionExtrator
