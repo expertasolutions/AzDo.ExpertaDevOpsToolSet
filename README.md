@@ -6,10 +6,16 @@
 - FileContentToBase64
 - ManageKeyVaultSecrets
 
+## VersionExtractor
+## Output variables
+- versionMajor
+- versionMinor
+- versionPatch
+- fullVersion
+
 ## ManageKeyVaultSecrets
 ![ManageKeyVaultSecrets](_screenShots/manageKeyVaultSecrets_v2-preview.png)
-
-### Define your secrets file content
+### Secrets file path (expected file format content)
 ```json
 [
 	{
@@ -22,16 +28,10 @@
 	}
 ]
 ```
-
 ### Important:
 *** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
 
 ## Task Output variables
-- VersionExtrator
-	- versionMajor
-	- versionMinor
-	- versionPatch
-	- fullVersion
 - ACRCredentials
 	- username
 	- password
