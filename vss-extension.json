@@ -55,7 +55,8 @@
       { "path": "ACRAKSAccess" },
       { "path": "AzureAppInsight" },
       { "path": "FileContentToBase64" },
-      { "path": "ManageKeyVaultSecrets" }
+      { "path": "ManageKeyVaultSecrets" },
+      { "path": "_screenShots" }
   ],
   "contributions": [
       {

@@ -1,4 +1,4 @@
-## Available tasks:
+# Available tasks:
 - VersionExtractor
 - ACRCredentials
 - ACRAKSAccess
@@ -6,7 +6,9 @@
 - FileContentToBase64
 - ManageKeyVaultSecrets
 
-# ManageKeyVaultSecrets
+## ManageKeyVaultSecrets
+![ManageKeyVaultSecrets](_screenShots/manageKeyVaultSecrets_v2-preview.png)
+
 ### Define your secrets file content
 ```json
 [
@@ -22,7 +24,7 @@
 ```
 
 ### Important:
-*** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault
+*** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
 
 ## Task Output variables
 - VersionExtrator
