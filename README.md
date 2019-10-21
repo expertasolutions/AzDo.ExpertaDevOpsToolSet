@@ -11,7 +11,7 @@ Eventually, we will publish each of these tasks separately. If you have any comm
 - versionMinor
 - versionPatch
 - fullVersion
-### Important
+#### Important
 *** Build name require to have v0.0.0 format ***
 
 ## ACRCredentials
@@ -19,7 +19,7 @@ Eventually, we will publish each of these tasks separately. If you have any comm
 ## Action Type
 - Show: Get the current credentials information
 - Renew: Renew the current credentials information access
-### Output variables
+#### Output variables
 - username
 - password
 - password2
@@ -29,17 +29,17 @@ Eventually, we will publish each of these tasks separately. If you have any comm
 
 ## AzureAppInsight
 ![AppInsight](_screenShots/appInsight_v2.png)
-### Output variables
+#### Output variables
 - instrumentationKey
 
 ## FileContentToBase64
 ![FileContentToBase64](_screenShots/FileContentToBase64_v2.png)
-### Output variables
+#### Output variables
 - base64Content
 
 ## ManageKeyVaultSecrets
 ![ManageKeyVaultSecrets](_screenShots/manageKeyVaultSecrets_v2-preview.png)
-### Secrets file path (expected file format content)
+#### Secrets file path (expected file format content)
 ```json
 [
 	{
@@ -52,5 +52,5 @@ Eventually, we will publish each of these tasks separately. If you have any comm
 	}
 ]
 ```
-### Important
+#### Important
 *** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
