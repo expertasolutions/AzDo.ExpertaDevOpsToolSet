@@ -17,6 +17,10 @@
 *** Build name require to have v0.0.0 format ***
 
 ## ACRCredentials
+![ACRCredentials](_screenShots/acrCredential_v1.png)
+## Action Type
+- Show: Get the current credentials information
+- Renew: Renew the current credentials information access
 ### Output variables
 - username
 - password
