@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
 var shell = require('node-powershell');
-var fs = required('fs');
+var fs = require('fs');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
