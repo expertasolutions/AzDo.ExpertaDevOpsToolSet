@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
 var shell = require('node-powershell');
+var fs = required('fs');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -31,6 +32,16 @@ try {
     console.log("Resource Group: " + resourceGroupName);
     console.log("Key Vault: " + keyVault);
     console.log("Secret File Path: '" + secretsFilePath + "'");
+
+    fs.access(secretsFilePath, fs.F_OK, (err) => {
+        if(err){
+            console.error(err);
+            tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+            return;
+        } else {
+            console.log("file exists !!");
+        }
+    })
 
     var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
 
