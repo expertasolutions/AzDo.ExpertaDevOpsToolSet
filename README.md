@@ -1,10 +1,8 @@
-# Available tasks:
-- VersionExtractor
-- ACRCredentials
-- ACRAKSAccess
-- AzureAppInsight
-- FileContentToBase64
-- ManageKeyVaultSecrets
+# Purpose & description
+Current Solutions Experta Inc customs Azure DevOps tasks tools set. Theses tasks has been specifially created for our needs and why not shared it for the entire community.
+Eventually, we will publish each of these tasks separately. If you have any comment/suggestion, please feel free to share it with us.
+
+# Tasks
 
 ## VersionExtractor
 ![VersionExtrator](_screenShots/VersionExtrator_v1.png)
