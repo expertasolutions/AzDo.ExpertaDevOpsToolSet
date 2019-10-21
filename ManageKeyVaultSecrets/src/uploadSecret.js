@@ -36,7 +36,7 @@ try {
     fs.access(secretsFilePath, fs.F_OK, (err) => {
         if(err){
             console.log("---file not exists---");
-            console.error(err);
+            throw new Error(err);
         } else {
             console.log("file exists !!");
         }
