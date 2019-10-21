@@ -13,6 +13,20 @@
 - versionPatch
 - fullVersion
 
+## ACRCredentials
+### Output variables
+- username
+- password
+- password2
+
+## ACRAKSAccess
+
+## AzureAppInsight
+
+## FileContentToBase64
+### Output variables
+- base64Content
+
 ## ManageKeyVaultSecrets
 ![ManageKeyVaultSecrets](_screenShots/manageKeyVaultSecrets_v2-preview.png)
 ### Secrets file path (expected file format content)
@@ -30,11 +44,3 @@
 ```
 ### Important:
 *** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
-
-## Task Output variables
-- ACRCredentials
-	- username
-	- password
-	- password2
-- FileContentToBase64
-	- base64Content
