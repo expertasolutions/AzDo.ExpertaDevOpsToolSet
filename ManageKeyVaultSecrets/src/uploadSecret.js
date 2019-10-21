@@ -35,32 +35,26 @@ try {
 
     fs.access(secretsFilePath, fs.F_OK, (err) => {
         if(err){
-            console.log("---file not exists---");
-            return done (Error('File not exists'));
+            throw new Error('File not exists');
         } else {
-            console.log("file exists !!");
+            var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
+            pwsh.addCommand(__dirname  + "/uploadSecret.ps1 -subscriptionId '" + subcriptionId + "' "
+                + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
+                + "-tenantId '" + tenantId + "' "
+                + "-resourceGroupName '" + resourceGroupName + "' "
+                + "-keyVault '" + keyVault + "' "
+                + "-secretFilePath '" + secretsFilePath + "'"
+            ).then(function() {
+                return pwsh.invoke();
+            }).then(function(output){
+                pwsh.dispose();
+            }).catch(function(err){
+                console.log(err);
+                tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                pwsh.dispose();
+            });
         }
     });
-
-    /*
-    var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
-
-    pwsh.addCommand(__dirname  + "/uploadSecret.ps1 -subscriptionId '" + subcriptionId + "' "
-        + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
-        + "-tenantId '" + tenantId + "' "
-        + "-resourceGroupName '" + resourceGroupName + "' "
-        + "-keyVault '" + keyVault + "' "
-        + "-secretFilePath '" + secretsFilePath + "'"
-    ).then(function() {
-        return pwsh.invoke();
-    }).then(function(output){
-        pwsh.dispose();
-    }).catch(function(err){
-        console.log(err);
-        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
-        pwsh.dispose();
-    });
-    */
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
