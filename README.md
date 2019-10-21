@@ -6,7 +6,7 @@ Eventually, we will publish each of these tasks separately. If you have any comm
 
 ## VersionExtractor
 ![VersionExtrator](_screenShots/VersionExtrator_v1.png)
-### Output variables
+#### Output variables
 - versionMajor
 - versionMinor
 - versionPatch
