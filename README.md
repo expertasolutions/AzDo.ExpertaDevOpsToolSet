@@ -26,7 +26,7 @@
 ![ACRAKSAccess](_screenShots/ACRAKSAccess_v2.png)
 
 ## AzureAppInsight
-![AppInsight](_screenshots/appInsight_v2.png)
+![AppInsight](_screenShots/appInsight_v2.png)
 ### Output variables
 - instrumentationKey
 
