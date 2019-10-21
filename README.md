@@ -23,7 +23,7 @@
 - password2
 
 ## ACRAKSAccess
-
+![ACRAKSAccess](_screenShots/ACRAKSAccess_v2.png)
 ## AzureAppInsight
 
 ## FileContentToBase64
