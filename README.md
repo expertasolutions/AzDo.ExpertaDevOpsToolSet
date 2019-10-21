@@ -7,7 +7,7 @@
 - ManageKeyVaultSecrets
 
 ## VersionExtractor
-## Output variables
+### Output variables
 - versionMajor
 - versionMinor
 - versionPatch
