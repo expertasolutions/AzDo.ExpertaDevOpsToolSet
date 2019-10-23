@@ -41,9 +41,10 @@ try {
             throw new Error('File not exists');
         } else {
             let client;
-            msRestAzure.loginWithServicePrincipalSecret(servicePrincipalId, servicePrincipalKey, tenantId,
-                (err, creds) => {
-                    url = 'https://' + keyVault + '.vault.azure.net';
+            msRestAzure.loginWithServicePrincipalSecret(
+                servicePrincipalId, servicePrincipalKey, 
+                tenantId, (err, creds) => {
+                    const url = 'https://' + keyVault + '.vault.azure.net';
                     console.log(url);
 
                     if(err){
@@ -56,11 +57,6 @@ try {
                     client.getSecrets(url, secrets => {
                         console.log('read secrets');
                     });
-                })
-                .catch(err=> {
-                    console.log('In error');
-                    console.dir(err, { depth: null, colors: true });
-                    throw new Error(err);
                 });
         }
     });
