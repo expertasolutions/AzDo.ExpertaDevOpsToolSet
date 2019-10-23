@@ -42,10 +42,14 @@ try {
         } else {
             let client;
             msRestAzure.loginWithServicePrincipalSecret(servicePrincipalId, servicePrincipalKey, tenantId)
-                .then(creds => {
+                .then((err, creds) => {
+                    if(err){
+                        throw err;
+                    }
                     console.log('inside creds');
-                    console.log(creds);
+                    //console.log(creds);
                     url = 'https://' + keyVault + '.vault.azure.net';
+                    console.log(url);
                     client = new keyVaultClient(creds, subcriptionId);
                     client.getSecrets(url, secrets => {
                         console.log('read secrets');
