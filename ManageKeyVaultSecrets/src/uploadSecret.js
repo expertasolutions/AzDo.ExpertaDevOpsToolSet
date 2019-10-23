@@ -14,7 +14,7 @@ var shell = require('node-powershell');
 var fs = require('fs');
 
 const msRestAzure = require('ms-rest-azure');
-const keyVaultClient = require('azure-keyvault');
+const KeyVault = require('azure-keyvault');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -53,7 +53,7 @@ try {
                     console.log('inside creds');
                     //console.log(creds);
                     
-                    client = new keyVaultClient(creds, subcriptionId);
+                    client = new KeyVault.KeyVaultClient(creds);
                     client.getSecrets(url, secrets => {
                         console.log('read secrets');
                     });
