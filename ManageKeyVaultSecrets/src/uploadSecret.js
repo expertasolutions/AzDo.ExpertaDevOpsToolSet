@@ -50,10 +50,9 @@ try {
                     }
 
                     client = new KeyVault.KeyVaultClient(creds);
-                    client.getSecrets(url, secrets => {
-                        console.log('read secrets');
-                        console.dir(secrets, {depth: null, colors: true});
-                    });
+                    var results = await client.getSecrets(url);
+                    console.log('read secrets');
+                    console.dir(results, { depth: null, colors: true});
                 });
         }
     });
