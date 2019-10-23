@@ -36,6 +36,7 @@ try {
     console.log("Secret File Path: '" + secretsFilePath + "'");
 
     const url = 'https://' + keyVault + '.vault.azure.net';
+    console.log(url);
 
     fs.access(secretsFilePath, fs.F_OK, (err) => {
         if(err){
@@ -52,7 +53,11 @@ try {
                     client = new KeyVault.KeyVaultClient(creds);
                     client.getSecrets(url).then(secrets => {
                         console.log('read secrets');
-                        console.dir(secrets, { depth: null, colors: true});
+                        //console.dir(secrets, { depth: null, colors: true});
+                        for(var i=0;i<secrets.length;i++){
+                            var secret = secrets[i];
+                            console.log(secret.id);
+                        }
                     });
                 });
         }
