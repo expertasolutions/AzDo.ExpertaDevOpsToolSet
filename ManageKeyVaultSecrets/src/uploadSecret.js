@@ -54,9 +54,10 @@ try {
                     client = new KeyVault.KeyVaultClient(creds);
                     client.getSecrets(url, secrets => {
                         console.log('read secrets');
-                        for(var i =0;i<secrets.length;i++){
+                        console.dir(secrets, {depth: null, colors: true});
+                        /*for(var i =0;i<secrets.length;i++){
                             console.log(secrets[i].id);
-                        }
+                        }*/
                     });
                 });
         }
