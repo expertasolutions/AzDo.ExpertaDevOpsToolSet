@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
-var shell = require('node-powershell');
 var fs = require('fs');
 
 const msRestAzure = require('ms-rest-azure');
@@ -44,14 +43,13 @@ try {
             msRestAzure.loginWithServicePrincipalSecret(
                 servicePrincipalId, servicePrincipalKey, 
                 tenantId, (err, creds) => {
+                    if(err){
+                        throw new Error('Auth error --> ' + err);
+                    }
+
                     const url = 'https://' + keyVault + '.vault.azure.net';
                     console.log(url);
-
-                    if(err){
-                        throw new Error(err);
-                    }
                     console.log('inside creds');
-                    //console.log(creds);
                     
                     client = new KeyVault.KeyVaultClient(creds);
                     client.getSecrets(url, secrets => {
