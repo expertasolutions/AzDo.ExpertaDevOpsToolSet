@@ -42,7 +42,7 @@ try {
             let client;
             __MSRESTAZURE.interactiveLogin()
                 .then(creds => {
-                    client = new KeyVaultManagementClient(creds, subscriptionId);
+                    client = new __KEYVAULTMANAGEMENTCLIENT(creds, subscriptionId);
                     return client.vaults.list();
                 })
                 .then(vaults => {
