@@ -12,8 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tl = require('azure-pipelines-task-lib');
 var shell = require('node-powershell');
 var fs = require('fs');
-const __KEYVAULTMANAGEMENTCLIENT = require('ms-rest-azure');
-const __MSRESTAZURE = require('azure-arm-keyvault');
+
+import { SecretsClient } from "@azure/keyvault-secrets";
+import { DefaultAzureCredential } from "@azure/identity";
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -39,21 +40,13 @@ try {
         if(err){
             throw new Error('File not exists');
         } else {
-            let client;
-            __MSRESTAZURE.interactiveLogin()
-                .then(creds => {
-                    client = new __KEYVAULTMANAGEMENTCLIENT(creds, subscriptionId);
-                    return client.vaults.list();
-                })
-                .then(vaults => {
-                    console.dir(vaults, { depth: null, colors: true});
-
-                })
-                .catch(err => {
-                    console.log("inside error");
-                    console.dir(err, { depth: null, colors: true});
-                    return err;
-                });
+            let url = "https://" + keyvault + ".vault.azure.net;";
+            let credentials = new DefaultAzureCredential();
+            let client = SecretsClient(url, credentials);
+            for await(const secretAttr of client.listSecrets()){ 
+                const secret = await client.getSecret(secretAttr.name);
+                console.log("secret: ", secret);
+            }
         }
     });
 } catch (err) {
