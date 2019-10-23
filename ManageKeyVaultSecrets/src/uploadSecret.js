@@ -45,7 +45,11 @@ try {
                 .then(creds => {
                     console.log('inside creds');
                     console.log(creds);
-                    
+                    url = 'https://' + keyVault + '.vault.azure.net';
+                    client = new keyVaultClient(creds, subcriptionId);
+                    client.getSecrets(url, secrets => {
+                        console.log('read secrets');
+                    });
                 })
                 .catch(err=> {
                     console.log('In error');
