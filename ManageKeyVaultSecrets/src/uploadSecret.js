@@ -59,6 +59,10 @@ try {
                             console.log(secret.id);
                         }
                     });
+
+                    client.setSecret(url, "chantal", "cholette", s=> {
+                        console.log("created");
+                    });
                 });
         }
     });
