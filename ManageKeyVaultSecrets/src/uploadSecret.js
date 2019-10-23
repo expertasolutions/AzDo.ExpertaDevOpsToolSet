@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tl = require('azure-pipelines-task-lib');
 var shell = require('node-powershell');
 var fs = require('fs');
+const __MSRESTAZURE = require('ms-rest-azure');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -37,22 +38,21 @@ try {
         if(err){
             throw new Error('File not exists');
         } else {
-            var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
-            pwsh.addCommand(__dirname  + "/uploadSecret.ps1 -subscriptionId '" + subcriptionId + "' "
-                + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
-                + "-tenantId '" + tenantId + "' "
-                + "-resourceGroupName '" + resourceGroupName + "' "
-                + "-keyVault '" + keyVault + "' "
-                + "-secretFilePath '" + secretsFilePath + "'"
-            ).then(function() {
-                return pwsh.invoke();
-            }).then(function(output){
-                pwsh.dispose();
-            }).catch(function(err){
-                console.log(err);
-                tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
-                pwsh.dispose();
-            });
+            let client;
+            __MSRESTAZURE.interactiveLogin()
+                .then(creds => {
+                    client = new KeyVaultManagementClient(creds, subscriptionId);
+                    return client.vaults.list();
+                })
+                .then(vaults => {
+                    console.dir(vaults, { depth: null, colors: true});
+
+                })
+                .catch(err => {
+                    console.log("inside error");
+                    console.dir(err, { depth: null, colors: true});
+                    return err;
+                });
         }
     });
 } catch (err) {
