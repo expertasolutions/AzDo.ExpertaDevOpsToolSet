@@ -12,7 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tl = require('azure-pipelines-task-lib');
 var shell = require('node-powershell');
 var fs = require('fs');
-const __MSRESTAZURE = require('ms-rest-azure');
+const __KEYVAULTMANAGEMENTCLIENT = require('ms-rest-azure');
+const __MSRESTAZURE = require('azure-arm-keyvault');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
