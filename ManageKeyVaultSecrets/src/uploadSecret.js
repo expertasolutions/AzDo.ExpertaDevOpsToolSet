@@ -41,7 +41,7 @@ try {
             throw new Error('File not exists');
         } else {
             let client;
-            msRestAzure.loginWithServicePrincipalSecret(servicePrincipalId, servicePrincipalKey)
+            msRestAzure.loginWithServicePrincipalSecret(servicePrincipalId, servicePrincipalKey, tenantId)
                 .then(creds => {
                     console.log('inside creds');
                     console.log(creds);
@@ -54,7 +54,7 @@ try {
                 .catch(err=> {
                     console.log('In error');
                     console.dir(err, { depth: null, colors: true });
-                    return err;
+                    throw err;
                 });
         }
     });
