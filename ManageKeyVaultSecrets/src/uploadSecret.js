@@ -35,6 +35,8 @@ try {
     console.log("Key Vault: " + keyVault);
     console.log("Secret File Path: '" + secretsFilePath + "'");
 
+    const url = 'https://' + keyVault + '.vault.azure.net';
+
     fs.access(secretsFilePath, fs.F_OK, (err) => {
         if(err){
             throw new Error('File not exists');
@@ -47,17 +49,10 @@ try {
                         throw new Error('Auth error --> ' + err);
                     }
 
-                    const url = 'https://' + keyVault + '.vault.azure.net';
-                    console.log(url);
-                    console.log('inside creds');
-                    
                     client = new KeyVault.KeyVaultClient(creds);
                     client.getSecrets(url, secrets => {
                         console.log('read secrets');
                         console.dir(secrets, {depth: null, colors: true});
-                        /*for(var i =0;i<secrets.length;i++){
-                            console.log(secrets[i].id);
-                        }*/
                     });
                 });
         }
