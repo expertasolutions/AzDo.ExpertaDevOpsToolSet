@@ -53,8 +53,9 @@ try {
 
                     client = new KeyVault.KeyVaultClient(creds);
                     for(var s=0;s<secretsContent.length;s++){
+                        const secret = secretsContent[s].secret;
                         client.setSecret(url, secretsContent[s].secret, secretsContent[s].value, sb=> {
-                            console.log(sb);
+                            console.log(secret + " set in keyVault");
                         });
                     }
                 });
