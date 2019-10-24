@@ -43,7 +43,7 @@ try {
             throw new Error('File not exists');
         } else {
 
-            let rawdata = fs.readFileSync(secretFilePath);
+            let rawdata = fs.readFileSync(secretsFilePath);
             let secretsContent = JSON.parse(rawdata);
             console.log(secretsContent);
 
