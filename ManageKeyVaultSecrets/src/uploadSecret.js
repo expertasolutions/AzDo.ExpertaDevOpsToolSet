@@ -43,12 +43,6 @@ try {
         } else {
             let rawdata = fs.readFileSync(secretsFilePath);
             let secretsContent = JSON.parse(rawdata);
-            console.log(secretsContent);
-
-            for(var s=0;s<secretsContent.length;s++){
-                console.log(secretsContent[s].secret);
-            }
-
             let client;
             msRestAzure.loginWithServicePrincipalSecret(
                 servicePrincipalId, servicePrincipalKey, 
@@ -56,10 +50,14 @@ try {
                     if(err){
                         throw new Error('Auth error --> ' + err);
                     }
+
                     client = new KeyVault.KeyVaultClient(creds);
-                    client.setSecret(url, "chantal", "cholette", s=> {
-                        console.log("created");
-                    });
+                    for(var s=0;s<secretsContent.length;s++){
+                        console.log(secretsContent[s].secret);
+                        client.setSecret(url, secretsContent[s].secret, secretsContent[s].value, s=> {
+                            console.log("created");
+                        });
+                    }
                 });
         }
     });
