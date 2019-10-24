@@ -45,7 +45,7 @@ try {
             let secretsContent = JSON.parse(rawdata);
             console.log(secretsContent);
 
-            for(var s=0;i<secretsContent.length;s++){
+            for(var s=0;s<secretsContent.length;s++){
                 console.log(secretsContent[s].secret);
             }
 
