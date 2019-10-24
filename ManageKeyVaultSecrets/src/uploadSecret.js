@@ -10,8 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
-var shell = require('node-powershell');
 var fs = require('fs');
+
+const msRestAzure = require('ms-rest-azure');
+const KeyVault = require('azure-keyvault');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -33,26 +35,30 @@ try {
     console.log("Key Vault: " + keyVault);
     console.log("Secret File Path: '" + secretsFilePath + "'");
 
+    const url = 'https://' + keyVault + '.vault.azure.net';
+
     fs.access(secretsFilePath, fs.F_OK, (err) => {
         if(err){
             throw new Error('File not exists');
         } else {
-            var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
-            pwsh.addCommand(__dirname  + "/uploadSecret.ps1 -subscriptionId '" + subcriptionId + "' "
-                + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
-                + "-tenantId '" + tenantId + "' "
-                + "-resourceGroupName '" + resourceGroupName + "' "
-                + "-keyVault '" + keyVault + "' "
-                + "-secretFilePath '" + secretsFilePath + "'"
-            ).then(function() {
-                return pwsh.invoke();
-            }).then(function(output){
-                pwsh.dispose();
-            }).catch(function(err){
-                console.log(err);
-                tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
-                pwsh.dispose();
-            });
+            let rawdata = fs.readFileSync(secretsFilePath);
+            let secretsContent = JSON.parse(rawdata);
+            let client;
+            msRestAzure.loginWithServicePrincipalSecret(
+                servicePrincipalId, servicePrincipalKey, 
+                tenantId, (err, creds) => {
+                    if(err){
+                        throw new Error('Auth error --> ' + err);
+                    }
+
+                    client = new KeyVault.KeyVaultClient(creds);
+                    for(var s=0;s<secretsContent.length;s++){
+                        const secret = secretsContent[s].secret;
+                        client.setSecret(url, secretsContent[s].secret, secretsContent[s].value, sb=> {
+                            console.log(secret + " set in keyVault");
+                        });
+                    }
+                });
         }
     });
 } catch (err) {
