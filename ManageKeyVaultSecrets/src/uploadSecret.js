@@ -36,16 +36,18 @@ try {
     console.log("Secret File Path: '" + secretsFilePath + "'");
 
     const url = 'https://' + keyVault + '.vault.azure.net';
-    console.log(url);
 
     fs.access(secretsFilePath, fs.F_OK, (err) => {
         if(err){
             throw new Error('File not exists');
         } else {
-
             let rawdata = fs.readFileSync(secretsFilePath);
             let secretsContent = JSON.parse(rawdata);
             console.log(secretsContent);
+
+            for(var s=0;i<secretsContent.length;s++){
+                console.log(secretsContent[s].secret);
+            }
 
             let client;
             msRestAzure.loginWithServicePrincipalSecret(
