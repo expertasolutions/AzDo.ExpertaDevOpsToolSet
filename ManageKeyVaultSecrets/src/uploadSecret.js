@@ -51,9 +51,11 @@ try {
                         throw new Error('Auth error --> ' + err);
                     }
 
+                    var currentSecret = null;
                     client = new KeyVault.KeyVaultClient(creds);
                     for(var s=0;s<secretsContent.length;s++){
-                        var currentSecret = secretsContent[s].secret;
+                        console.log(secretsContent[s].secret);
+                        currentSecret = secretsContent[s].secret;
                         client.setSecret(url, currentSecret, secretsContent[s].value, s=> {
                             console.log(currentSecret + " set with new value");
                         });
