@@ -42,6 +42,11 @@ try {
         if(err){
             throw new Error('File not exists');
         } else {
+
+            let rawdata = fs.readFileSync(secretFilePath);
+            let secretsContent = JSON.parse(rawdata);
+            console.log(secretsContent);
+
             let client;
             msRestAzure.loginWithServicePrincipalSecret(
                 servicePrincipalId, servicePrincipalKey, 
@@ -49,17 +54,7 @@ try {
                     if(err){
                         throw new Error('Auth error --> ' + err);
                     }
-
                     client = new KeyVault.KeyVaultClient(creds);
-                    client.getSecrets(url).then(secrets => {
-                        console.log('read secrets');
-                        //console.dir(secrets, { depth: null, colors: true});
-                        for(var i=0;i<secrets.length;i++){
-                            var secret = secrets[i];
-                            console.log(secret.id);
-                        }
-                    });
-
                     client.setSecret(url, "chantal", "cholette", s=> {
                         console.log("created");
                     });
