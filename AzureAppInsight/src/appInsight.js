@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
 const msRestAzure = require('ms-rest-azure');
-const ResourceManagementClient = require('azure-arm-resource');
+const resourceManagement = require('azure-arm-resource');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -37,7 +37,7 @@ try {
             }
 
             const instrumentKey = null;
-            const resClient = new ResourceManagementClient(creds, subcriptionId);
+            const resClient = new resourceManagement.ResourceManagementClient(creds, subcriptionId);
             resClient.resources.list(function(err, result){
                 if(err){
                     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
