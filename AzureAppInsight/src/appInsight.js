@@ -36,7 +36,7 @@ try {
                 throw new Error('Auth error --> ' + err);
             }
 
-            const instrumentKey = null;
+            var instrumentKey = null;
             const resClient = new resourceManagement.ResourceManagementClient(creds, subcriptionId);
             resClient.resources.list(function(err, result){
                 if(err){
@@ -49,11 +49,12 @@ try {
                             .then(result => {
                                 console.log(result);
                                 console.log(result.properties.InstrumentationKey);
-                                instrumentKey = result.properties.InstrumentationKey;                               
+                                instrumentKey = result.properties.InstrumentationKey; 
                           })
                         }
                       }
                 }
+                console.log("");
                 if(instrumentKey != null){
                     tl.setVariable("instrumentationKey", instrumentKey, false);
                 } else {
