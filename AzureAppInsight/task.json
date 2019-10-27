@@ -4,6 +4,7 @@
     "friendlyName": "AzureAppInsightDetails",
     "description": "Task to extract azure app insight details",
     "helpMarkDown": "",
+    "preview": true,
     "category": "Utility",
     "author": "Solutions Experta Inc.",
     "version": {

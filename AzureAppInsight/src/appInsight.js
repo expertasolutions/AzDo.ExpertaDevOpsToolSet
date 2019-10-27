@@ -10,7 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
-var shell = require('node-powershell');
+const msRestAzure = require('ms-rest-azure');
+const ResourceManagementClient = require('azure-arm-resource');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -19,7 +20,6 @@ try {
     var servicePrincipalId = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint, "serviceprincipalid", false);
     var servicePrincipalKey = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint, "serviceprincipalkey", false);
     var tenantId = tl.getEndpointAuthorizationParameter(azureSubscriptionEndpoint,"tenantid", false);
-
     var azureAppInsightName = tl.getInput("azureAppInsightName", true);
     
     console.log("Azure Subscription Id: " + subcriptionId);
@@ -27,28 +27,41 @@ try {
     console.log("ServicePrincipalKey: " + servicePrincipalKey);
     console.log("Tenant Id: " + tenantId);
     console.log("AppInsight Name: " + azureAppInsightName)
+    console.log("");
 
-    // TODO: Use npm module to interact with azure container registry
-    var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
+    msRestAzure.loginWithServicePrincipalSecret(
+        servicePrincipalId, servicePrincipalKey, 
+        tenantId, (err, creds) => {
+            if(err){
+                throw new Error('Auth error --> ' + err);
+            }
 
-    pwsh.addCommand(__dirname  + "/appInsight.ps1 -subscriptionId '" + subcriptionId + "' "
-        + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
-        + "-tenantId '" + tenantId + "' "
-        + "-appInsightName '" + azureAppInsightName + "' "
-    ).then(function() {
-        return pwsh.invoke();
-    }).then(function(output){
+            const instrumentKey = null;
+            const resClient = new ResourceManagementClient(creds, subcriptionId);
+            resClient.resources.list(function(err, result){
+                if(err){
+                    tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                } else {
+                    for(var i=0;i<result.length;i++){
+                        const entity = result[i];
+                        if(entity.name == azureAppInsightName){
+                          resClient.resources.getById(entity.id, '2015-05-01')
+                            .then(result => {
+                                console.log(result);
+                                console.log(result.properties.InstrumentationKey);
+                                instrumentKey = result.properties.InstrumentationKey;                               
+                          })
+                        }
+                      }
+                }
+                if(instrumentKey != null){
+                    tl.setVariable("instrumentationKey", instrumentKey, false);
+                } else {
+                    tl.setResult(tl.TaskResult.Failed, "ApplicationInsight not found");
+                }
+            });
+        });
 
-        let result = JSON.parse(output);
-        tl.setVariable("instrumentationKey", result.properties.InstrumentationKey, false);       
-
-        pwsh.dispose();
-    }).catch(function(err){
-        console.log(err);
-        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
-        pwsh.dispose();
-    });
-    
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
