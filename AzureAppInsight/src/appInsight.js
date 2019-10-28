@@ -36,7 +36,6 @@ try {
                 throw new Error('Auth error --> ' + err);
             }
 
-            var instrumentKey;
             var entityFound;
             const resClient = new resourceManagement.ResourceManagementClient(creds, subcriptionId);
             resClient.resources.list(function(err, result){
@@ -50,12 +49,12 @@ try {
                 }
           
                 if(entityFound === undefined)
-                  console.log("not found");
+                  console.log("Azure ApplicationInsight not found");
                 else {
                   resClient.resources.getById(entityFound.id, '2015-05-01')
                         .then(result => {
-                          instrumentKey = result.properties.InstrumentationKey; 
-                          console.log("ApplicationInsigth " + azureAppInsightName + " has been found !");
+                          console.log("Azure ApplicationInsight " + azureAppInsightName + " has been found !");
+                          tl.setVariable("instrumentationKey", result.properties.InstrumentationKey, false);     
                         });
                 }
             });        
