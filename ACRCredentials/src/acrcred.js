@@ -50,27 +50,27 @@ try {
                         tl.setResult(tl.TaskResult.Failed, "Container registry named " + containerRegistry + " does not have adminUser configured");
                     } else {
                         if(actionType == "show"){
-                        manager.registries.listCredentials(resourceGroupName, containerRegistry)
-                            .then(rs => {
-                            var pwd1 = rs.passwords[0].value;
-                            var pwd2 = rs.passwords[1].value;
-                            tl.setVariable("username", rs.username, true);
-                            tl.setVariable("password", pwd1, true);
-                            tl.setVariable("password2", pwd2, true);
-                            });
+                            manager.registries.listCredentials(resourceGroupName, containerRegistry)
+                                .then(rs => {
+                                var pwd1 = rs.passwords[0].value;
+                                var pwd2 = rs.passwords[1].value;
+                                tl.setVariable("username", rs.username, true);
+                                tl.setVariable("password", pwd1, true);
+                                tl.setVariable("password2", pwd2, true);
+                                });
                         } else {
-                        var password = { name: "password" };
-                        manager.registries.regenerateCredential(resourceGroupName, containerRegistry, password)
-                            .then(rp1=> {
-                            tl.setVariable("username", rp1.username, true);
-                            console.log("Password regenerated to " + rp1.passwords[0].value);
-                            var password2 = { name: "password2" };
-                            manager.registries.regenerateCredential(resourceGroupName, containerRegistry, password2)
-                            .then(rp2=> {
-                                tl.setVariable("password2", rp2.passwords[1].value, true);
-                                console.log("Password2 regenerated to " + rp2.passwords[1].value);
-                            });
-                            });
+                            var password = { name: "password" };
+                            manager.registries.regenerateCredential(resourceGroupName, containerRegistry, password)
+                                .then(rp1=> {
+                                    tl.setVariable("username", rp1.username, true);
+                                    console.log("Password regenerated to " + rp1.passwords[0].value);
+                                    var password2 = { name: "password2" };
+                                    manager.registries.regenerateCredential(resourceGroupName, containerRegistry, password2)
+                                        .then(rp2=> {
+                                            tl.setVariable("password2", rp2.passwords[1].value, true);
+                                            console.log("Password2 regenerated to " + rp2.passwords[1].value);
+                                        });
+                                });
                         }
                     }
                 });
