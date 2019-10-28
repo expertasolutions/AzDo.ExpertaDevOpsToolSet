@@ -48,8 +48,9 @@ try {
                   }
                 }
           
-                if(entityFound === undefined)
-                  console.log("Azure ApplicationInsight not found");
+                if(entityFound === undefined) {
+                  tl.setResult(tl.TaskResult.Failed, "Azure ApplicationInsight not found");
+                }
                 else {
                   resClient.resources.getById(entityFound.id, '2015-05-01')
                         .then(result => {
