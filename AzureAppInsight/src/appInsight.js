@@ -36,7 +36,7 @@ try {
                 throw new Error('Auth error --> ' + err);
             }
 
-            var instrumentKey = null;
+            var instrumentKey;
             const resClient = new resourceManagement.ResourceManagementClient(creds, subcriptionId);
             resClient.resources.list(function(err, result){
                 if(err){
@@ -55,7 +55,8 @@ try {
                       }
                 }
                 console.log("");
-                if(instrumentKey != null){
+                console.log(instrumentKey);
+                if(instrumentKey != undefined){
                     tl.setVariable("instrumentationKey", instrumentKey, false);
                 } else {
                     tl.setResult(tl.TaskResult.Failed, "ApplicationInsight not found");
