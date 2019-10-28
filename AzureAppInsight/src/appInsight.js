@@ -37,33 +37,29 @@ try {
             }
 
             var instrumentKey;
+            var entityFound;
             const resClient = new resourceManagement.ResourceManagementClient(creds, subcriptionId);
             resClient.resources.list(function(err, result){
-                if(err){
-                    tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
-                } else {
-                    for(var i=0;i<result.length;i++){
-                        const entity = result[i];
-                        if(entity.name == azureAppInsightName){
-                          resClient.resources.getById(entity.id, '2015-05-01')
-                            .then(result => {
-                                console.log(result);
-                                console.log(result.properties.InstrumentationKey);
-                                instrumentKey = result.properties.InstrumentationKey; 
-                          })
-                        }
-                      }
+                if(err)
+                  console.log(err);
+                for(var i=0;i<result.length;i++){
+                  const entity = result[i];
+                  if(entity.name == appInsightName) {
+                    entityFound = entity;
+                  }
                 }
-                console.log("");
-                console.log(instrumentKey);
-                if(instrumentKey != undefined){
-                    tl.setVariable("instrumentationKey", instrumentKey, false);
-                } else {
-                    tl.setResult(tl.TaskResult.Failed, "ApplicationInsight not found");
+          
+                if(entityFound === undefined)
+                  console.log("not found");
+                else {
+                  resClient.resources.getById(entityFound.id, '2015-05-01')
+                        .then(result => {
+                          instrumentKey = result.properties.InstrumentationKey; 
+                          console.log("ApplicationInsigth " + azureAppInsightName + " has been found !");
+                        });
                 }
-            });
+            });        
         });
-
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
