@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
-var shell = require('node-powershell');
+const ContainerRegistryManagement = require('azure-arm-containerregistry');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -33,33 +33,47 @@ try {
     console.log("Container Registry: " + containerRegistry);
     console.log("Action Type: " + actionType);
     console.log("Password Name: " + passwordToRenew);
-
-    // TODO: Use npm module to interact with azure container registry
-    var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
-
-    pwsh.addCommand(__dirname  + "/acrcred.ps1 -subscriptionId '" + subcriptionId + "' "
-        + "-servicePrincipalId '" + servicePrincipalId + "' -servicePrincipalKey '" + servicePrincipalKey + "' "
-        + "-tenantId '" + tenantId + "' "
-        + "-resourceGroupName '" + resourceGroupName + "' "
-        + "-containerRegistry '" + containerRegistry + "' "
-        + "-actionType '" + actionType + "' "
-        + "-pwdName '" + passwordToRenew + "' "
-    ).then(function() {
-        return pwsh.invoke();
-    }).then(function(output){
-        let result = JSON.parse(output);
-
-        tl.setVariable("username", result.username, true);
-        tl.setVariable("password", result.passwords[0].value, true);
-        tl.setVariable("password2", result.passwords[1].value, true);        
-
-        pwsh.dispose();
-    }).catch(function(err){
-        console.log(err);
-        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
-        pwsh.dispose();
-    });
+    console.log("");
     
+    msRestAzure.loginWithServicePrincipalSecret(
+        servicePrincipalId, servicePrincipalKey, 
+        tenantId, (err, creds) => {
+            if(err){
+                throw new Error('Auth error --> ' + err);
+            }
+
+            const manager = new ContainerRegistryManagement(creds, subcriptionId);
+            manager.registries.get(resourceGroupName, containerRegistry)
+                .then(result => {
+                    if(result.adminUserEnabled == false) {
+                        tl.setResult(tl.TaskResult.Failed, "Container registry named " + containerRegistry + " does not have adminUser configured");
+                    } else {
+                        if(actionType == "show"){
+                        manager.registries.listCredentials(resourceGroupName, containerRegistry)
+                            .then(rs => {
+                            var pwd1 = rs.passwords[0].value;
+                            var pwd2 = rs.passwords[1].value;
+                            tl.setVariable("username", rs.username, true);
+                            tl.setVariable("password", pwd1, true);
+                            tl.setVariable("password2", pwd2, true);
+                            });
+                        } else {
+                        var password = { name: "password" };
+                        manager.registries.regenerateCredential(resourceGroupName, containerRegistry, password)
+                            .then(rp1=> {
+                            tl.setVariable("username", rp1.username, true);
+                            console.log("Password regenerated to " + rp1.passwords[0].value);
+                            var password2 = { name: "password2" };
+                            manager.registries.regenerateCredential(resourceGroupName, containerRegistry, password2)
+                            .then(rp2=> {
+                                tl.setVariable("password2", rp2.passwords[1].value, true);
+                                console.log("Password2 regenerated to " + rp2.passwords[1].value);
+                            });
+                            });
+                        }
+                    }
+                });
+        });
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
