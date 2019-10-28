@@ -44,7 +44,7 @@ try {
                   console.log(err);
                 for(var i=0;i<result.length;i++){
                   const entity = result[i];
-                  if(entity.name == appInsightName) {
+                  if(entity.name == azureAppInsightName) {
                     entityFound = entity;
                   }
                 }
