@@ -58,8 +58,13 @@
         {
           "name": "pwdName",
           "label": "Password name to renew",
-          "type": "string",
-          "defaultValue": "*",
+          "type": "pickList",
+          "defaultValue": "all",
+          "options": {
+            "all": "All",
+            "password": "password",
+            "password2": "password2"
+          },
           "required:": true,
           "visibleRule": "actionType = renew"
         }

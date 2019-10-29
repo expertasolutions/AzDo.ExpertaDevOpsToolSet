@@ -52,24 +52,36 @@ try {
                         if(actionType == "show"){
                             manager.registries.listCredentials(resourceGroupName, containerRegistry)
                                 .then(rs => {
-                                var pwd1 = rs.passwords[0].value;
-                                var pwd2 = rs.passwords[1].value;
-                                tl.setVariable("username", rs.username, true);
-                                tl.setVariable("password", pwd1, true);
-                                tl.setVariable("password2", pwd2, true);
+                                    var pwd1 = rs.passwords[0].value;
+                                    var pwd2 = rs.passwords[1].value;
+                                    tl.setVariable("username", rs.username, true);
+                                    tl.setVariable("password", pwd1, true);
+                                    tl.setVariable("password2", pwd2, true);
                                 });
-                        } else {
+                        } else if(passwordToRenew == "all") {
                             var password = { name: "password" };
+                            console.log("Regenerating password ...");
                             manager.registries.regenerateCredential(resourceGroupName, containerRegistry, password)
                                 .then(rp1=> {
                                     tl.setVariable("username", rp1.username, true);
-                                    console.log("Password regenerated to " + rp1.passwords[0].value);
                                     var password2 = { name: "password2" };
+                                    console.log("Regenerating password2 ...");
                                     manager.registries.regenerateCredential(resourceGroupName, containerRegistry, password2)
                                         .then(rp2=> {
                                             tl.setVariable("password2", rp2.passwords[1].value, true);
-                                            console.log("Password2 regenerated to " + rp2.passwords[1].value);
                                         });
+                                });
+                        } else {
+                            console.log("")
+                            var passwordToRenew = { name: passwordToRenew };
+                            console.log("Regenerating " + passwordToRenew + " ...");
+                            manager.registries.regenerateCredential(resourceGroupName, containerRegistry, passwordToRenew)
+                                .then(rs => {
+                                    var pwd1 = rs.passwords[0].value;
+                                    var pwd2 = rs.passwords[1].value;
+                                    tl.setVariable("username", rs.username, true);
+                                    tl.setVariable("password", pwd1, true);
+                                    tl.setVariable("password2", pwd2, true);
                                 });
                         }
                     }
