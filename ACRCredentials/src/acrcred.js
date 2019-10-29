@@ -72,10 +72,9 @@ try {
                                         });
                                 });
                         } else {
-                            console.log("")
-                            var passwordToRenew = { name: passwordToRenew };
+                            var password = { name: passwordToRenew };
                             console.log("Regenerating " + passwordToRenew + " ...");
-                            manager.registries.regenerateCredential(resourceGroupName, containerRegistry, passwordToRenew)
+                            manager.registries.regenerateCredential(resourceGroupName, containerRegistry, password)
                                 .then(rs => {
                                     var pwd1 = rs.passwords[0].value;
                                     var pwd2 = rs.passwords[1].value;
