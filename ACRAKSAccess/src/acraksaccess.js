@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
-var shell = require('node-powershell');
 
 try {
     var acrSubscriptionEndpoint = tl.getInput("acrSubscriptionEndpoint", true);
@@ -55,30 +54,7 @@ try {
     console.log("ACR Username: " + acrUsername);
     console.log("ACR Password: " + acrPassword);
 
-    // TODO: Use npm module to interact with azure container registry
-    var pwsh = new shell({ executionPolicy: 'Bypass', noProfile: true });
-
-    pwsh.addCommand(__dirname  + "/acraksaccess.ps1 -acrSubscriptionId '" + acrSubcriptionId + "' "
-        + "-acrServicePrincipalId '" + acrServicePrincipalId + "' -acrServicePrincipalKey '" + acrServicePrincipalKey + "' "
-        + "-acrTenantId '" + acrTenantId + "' "
-        + "-registerMode '" + registerMode + "' "
-        + "-acrResourceGroup '" + acrResourceGroup + "' "
-        + "-containerRegistry '" + containerRegistry + "' "
-        + "-aksResourceGroup '" + aksResourceGroup + "' "
-        + "-aksCluster '" + aksCluster + "' "
-        + "-acrUsername '" + acrUsername + "' "
-        + "-acrPwd '" + acrPassword + "' "
-        + "-aksSubscriptionId '" + aksSubcriptionId + "' "
-        ).then(function() {
-        return pwsh.invoke();
-    }).then(function(output){
-        console.log(output);
-        pwsh.dispose();
-    }).catch(function(err){
-        console.log(err);
-        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
-        pwsh.dispose();
-    });
+    // TODO: Implement codes here :P
     
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
