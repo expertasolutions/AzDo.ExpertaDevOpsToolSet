@@ -11,6 +11,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
 const msRestNodeAuth = require('@azure/ms-rest-nodeauth');
+const resourceManagement = require('@azure/arm-resources');
+const auth = require('@azure/arm-authorization');
+const graph = require('@azure/graph');
 
 try {
     var acrSubscriptionEndpoint = tl.getInput("acrSubscriptionEndpoint", true);
@@ -56,14 +59,50 @@ try {
     console.log("ACR Password: " + acrPassword);
 
     // TODO: Implement codes here :P
-    msRestNodeAuth.loginWithServicePrincipalSecretWithAuthResponse(
+    msRestNodeAuth.loginWithServicePrincipalSecret (
         aksServicePrincipalId, aksServicePrincipalKey, aksTenantId
-    ).then(creds => {
+    ).then(aksCreds => {
         if(registerMode == "aksSecret") {
             throw new Error("AKS Secret access mode not implemented yet");
         } else {
             console.log("RBAC Access mode");
             console.log("Looking for Azure Kubernetes service cluster ...");
+            
+            const aksResourceClient = new resourceManagement.ResourceManagementClient(aksCreds, aksSubcriptionId);
+            aksResourceClient.resources.list()
+                .then(result => {
+                    // Find the AKS Cluster Resource group
+                    const aksCluster = result.find(element => {
+                        return element.name == aksCluster;
+                    });
+
+                    aksResourceClient.resources.getById(aksCluster.id, '2019-10-01')
+                        .then(aksInfoResult => {
+                        const clientId = result.properties.servicePrincipalProfile.clientId;
+                        var aksAppCreds = new msRestNodeAuth.ApplicationTokenCredentials(clientId, aksTenantId, aksCreds.secret, 'graph');
+                        const aksGraphClient = new graph.GraphRbacManagementClient(aksAppCreds, aksTenantId, { baseUri: 'https://graph.windows.net' });
+                        var aksFilterValue = "appId eq '" + clientId + "'";
+                        var aksServiceFilter = {
+                            filter: aksFilterValue
+                        };
+                        aksGraphClient.servicePrincipals.list(aksServiceFilter)
+                            .then(aksSearch => {
+                                const aksServicePrincipal = result.find(element => {
+                                    return element.appId == clientId;
+                                });
+                                console.log(aksServicePrincipal);
+                            })
+                            .catch(err => {
+                                tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                            });
+                    })
+                    .catch(err => {
+                        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                    });
+                })
+                .catch(err => {
+                    tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                });
         }
     }).catch(err => {
         tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
