@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
+const msRestNodeAuth = require('@azure/ms-rest-nodeauth');
 
 try {
     var acrSubscriptionEndpoint = tl.getInput("acrSubscriptionEndpoint", true);
@@ -55,13 +56,18 @@ try {
     console.log("ACR Password: " + acrPassword);
 
     // TODO: Implement codes here :P
-
-    if(registerMode == "aksSecret") {
-        throw new Error("AKS Secret access mode not implemented yet");
-    } else {
-
-    }
-    
+    msRestNodeAuth.loginWithServicePrincipalSecretWithAuthResponse(
+        aksServicePrincipalId, aksServicePrincipalKey, aksTenantId
+    ).then(creds => {
+        if(registerMode == "aksSecret") {
+            throw new Error("AKS Secret access mode not implemented yet");
+        } else {
+            console.log("RBAC Access mode");
+            console.log("Looking for Azure Kubernetes service cluster ...");
+        }
+    }).catch(err => {
+        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+    });
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
