@@ -76,9 +76,13 @@ try {
                         return element.name == aksCluster;
                     });
 
+                    console.log("AksCluster instance information ...");
+                    console.log(aksClusterInstance);
+
                     aksResourceClient.resources.getById(aksClusterInstance.id, '2019-10-01')
-                        .then(aksInfoResult => {
-                        const clientId = result.properties.servicePrincipalProfile.clientId;
+                    .then(aksInfoResult => {
+                        const clientId = aksInfoResult.properties.servicePrincipalProfile.clientId;
+                        console.log("AKS.ClientId: " + clientId);
                         var aksAppCreds = new msRestNodeAuth.ApplicationTokenCredentials(clientId, aksTenantId, aksCreds.secret, 'graph');
                         const aksGraphClient = new graph.GraphRbacManagementClient(aksAppCreds, aksTenantId, { baseUri: 'https://graph.windows.net' });
                         var aksFilterValue = "appId eq '" + clientId + "'";
