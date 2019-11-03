@@ -55,6 +55,12 @@ try {
     console.log("ACR Password: " + acrPassword);
 
     // TODO: Implement codes here :P
+
+    if(registerMode == "aksSecret") {
+        throw new Error("AKS Secret access mode not implemented yet");
+    } else {
+
+    }
     
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
