@@ -91,6 +91,56 @@ try {
                                     return element.appId == clientId;
                                 });
                                 console.log(aksServicePrincipal);
+
+                                msRestNodeAuth.loginWithServicePrincipalSecret(
+                                    acrServicePrincipalId, acrServicePrincipalKey, acrTenantId
+                                ).then(acrCreds => {
+
+                                    const acrResourceClient = new resourceManagement.ResourceManagementClient(acrCreds, acrSubcriptionId);
+                                    acrResourceGroup.resources.list()
+                                    .then(acrResult => {
+
+                                        const acrInstance = acrResult.find(element => {
+                                            return element.name == containerRegistry;
+                                        });
+                                        console.log(acrInstance);
+                                        
+                                    })
+                                    .catch(err => {
+                                        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                                    })
+
+                                    /*
+                                    const acrAuthClient = new auth.AuthorizationManagementClient(acrCreds, acrSubcriptionId);
+                                    const acrPullRoleName = "AcrPull";
+
+                                    acrAuthClient.roleDefinitions.list("/")
+                                        .then(roles => {
+                                            var acrRole = roles.find(role => {
+                                                return role.roleName == acrPullRoleName;
+                                            });
+
+                                            acrAuthClient.roleAssigments.listForResourceGroup(acrResourceGroup)
+                                            .then(rs => {
+                                                var roleAssignement = rs.find(elm => {
+                                                    const rolId = "/subscriptions/" + acrSubcriptionId + acrRole.id;
+                                                    return rolId === elm.roleDefinitionId;
+                                                });
+
+                                                console.log(roleAssignement);
+
+                                            }).catch(err => {
+                                                tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                                            })
+
+                                        }).catch(err => {
+                                            tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                                        });
+                                    */
+
+                                }).catch(err => {
+                                    tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                                });
                             })
                             .catch(err => {
                                 tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');

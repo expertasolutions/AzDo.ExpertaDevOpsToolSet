@@ -12,6 +12,7 @@
     "@azure/arm-containerregistry": "^7.0.0",
     "@azure/arm-containerservice": "^10.0.0",
     "@azure/graph": "^5.0.0",
+    "@azure/ms-rest-nodeauth": "^2.0.5",
     "azure-pipelines-task-lib": "^2.9.3"
   }
 }
