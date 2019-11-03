@@ -72,11 +72,11 @@ try {
             aksResourceClient.resources.list()
                 .then(result => {
                     // Find the AKS Cluster Resource group
-                    const aksCluster = result.find(element => {
+                    const aksClusterInstance = result.find(element => {
                         return element.name == aksCluster;
                     });
 
-                    aksResourceClient.resources.getById(aksCluster.id, '2019-10-01')
+                    aksResourceClient.resources.getById(aksClusterInstance.id, '2019-10-01')
                         .then(aksInfoResult => {
                         const clientId = result.properties.servicePrincipalProfile.clientId;
                         var aksAppCreds = new msRestNodeAuth.ApplicationTokenCredentials(clientId, aksTenantId, aksCreds.secret, 'graph');
@@ -104,7 +104,7 @@ try {
                                             return element.name == containerRegistry;
                                         });
                                         console.log(acrInstance);
-                                        
+
                                     })
                                     .catch(err => {
                                         tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
