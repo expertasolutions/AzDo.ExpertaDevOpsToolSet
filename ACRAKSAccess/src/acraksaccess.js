@@ -89,15 +89,13 @@ try {
                         var aksServiceFilter = {
                             filter: aksFilterValue
                         };
-                        console.log("   aksServiceFilter: ");
-                        console.log(aksServiceFilter);
-                        console.log("Before aksGraphClient.servicePrincipals");
                         // Get the AKS Service Principal details
                         aksGraphClient.servicePrincipals.list(aksServiceFilter)
                             .then(aksSearch => {
                                 const aksServicePrincipal = result.find(element => {
                                     return element.appId == aksCreds.clientId;
                                 });
+                                console.log("AKS Service Principal: ");
                                 console.log(aksServicePrincipal);
 
                                 // Get the Azure Container Registry resource infos
