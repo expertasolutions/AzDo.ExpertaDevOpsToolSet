@@ -93,10 +93,15 @@ try {
                         aksGraphClient.servicePrincipals.list(aksServiceFilter)
                             .then(aksSearch => {
                                 const aksServicePrincipal = result.find(element => {
-                                    return element.appId == aksCreds.clientId;
+                                    return element.appId == clientId;
                                 });
                                 console.log("AKS Service Principal: ");
                                 console.log(aksServicePrincipal);
+
+                                if(aksServicePrincipal == undefined)
+                                {
+                                    throw new Error("AKS Server Principal not found");
+                                }
 
                                 // Get the Azure Container Registry resource infos
                                 msRestNodeAuth.loginWithServicePrincipalSecret(
