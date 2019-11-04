@@ -83,12 +83,16 @@ try {
                     .then(aksInfoResult => {
                         const clientId = aksInfoResult.properties.servicePrincipalProfile.clientId;
                         console.log("AKS.ClientId: " + clientId);
-                        var aksAppCreds = new msRestNodeAuth.ApplicationTokenCredentials(clientId, aksTenantId, aksCreds.secret, 'graph');
+                        var aksAppCreds = new msRestNodeAuth.ApplicationTokenCredentials(aksCreds.clientId, aksTenantId, aksCreds.secret, 'graph');
                         const aksGraphClient = new graph.GraphRbacManagementClient(aksAppCreds, aksTenantId, { baseUri: 'https://graph.windows.net' });
                         var aksFilterValue = "appId eq '" + clientId + "'";
                         var aksServiceFilter = {
                             filter: aksFilterValue
                         };
+                        console.log("   aksServiceFilter: ");
+                        console.log(aksServiceFilter);
+                        console.log("Before aksGraphClient.servicePrincipals");
+                        // Get the AKS Service Principal details
                         aksGraphClient.servicePrincipals.list(aksServiceFilter)
                             .then(aksSearch => {
                                 const aksServicePrincipal = result.find(element => {
@@ -96,14 +100,14 @@ try {
                                 });
                                 console.log(aksServicePrincipal);
 
+                                // Get the Azure Container Registry resource infos
                                 msRestNodeAuth.loginWithServicePrincipalSecret(
                                     acrServicePrincipalId, acrServicePrincipalKey, acrTenantId
                                 ).then(acrCreds => {
-
+                                    /*
                                     const acrResourceClient = new resourceManagement.ResourceManagementClient(acrCreds, acrSubcriptionId);
                                     acrResourceGroup.resources.list()
                                     .then(acrResult => {
-
                                         const acrInstance = acrResult.find(element => {
                                             return element.name == containerRegistry;
                                         });
@@ -113,6 +117,7 @@ try {
                                     .catch(err => {
                                         tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                                     })
+                                    */
 
                                     /*
                                     const acrAuthClient = new auth.AuthorizationManagementClient(acrCreds, acrSubcriptionId);
