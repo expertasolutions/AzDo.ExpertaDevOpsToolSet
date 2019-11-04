@@ -102,21 +102,19 @@ try {
                                 msRestNodeAuth.loginWithServicePrincipalSecret(
                                     acrServicePrincipalId, acrServicePrincipalKey, acrTenantId
                                 ).then(acrCreds => {
-                                    /*
+                                    
                                     const acrResourceClient = new resourceManagement.ResourceManagementClient(acrCreds, acrSubcriptionId);
-                                    acrResourceGroup.resources.list()
+                                    acrResourceClient.resources.list()
                                     .then(acrResult => {
                                         const acrInstance = acrResult.find(element => {
                                             return element.name == containerRegistry;
                                         });
+                                        console.log("ACR Instance: ");
                                         console.log(acrInstance);
-
                                     })
                                     .catch(err => {
                                         tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                                     })
-                                    */
-
                                     /*
                                     const acrAuthClient = new auth.AuthorizationManagementClient(acrCreds, acrSubcriptionId);
                                     const acrPullRoleName = "AcrPull";
