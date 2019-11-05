@@ -116,9 +116,6 @@ try {
                                             return element.name == containerRegistry;
                                         });
 
-                                        console.log("Azure Container Registry instance");
-                                        console.log(acrInstance);
-
                                         if(acrInstance == undefined){
                                             throw new Error("ACR Intance not found");
                                         }
@@ -146,9 +143,21 @@ try {
                                                 });
 
                                                 if(roleAssignement == undefined){
-                                                    throw new Error("RoleAssignment not found");
-                                                    // Create the role for the AKS Service principal to Azure Container registry instance
+                                                    console.log("----------");
+                                                    console.log("Scope:" + acrInstance.id);
+                                                    console.log("RoleAssignementName: " + "");
+                                                    console.log("PrincipalType: ServicePrincipal");
 
+                                                    var newRoleParm = {
+                                                        roleDefinitionId: acrRole.id,
+                                                        principalId: aksServicePrincipal.principalId
+                                                    };
+
+                                                    acrAuthClient.roleAssignments.create(acrIntance.id, aksServiceFilter.principalId, newRoleParm)
+                                                        .then(newRoleResult => {
+                                                            console.log("New Role Assignement details:");
+                                                            console.log(newRoleResult);
+                                                        });
                                                 } else {
                                                     console.log("Role assignement found");
                                                     console.log(roleAssignement);
