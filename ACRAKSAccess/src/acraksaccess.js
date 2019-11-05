@@ -76,8 +76,7 @@ try {
                         return element.name == aksCluster;
                     });
 
-                    console.log("AksCluster instance information ...");
-                    console.log(aksClusterInstance);
+                    console.log("--- AKS Cluster instance information ---");
 
                     aksResourceClient.resources.getById(aksClusterInstance.id, '2019-10-01')
                     .then(aksInfoResult => {
@@ -106,6 +105,7 @@ try {
                                     acrServicePrincipalId, acrServicePrincipalKey, acrTenantId
                                 ).then(acrCreds => {
                                     
+                                    console.log("--- Azure Container Registry instance information ---");
                                     const acrResourceClient = new resourceManagement.ResourceManagementClient(acrCreds, acrSubcriptionId);
                                     acrResourceClient.resources.list()
                                     .then(acrResult => {
@@ -128,6 +128,8 @@ try {
 
                                             if(acrRole == undefined){
                                                 throw new Error("AcrPull not found");
+                                            } else {
+                                                console.log("AcrPull role found");
                                             }
 
                                             acrAuthClient.roleAssignments.listForResourceGroup(acrResourceGroup)
@@ -139,6 +141,8 @@ try {
 
                                                 if(roleAssignement == undefined){
                                                     throw new Error("RoleAssignment not found");
+                                                } else {
+                                                    console.log("Role assignement founds");
                                                 }
 
                                             }).catch(err => {
