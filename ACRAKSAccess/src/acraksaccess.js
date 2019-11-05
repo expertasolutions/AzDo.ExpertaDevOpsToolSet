@@ -64,6 +64,13 @@ try {
     ).then(aksCreds => {
         if(registerMode == "aksSecret") {
             throw new Error("AKS Secret access mode not implemented yet");
+            /*
+                Old Powershell code algo
+                $acrInfo = az acr show --name $containerRegistry -g $acrResourceGroup --subscription $acrSubscriptionId | ConvertFrom-Json
+                if(-not $acrInfo.adminUserEnabled){
+                    throw "Container registry named '$containerRegistry' does not have adminUser configured"
+                }
+            */
         } else {
             console.log("RBAC Access mode");
             console.log("Looking for Azure Kubernetes service cluster ...");
@@ -153,7 +160,7 @@ try {
                                                         principalId: aksServicePrincipal.principalId
                                                     };
 
-                                                    acrAuthClient.roleAssignments.create(acrIntance.id, aksServiceFilter.principalId, newRoleParm)
+                                                    acrAuthClient.roleAssignments.create(acrInstance.id, aksServiceFilter.principalId, newRoleParm)
                                                         .then(newRoleResult => {
                                                             console.log("New Role Assignement details:");
                                                             console.log(newRoleResult);
