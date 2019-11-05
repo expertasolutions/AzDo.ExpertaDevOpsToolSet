@@ -92,13 +92,10 @@ try {
                         // Get the AKS Service Principal details
                         aksGraphClient.servicePrincipals.list(aksServiceFilter)
                             .then(aksSearch => {
-                                console.dir(aksSearch, { depth: null, colors: true });
                                 const aksServicePrincipal = aksSearch.find(element => {
                                     console.log("element.appId: " + element.appId);
                                     return element.appId == clientId;
                                 });
-                                console.log("AKS Service Principal: ");
-                                console.log(aksServicePrincipal);
 
                                 if(aksServicePrincipal == undefined)
                                 {
@@ -118,19 +115,17 @@ try {
                                         });
                                         console.log("ACR Instance: ");
                                         console.log(acrInstance);
-                                    })
-                                    .catch(err => {
-                                        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
-                                    })
-                                    /*
-                                    const acrAuthClient = new auth.AuthorizationManagementClient(acrCreds, acrSubcriptionId);
-                                    const acrPullRoleName = "AcrPull";
 
-                                    acrAuthClient.roleDefinitions.list("/")
+                                        const acrAuthClient = new auth.AuthorizationManagementClient(acrCreds, acrSubcriptionId);
+                                        const acrPullRoleName = "AcrPull";
+
+                                        acrAuthClient.roleDefinitions.list("/")
                                         .then(roles => {
                                             var acrRole = roles.find(role => {
                                                 return role.roleName == acrPullRoleName;
                                             });
+                                            console.log("AcrRole: ");
+                                            console.log(acrRole);
 
                                             acrAuthClient.roleAssigments.listForResourceGroup(acrResourceGroup)
                                             .then(rs => {
@@ -138,18 +133,19 @@ try {
                                                     const rolId = "/subscriptions/" + acrSubcriptionId + acrRole.id;
                                                     return rolId === elm.roleDefinitionId;
                                                 });
-
+                                                console.log("ACR Role Assignement: ");
                                                 console.log(roleAssignement);
 
                                             }).catch(err => {
                                                 tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
-                                            })
-
+                                            });
                                         }).catch(err => {
                                             tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                                         });
-                                    */
-
+                                    })
+                                    .catch(err => {
+                                        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                                    })
                                 }).catch(err => {
                                     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                                 });
