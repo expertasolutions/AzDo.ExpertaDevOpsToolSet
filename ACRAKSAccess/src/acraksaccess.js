@@ -116,6 +116,9 @@ try {
                                             return element.name == containerRegistry;
                                         });
 
+                                        console.log("Azure Container Registry instance");
+                                        console.log(acrInstance);
+
                                         if(acrInstance == undefined){
                                             throw new Error("ACR Intance not found");
                                         }
