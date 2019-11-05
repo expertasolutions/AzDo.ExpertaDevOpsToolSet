@@ -100,6 +100,9 @@ try {
                                     throw new Error("AKS Server Principal not found");
                                 }
 
+                                console.log("AKS Cluster Service Principal");
+                                console.log(aksServicePrincipal);
+
                                 // Get the Azure Container Registry resource infos
                                 msRestNodeAuth.loginWithServicePrincipalSecret(
                                     acrServicePrincipalId, acrServicePrincipalKey, acrTenantId
