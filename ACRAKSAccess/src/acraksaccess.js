@@ -139,7 +139,7 @@ try {
                                             .then(rs => {
                                                 var roleAssignement = rs.find(elm => {
                                                     const rolId = "/subscriptions/" + acrSubcriptionId + acrRole.id;
-                                                    return rolId === elm.roleDefinitionId;
+                                                    return rolId === elm.roleDefinitionId && elm.principalId === aksServicePrincipal.principalId;
                                                 });
 
                                                 if(roleAssignement == undefined){
