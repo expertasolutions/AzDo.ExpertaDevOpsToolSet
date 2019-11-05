@@ -93,7 +93,6 @@ try {
                         aksGraphClient.servicePrincipals.list(aksServiceFilter)
                             .then(aksSearch => {
                                 const aksServicePrincipal = aksSearch.find(element => {
-                                    console.log("element.appId: " + element.appId);
                                     return element.appId == clientId;
                                 });
 
@@ -113,8 +112,10 @@ try {
                                         const acrInstance = acrResult.find(element => {
                                             return element.name == containerRegistry;
                                         });
-                                        console.log("ACR Instance: ");
-                                        console.log(acrInstance);
+
+                                        if(acrInstance == undefined){
+                                            throw new Error("ACR Intance not found");
+                                        }
 
                                         const acrAuthClient = new auth.AuthorizationManagementClient(acrCreds, acrSubcriptionId);
                                         const acrPullRoleName = "AcrPull";
@@ -124,8 +125,10 @@ try {
                                             var acrRole = roles.find(role => {
                                                 return role.roleName == acrPullRoleName;
                                             });
-                                            console.log("AcrRole: ");
-                                            console.log(acrRole);
+
+                                            if(acrRole == undefined){
+                                                throw new Error("AcrPull not found");
+                                            }
 
                                             acrAuthClient.roleAssignments.listForResourceGroup(acrResourceGroup)
                                             .then(rs => {
@@ -133,8 +136,10 @@ try {
                                                     const rolId = "/subscriptions/" + acrSubcriptionId + acrRole.id;
                                                     return rolId === elm.roleDefinitionId;
                                                 });
-                                                console.log("ACR Role Assignement: ");
-                                                console.log(roleAssignement);
+
+                                                if(roleAssignement == undefined){
+                                                    throw new Error("RoleAssignment not found");
+                                                }
 
                                             }).catch(err => {
                                                 tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
