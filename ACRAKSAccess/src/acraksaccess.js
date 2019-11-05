@@ -141,8 +141,11 @@ try {
 
                                                 if(roleAssignement == undefined){
                                                     throw new Error("RoleAssignment not found");
+                                                    // Create the role for the AKS Service principal to Azure Container registry instance
+
                                                 } else {
-                                                    console.log("Role assignement founds");
+                                                    console.log("Role assignement found");
+                                                    console.log(roleAssignement);
                                                 }
 
                                             }).catch(err => {
