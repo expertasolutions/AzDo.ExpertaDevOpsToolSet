@@ -127,7 +127,7 @@ try {
                                             console.log("AcrRole: ");
                                             console.log(acrRole);
 
-                                            acrAuthClient.roleAssigments.listForResourceGroup(acrResourceGroup)
+                                            acrAuthClient.roleAssignments.listForResourceGroup(acrResourceGroup)
                                             .then(rs => {
                                                 var roleAssignement = rs.find(elm => {
                                                     const rolId = "/subscriptions/" + acrSubcriptionId + acrRole.id;
