@@ -93,6 +93,7 @@ try {
                         aksGraphClient.servicePrincipals.list(aksServiceFilter)
                             .then(aksSearch => {
                                 const aksServicePrincipal = result.find(element => {
+                                    console.log("element.appId: " + element.appId);
                                     return element.appId == clientId;
                                 });
                                 console.log("AKS Service Principal: ");
