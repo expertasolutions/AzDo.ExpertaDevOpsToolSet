@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
-const msRestAzure = require('ms-rest-azure');
-const ContainerRegistryManagement = require('azure-arm-containerregistry');
+const msRestAzureAuth = require('@azure/ms-rest-nodeauth');
+const ContainerRegistryManagement = require('@azure/arm-containerregistry');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -36,7 +36,7 @@ try {
     console.log("Password Name: " + passwordToRenew);
     console.log("");
     
-    msRestAzure.loginWithServicePrincipalSecret(
+    msRestAzureAuth.loginWithServicePrincipalSecret(
         servicePrincipalId, servicePrincipalKey, 
         tenantId, (err, creds) => {
             if(err){
