@@ -55,14 +55,17 @@ try {
     console.log("Container Registry: " + containerRegistry);
     console.log("AKS Resource Group: " + aksResourceGroup);
     console.log("AKS Cluster: " + aksCluster);
-    console.log("ACR Username: " + acrUsername);
-    console.log("ACR Password: " + acrPassword);
-
+    
+    if(acrUsername != undefined){
+        console.log("ACR Username: " + acrUsername);
+        console.log("ACR Password: " + acrPassword);
+    }
     // TODO: Implement codes here :P
     msRestNodeAuth.loginWithServicePrincipalSecret (
         aksServicePrincipalId, aksServicePrincipalKey, aksTenantId
     ).then(aksCreds => {
         if(registerMode == "aksSecret") {
+            console.log("AKS Secret Access mode");
             throw new Error("AKS Secret access mode not implemented yet");
             /*
                 Old Powershell code algo
@@ -83,12 +86,9 @@ try {
                         return element.name == aksCluster;
                     });
 
-                    console.log("--- AKS Cluster instance information ---");
-
                     aksResourceClient.resources.getById(aksClusterInstance.id, '2019-10-01')
                     .then(aksInfoResult => {
                         const clientId = aksInfoResult.properties.servicePrincipalProfile.clientId;
-                        console.log("AKS.ClientId: " + clientId);
                         var aksAppCreds = new msRestNodeAuth.ApplicationTokenCredentials(aksCreds.clientId, aksTenantId, aksCreds.secret, 'graph');
                         const aksGraphClient = new graph.GraphRbacManagementClient(aksAppCreds, aksTenantId, { baseUri: 'https://graph.windows.net' });
                         var aksFilterValue = "appId eq '" + clientId + "'";
@@ -106,13 +106,9 @@ try {
                                 {
                                     throw new Error("AKS Server Principal not found");
                                 }
-
-                                console.log("AKS Cluster Service Principal");
-                                console.log(aksServicePrincipal);
-
+                                
                                 // Get the Azure Container Registry resource infos
-                                msRestNodeAuth.loginWithServicePrincipalSecret(
-                                    acrServicePrincipalId, acrServicePrincipalKey, acrTenantId
+                                msRestNodeAuth.loginWithServicePrincipalSecret(acrServicePrincipalId, acrServicePrincipalKey, acrTenantId
                                 ).then(acrCreds => {
                                     
                                     console.log("--- Azure Container Registry instance information ---");
@@ -124,7 +120,7 @@ try {
                                         });
 
                                         if(acrInstance == undefined){
-                                            throw new Error("ACR Intance not found");
+                                            throw new Error("ACR Instance not found");
                                         }
 
                                         const acrAuthClient = new auth.AuthorizationManagementClient(acrCreds, acrSubcriptionId);
@@ -138,8 +134,6 @@ try {
 
                                             if(acrRole == undefined){
                                                 throw new Error("AcrPull not found");
-                                            } else {
-                                                console.log("AcrPull role found");
                                             }
 
                                             acrAuthClient.roleAssignments.listForResourceGroup(acrResourceGroup)
@@ -150,7 +144,6 @@ try {
                                                 });
 
                                                 if(roleAssignement == undefined){
-                                                    console.log("----------");
                                                     console.log("Scope:" + acrInstance.id);
                                                     console.log("RoleAssignementName: " + "");
                                                     console.log("PrincipalType: ServicePrincipal");
@@ -160,16 +153,16 @@ try {
                                                         principalId: aksServicePrincipal.principalId
                                                     };
 
-                                                    acrAuthClient.roleAssignments.create(acrInstance.id, aksServiceFilter.principalId, newRoleParm)
+                                                    acrAuthClient.roleAssignments.create(acrInstance.id, aksServicePrincipal.principalId, newRoleParm)
                                                         .then(newRoleResult => {
                                                             console.log("New Role Assignement details:");
                                                             console.log(newRoleResult);
+                                                        }).catch(err=> {
+                                                            tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                                                         });
                                                 } else {
-                                                    console.log("Role assignement found");
-                                                    console.log(roleAssignement);
+                                                    console.log("Role assignement already existing");
                                                 }
-
                                             }).catch(err => {
                                                 tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                                             });
