@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
 const msRestAzureAuth = require('@azure/ms-rest-nodeauth');
-const ContainerRegistryManagement = require('@azure/arm-containerregistry');
+const ContainerRegistryManagement = require('@azure/arm-containerregistry').ContainerRegistryManagement;
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -57,18 +57,24 @@ try {
                                     tl.setVariable("username", rs.username, true);
                                     tl.setVariable("password", pwd1, true);
                                     tl.setVariable("password2", pwd2, true);
+                                })
+                                .catch(err => {
+                                    tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                                 });
                         } else if(passwordToRenew == "all") {
                             var password = { name: "password" };
                             console.log("Regenerating password ...");
                             manager.registries.regenerateCredential(resourceGroupName, containerRegistry, password)
-                                .then(rp1=> {
+                                .then(rp1 => {
                                     tl.setVariable("username", rp1.username, true);
                                     var password2 = { name: "password2" };
                                     console.log("Regenerating password2 ...");
                                     manager.registries.regenerateCredential(resourceGroupName, containerRegistry, password2)
-                                        .then(rp2=> {
+                                        .then(rp2 => {
                                             tl.setVariable("password2", rp2.passwords[1].value, true);
+                                        })
+                                        .catch(err => {
+                                            tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                                         });
                                 });
                         } else {
@@ -81,10 +87,18 @@ try {
                                     tl.setVariable("username", rs.username, true);
                                     tl.setVariable("password", pwd1, true);
                                     tl.setVariable("password2", pwd2, true);
+                                })
+                                .catch(err => {
+                                    tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                                 });
                         }
                     }
+                }).catch(err => {
+                    tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                 });
+        })
+        .catch(err => {
+            tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
         });
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
