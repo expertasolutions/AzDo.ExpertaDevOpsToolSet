@@ -96,9 +96,6 @@ try {
                 }).catch(err => {
                     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                 });
-        })
-        .catch(err => {
-            tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
         });
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
