@@ -105,10 +105,10 @@ try {
                                 if(aksServicePrincipal == undefined)
                                 {
                                     throw new Error("AKS Server Principal not found");
-                                } 
+                                }
 
-                                console.log("AKSServicePrincipal");
-                                console.log(aksServicePrincipal);
+                                console.debug("AKSServicePrincipal");
+                                console.debug(aksServicePrincipal);
                                 
                                 // Get the Azure Container Registry resource infos
                                 msRestNodeAuth.loginWithServicePrincipalSecret(acrServicePrincipalId, acrServicePrincipalKey, acrTenantId
