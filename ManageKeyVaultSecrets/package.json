@@ -11,6 +11,6 @@
   "dependencies": {
     "azure-arm-keyvault": "^1.2.0",
     "azure-keyvault": "^3.0.5",
-    "azure-pipelines-task-lib": "^2.7.0"
+    "azure-pipelines-task-lib": "^2.9.3"
   }
 }

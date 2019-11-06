@@ -4,6 +4,7 @@
     "friendlyName": "ACR Credential",
     "description": "Show/Renew Azure Container registries password",
     "helpMarkDown": "",
+    "preview": true,
     "category": "Utility",
     "author": "Solutions Experta Inc.",
     "version": {
@@ -57,8 +58,13 @@
         {
           "name": "pwdName",
           "label": "Password name to renew",
-          "type": "string",
-          "defaultValue": "*",
+          "type": "pickList",
+          "defaultValue": "all",
+          "options": {
+            "all": "All",
+            "password": "password",
+            "password2": "password2"
+          },
           "required:": true,
           "visibleRule": "actionType = renew"
         }
