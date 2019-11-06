@@ -43,6 +43,7 @@ try {
     console.log("ACR Tenant Id: " + acrTenantId);
     /* End of ACR Subscription Informations */
 
+    console.log("");
     /* AKS Subscription Informations */
     console.log("AKS Azure Subscription Id: " + aksSubcriptionId);
     console.log("AKS ServicePrincipalId: " + aksServicePrincipalId);
@@ -50,6 +51,7 @@ try {
     console.log("AKS Tenant Id: " + aksTenantId);
     /* End of AKS Subscription Informations */
 
+    console.log("");
     console.log("Register mode: " + registerMode);
     console.log("ACR Resource Group: '" + acrResourceGroup + "'");
     console.log("Container Registry: " + containerRegistry);
