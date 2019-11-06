@@ -105,7 +105,10 @@ try {
                                 if(aksServicePrincipal == undefined)
                                 {
                                     throw new Error("AKS Server Principal not found");
-                                }
+                                } 
+
+                                console.log("AKSServicePrincipal");
+                                console.log(aksServicePrincipal);
                                 
                                 // Get the Azure Container Registry resource infos
                                 msRestNodeAuth.loginWithServicePrincipalSecret(acrServicePrincipalId, acrServicePrincipalKey, acrTenantId
@@ -144,14 +147,12 @@ try {
                                                 });
 
                                                 if(roleAssignement == undefined){
-                                                    console.log("Scope:" + acrInstance.id);
-                                                    console.log("RoleAssignementName: " + "");
-                                                    console.log("PrincipalType: ServicePrincipal");
-
                                                     var newRoleParm = {
                                                         roleDefinitionId: acrRole.id,
                                                         principalId: aksServicePrincipal.principalId
                                                     };
+
+                                                    console.log(newRoleParm);
 
                                                     acrAuthClient.roleAssignments.create(acrInstance.id, aksServicePrincipal.principalId, newRoleParm)
                                                         .then(newRoleResult => {
