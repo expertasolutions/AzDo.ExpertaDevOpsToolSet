@@ -141,20 +141,21 @@ try {
 
                                             acrAuthClient.roleAssignments.listForResourceGroup(acrResourceGroup)
                                             .then(rs => {
+                                                
                                                 var roleAssignement = rs.find(elm => {
                                                     const rolId = "/subscriptions/" + acrSubcriptionId + acrRole.id;
-                                                    return rolId === elm.roleDefinitionId && elm.principalId === aksServicePrincipal.principalId;
+                                                    return rolId === elm.roleDefinitionId && elm.principalId === aksServicePrincipal.objectId;
                                                 });
 
                                                 if(roleAssignement == undefined){
                                                     var newRoleParm = {
                                                         roleDefinitionId: acrRole.id,
-                                                        principalId: aksServicePrincipal.principalId
+                                                        principalId: aksServicePrincipal.objectId
                                                     };
 
                                                     console.log(newRoleParm);
 
-                                                    acrAuthClient.roleAssignments.create(acrInstance.id, aksServicePrincipal.principalId, newRoleParm)
+                                                    acrAuthClient.roleAssignments.create(acrInstance.id, aksServicePrincipal.objectId, newRoleParm)
                                                         .then(newRoleResult => {
                                                             console.log("New Role Assignement details:");
                                                             console.log(newRoleResult);
