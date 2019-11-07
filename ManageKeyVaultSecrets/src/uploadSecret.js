@@ -44,9 +44,11 @@ try {
             let rawdata = fs.readFileSync(secretsFilePath);
             let secretsContent = JSON.parse(rawdata);
 
-            msRestAzureAuth.loginWithServicePrincipalSecret(
-                servicePrincipalId, servicePrincipalKey, tenantId)
+            console.log(secretsContent);
+
+            msRestAzureAuth.loginWithServicePrincipalSecret(servicePrincipalId, servicePrincipalKey, tenantId)
             .then(creds => {
+                console.log("Authentication successful");
                 const client = new KeyVault.KeyVaultClient(creds, subcriptionId);
 
                 for(var s=0;s<secretsContent.length;s++){
