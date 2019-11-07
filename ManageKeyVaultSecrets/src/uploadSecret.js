@@ -43,26 +43,24 @@ try {
         } else {
             let rawdata = fs.readFileSync(secretsFilePath);
             let secretsContent = JSON.parse(rawdata);
-            let client;
+
             msRestAzureAuth.loginWithServicePrincipalSecret(
-                servicePrincipalId, servicePrincipalKey, 
-                tenantId, (err, creds) => {
-                    if(err){
-                        throw new Error('Auth error --> ' + err);
-                    }
+                servicePrincipalId, servicePrincipalKey, tenantId)
+            .then(creds => {
+                const client = new KeyVault.KeyVaultClient(creds, subcriptionId);
 
-                    client = new KeyVault.KeyVaultClient(creds, subcriptionId);
-
-                    for(var s=0;s<secretsContent.length;s++){
-                        const secret = secretsContent[s].secret;
-                        client.setSecret(url, secretsContent[s].secret, secretsContent[s].value)
-                        .then(sb=> {
-                            console.log(secret + " set in keyVault");
-                        }).catch(err=> {
-                            tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
-                        });
-                    }
-                });
+                for(var s=0;s<secretsContent.length;s++){
+                    const secret = secretsContent[s].secret;
+                    client.setSecret(url, secretsContent[s].secret, secretsContent[s].value)
+                    .then(sb=> {
+                        console.log(secret + " set in keyVault");
+                    }).catch(err=> {
+                        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                    });
+                }
+            }).catch(err => {
+                tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+            });
         }
     });
 } catch (err) {
