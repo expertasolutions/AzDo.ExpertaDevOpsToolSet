@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tl = require('azure-pipelines-task-lib');
 var fs = require('fs');
 
-const msRestAzureAuth = require('@azure/ms-rest-nodeauth');
+const msRestNodeAuth = require('@azure/ms-rest-nodeauth');
 const KeyVault = require('@azure/keyvault');
 
 try {
@@ -45,13 +45,12 @@ try {
             let secretsContent = JSON.parse(rawdata);
             msRestNodeAuth.loginWithServicePrincipalSecret(servicePrincipalId, servicePrincipalKey, tenantId)
             .then(creds => {
-                console.log("Authentication successful");
                 const client = new KeyVault.KeyVaultClient(creds);
-
                 for(var s=0;s<secretsContent.length;s++){
                     const secret = secretsContent[s].secret;
                     client.setSecret(url, secretsContent[s].secret, secretsContent[s].value)
                     .then(sb=> {
+                        console.log(sb);
                         console.log(secret + " set in keyVault");
                     }).catch(err=> {
                         tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
