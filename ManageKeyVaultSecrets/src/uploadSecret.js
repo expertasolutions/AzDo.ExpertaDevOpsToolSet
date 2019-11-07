@@ -42,17 +42,11 @@ try {
             throw new Error('File not exists');
         } else {
             let rawdata = fs.readFileSync(secretsFilePath);
-            console.log("rawData");
-            console.log(rawdata);
-            
             let secretsContent = JSON.parse(rawdata);
-
-            console.log(secretsContent);
-
             msRestNodeAuth.loginWithServicePrincipalSecret(servicePrincipalId, servicePrincipalKey, tenantId)
             .then(creds => {
                 console.log("Authentication successful");
-                const client = new KeyVault.KeyVaultClient(creds, subcriptionId);
+                const client = new KeyVault.KeyVaultClient(creds);
 
                 for(var s=0;s<secretsContent.length;s++){
                     const secret = secretsContent[s].secret;
