@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
-const msRestAzure = require('ms-rest-azure');
-const resourceManagement = require('azure-arm-resource');
+const msRestAzureAuth = require('@azure/ms-rest-nodeauth');
+const ResourceManagementClient = require('@azure/arm-resources').ResourceManagementClient;
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -29,25 +29,22 @@ try {
     console.log("AppInsight Name: " + azureAppInsightName)
     console.log("");
 
-    msRestAzure.loginWithServicePrincipalSecret(
+    msRestAzureAuth.loginWithServicePrincipalSecret(
         servicePrincipalId, servicePrincipalKey, 
         tenantId, (err, creds) => {
             if(err){
                 throw new Error('Auth error --> ' + err);
             }
 
-            var entityFound;
-            const resClient = new resourceManagement.ResourceManagementClient(creds, subcriptionId);
+            const resClient = new ResourceManagementClient(creds, subcriptionId);
             resClient.resources.list(function(err, result){
                 if(err)
                   console.log(err);
-                for(var i=0;i<result.length;i++){
-                  const entity = result[i];
-                  if(entity.name == azureAppInsightName) {
-                    entityFound = entity;
-                  }
-                }
-          
+
+                const entityFound = result.find(elm => {
+                  return elm.name === azureAppInsightName;
+                });
+
                 if(entityFound === undefined) {
                   tl.setResult(tl.TaskResult.Failed, "Azure ApplicationInsight not found");
                 }
@@ -56,6 +53,9 @@ try {
                         .then(result => {
                           console.log("Azure ApplicationInsight " + azureAppInsightName + " has been found !");
                           tl.setVariable("instrumentationKey", result.properties.InstrumentationKey, false);     
+                        })
+                        .catch(err=> {
+                          tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                         });
                 }
             });        
