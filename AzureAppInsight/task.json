@@ -2,9 +2,9 @@
   "id": "181eeb4b-02b3-4c28-9f1c-a58001b40051",
     "name": "AzureAppInsightDetails",
     "friendlyName": "AzureAppInsightDetails",
-    "description": "Task to extract azure app insight details",
+    "description": "Task to extract azure app insights details",
     "helpMarkDown": "",
-    "preview": true,
+    "preview": false,
     "category": "Utility",
     "author": "Solutions Experta Inc.",
     "version": {
@@ -12,7 +12,7 @@
         "Minor": 0,
         "Patch": 0
     },
-    "instanceNameFormat": "Azure Application Insight details extractor",
+    "instanceNameFormat": "Azure Application Insights details extractor",
     "groups": [],
     "inputs": [
       {

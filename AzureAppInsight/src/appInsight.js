@@ -46,12 +46,12 @@ try {
                 });
 
                 if(entityFound === undefined) {
-                  tl.setResult(tl.TaskResult.Failed, "Azure ApplicationInsight not found");
+                  tl.setResult(tl.TaskResult.Failed, "Azure Application Insights not found");
                 }
                 else {
                   resClient.resources.getById(entityFound.id, '2015-05-01')
                         .then(result => {
-                          console.log("Azure ApplicationInsight " + azureAppInsightName + " has been found !");
+                          console.log("Azure Application Insights " + azureAppInsightName + " has been found !");
                           tl.setVariable("instrumentationKey", result.properties.InstrumentationKey, false);     
                         })
                         .catch(err=> {
