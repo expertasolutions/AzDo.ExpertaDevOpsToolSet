@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 var tl = require('azure-pipelines-task-lib');
 const msRestAzureAuth = require('@azure/ms-rest-nodeauth');
-const ContainerRegistryManagement = require('@azure/arm-containerregistry').ContainerRegistryManagement;
+const ContainerRegistryManagementClient = require('@azure/arm-containerregistry').ContainerRegistryManagementClient;
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -43,7 +43,7 @@ try {
                 throw new Error('Auth error --> ' + err);
             }
 
-            const manager = new ContainerRegistryManagement(creds, subcriptionId);
+            const manager = new ContainerRegistryManagementClient(creds, subcriptionId);
             manager.registries.get(resourceGroupName, containerRegistry)
                 .then(result => {
                     if(result.adminUserEnabled == false) {
