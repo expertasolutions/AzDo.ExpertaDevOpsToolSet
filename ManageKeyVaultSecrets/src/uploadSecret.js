@@ -52,11 +52,14 @@ try {
                     }
 
                     client = new KeyVault.KeyVaultClient(creds, subcriptionId);
-                    
+
                     for(var s=0;s<secretsContent.length;s++){
                         const secret = secretsContent[s].secret;
-                        client.setSecret(url, secretsContent[s].secret, secretsContent[s].value, sb=> {
+                        client.setSecret(url, secretsContent[s].secret, secretsContent[s].value)
+                        .then(sb=> {
                             console.log(secret + " set in keyVault");
+                        }).catch(err=> {
+                            tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
                         });
                     }
                 });
