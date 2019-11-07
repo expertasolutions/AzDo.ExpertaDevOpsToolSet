@@ -9,8 +9,9 @@
   "author": "Solutions Experta Inc.",
   "license": "MIT",
   "dependencies": {
-    "azure-arm-keyvault": "^1.2.0",
-    "azure-keyvault": "^3.0.5",
+    "@azure/arm-keyvault": "^1.2.1",
+    "@azure/keyvault": "^0.1.0",
+    "@azure/ms-rest-nodeauth": "^2.0.5",
     "azure-pipelines-task-lib": "^2.9.3"
   }
 }

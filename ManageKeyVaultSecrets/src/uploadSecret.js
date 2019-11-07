@@ -12,8 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tl = require('azure-pipelines-task-lib');
 var fs = require('fs');
 
-const msRestAzure = require('ms-rest-azure');
-const KeyVault = require('azure-keyvault');
+const msRestAzureAuth = require('@azure/ms-rest-nodeauth');
+const KeyVault = require('@azure/keyvault');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -44,14 +44,15 @@ try {
             let rawdata = fs.readFileSync(secretsFilePath);
             let secretsContent = JSON.parse(rawdata);
             let client;
-            msRestAzure.loginWithServicePrincipalSecret(
+            msRestAzureAuth.loginWithServicePrincipalSecret(
                 servicePrincipalId, servicePrincipalKey, 
                 tenantId, (err, creds) => {
                     if(err){
                         throw new Error('Auth error --> ' + err);
                     }
 
-                    client = new KeyVault.KeyVaultClient(creds);
+                    client = new KeyVault.KeyVaultClient(creds, subcriptionId);
+                    
                     for(var s=0;s<secretsContent.length;s++){
                         const secret = secretsContent[s].secret;
                         client.setSecret(url, secretsContent[s].secret, secretsContent[s].value, sb=> {
