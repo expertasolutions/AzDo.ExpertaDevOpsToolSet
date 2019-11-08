@@ -13,7 +13,6 @@ var tl = require('azure-pipelines-task-lib');
 var fs = require('fs');
 
 const msRestNodeAuth = require('@azure/ms-rest-nodeauth');
-const KeyVault = require('@azure/keyvault');
 const SecretClient = require('@azure/keyvault-secrets').SecretClient;
 
 try {
