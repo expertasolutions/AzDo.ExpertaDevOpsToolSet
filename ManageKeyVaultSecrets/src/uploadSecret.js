@@ -14,7 +14,7 @@ var fs = require('fs');
 
 const msRestNodeAuth = require('@azure/ms-rest-nodeauth');
 const KeyVault = require('@azure/keyvault');
-const SecretClient = require('@azure/keyvault-secrets');
+const SecretClient = require('@azure/keyvault-secrets').SecretClient;
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
