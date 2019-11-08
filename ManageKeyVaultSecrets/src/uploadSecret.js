@@ -14,7 +14,7 @@ var fs = require('fs');
 
 const msRestNodeAuth = require('@azure/ms-rest-nodeauth');
 const KeyVault = require('@azure/keyvault');
-const ClientSecrets = require('@azure/keyvault-secrets');
+const SecretClient = require('@azure/keyvault-secrets');
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -47,7 +47,7 @@ try {
             msRestNodeAuth.loginWithServicePrincipalSecret(servicePrincipalId, servicePrincipalKey, tenantId)
             .then(creds => {
                 //const client = new KeyVault.KeyVaultClient(creds);
-                const client = new ClientSecrets(url, creds);
+                const client = new SecretClient(url, creds);
                 for(var s=0;s<secretsContent.length;s++){
                     const secret = secretsContent[s].secret;
                     //client.setSecret(url, secretsContent[s].secret, secretsContent[s].value)
