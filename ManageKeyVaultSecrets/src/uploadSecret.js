@@ -12,8 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tl = require('azure-pipelines-task-lib');
 var fs = require('fs');
 
-const msRestAzure = require('ms-rest-azure');
-const KeyVault = require('azure-keyvault');
+const msRestNodeAuth = require('@azure/ms-rest-nodeauth');
+const SecretClient = require('@azure/keyvault-secrets').SecretClient;
+const ApplicationTokenCredentials = require('@azure/ms-rest-nodeauth').ApplicationTokenCredentials;
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -43,22 +44,22 @@ try {
         } else {
             let rawdata = fs.readFileSync(secretsFilePath);
             let secretsContent = JSON.parse(rawdata);
-            let client;
-            msRestAzure.loginWithServicePrincipalSecret(
-                servicePrincipalId, servicePrincipalKey, 
-                tenantId, (err, creds) => {
-                    if(err){
-                        throw new Error('Auth error --> ' + err);
-                    }
-
-                    client = new KeyVault.KeyVaultClient(creds);
-                    for(var s=0;s<secretsContent.length;s++){
-                        const secret = secretsContent[s].secret;
-                        client.setSecret(url, secretsContent[s].secret, secretsContent[s].value, sb=> {
-                            console.log(secret + " set in keyVault");
-                        });
-                    }
-                });
+            msRestNodeAuth.loginWithServicePrincipalSecret(servicePrincipalId, servicePrincipalKey, tenantId)
+            .then(creds => {
+                const keyvaultCreds = new ApplicationTokenCredentials(creds.clientId, creds.domain, creds.secret, 'https://vault.azure.net');
+                const client = new SecretClient(url, keyvaultCreds);
+                for(var s=0;s<secretsContent.length;s++){
+                    const secret = secretsContent[s].secret;
+                    client.setSecret(secretsContent[s].secret, secretsContent[s].value)
+                    .then(sb=> {
+                        console.log(secret + " set in keyVault");
+                    }).catch(err=> {
+                        tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+                    });
+                }
+            }).catch(err => {
+                tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
+            });
         }
     });
 } catch (err) {
