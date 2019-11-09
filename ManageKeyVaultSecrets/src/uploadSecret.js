@@ -14,6 +14,7 @@ var fs = require('fs');
 
 const msRestNodeAuth = require('@azure/ms-rest-nodeauth');
 const SecretClient = require('@azure/keyvault-secrets').SecretClient;
+const ApplicationTokenCredentials = require('@azure/ms-rest-nodeauth').ApplicationTokenCredentials;
 
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
@@ -45,14 +46,12 @@ try {
             let secretsContent = JSON.parse(rawdata);
             msRestNodeAuth.loginWithServicePrincipalSecret(servicePrincipalId, servicePrincipalKey, tenantId)
             .then(creds => {
-                //const client = new KeyVault.KeyVaultClient(creds);
-                const client = new SecretClient(url, creds);
+                const keyvaultCreds = new ApplicationTokenCredentials(creds.clientId, creds.domain, creds.secret, 'https://vault.azure.net');
+                const client = new SecretClient(url, keyvaultCreds);
                 for(var s=0;s<secretsContent.length;s++){
                     const secret = secretsContent[s].secret;
-                    //client.setSecret(url, secretsContent[s].secret, secretsContent[s].value)
                     client.setSecret(secretsContent[s].secret, secretsContent[s].value)
                     .then(sb=> {
-                        console.log(sb);
                         console.log(secret + " set in keyVault");
                     }).catch(err=> {
                         tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
