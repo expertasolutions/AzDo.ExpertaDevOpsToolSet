@@ -19,7 +19,13 @@
     "windows",
     "AzureDevOps",
     "DevOps",
-    "Toolsset"
+    "Toolsset",
+    "Azure",
+    "Kubernetes",
+    "ContainerRegistries",
+    "KeyVault",
+    "VersionExtrator",
+    "AppInsight"
   ],
   "links":{
     "support": { 
