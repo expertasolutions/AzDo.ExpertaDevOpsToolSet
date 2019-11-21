@@ -16,7 +16,10 @@
     "Azure Pipelines",
     "macOS",
     "linux",
-    "windows"
+    "windows",
+    "AzureDevOps",
+    "DevOps",
+    "Toolsset"
   ],
   "links":{
     "support": { 
