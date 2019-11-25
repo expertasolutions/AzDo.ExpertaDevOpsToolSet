@@ -30,7 +30,10 @@ try {
         revision = result[4];
     }
 
-    let minFullVersion = major + minor + patch + revision
+    let minFullVersion = major + minor + patch;
+    if(revision != 0) {
+        minFullVersion += minFullVersion + revision;
+    }
 
     console.log("Version string details:");
     console.log("");
