@@ -16,14 +16,18 @@ try {
     
     console.log("Current string analyzed: " + stringToAnalyze);
 
-    let result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]{1,}).([0-9]{1,}).([0-9]{1,}))");
+    let result = stringToAnalyze.match("\w*-v([0-9]{1,}).([0-9]{1,3}).([0-9]*).([0-9]*)");
 
-    let major = result[2];
-    let minor = result[3];
-    let patch = result[4];
+    if(result[4] === '') {
+        result = stringToAnalyze.match("\w*-v([0-9]{1,}).([0-9]{1,3}).([0-9]*)");
+    }
+
+    let major = result[1];
+    let minor = result[2];
+    let patch = result[3];
     let revision = 0;
-    if(result.length > 5){
-        revision = result[5];
+    if(result.length > 4){
+        revision = result[4];
     }
 
     let minFullVersion = major + minor + patch + revision
