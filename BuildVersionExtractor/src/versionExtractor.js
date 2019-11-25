@@ -16,13 +16,17 @@ try {
     
     console.log("Current string analyzed: " + stringToAnalyze);
 
-    var result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]{1,}).([0-9]{1,}))");
+    let result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]{1,}).([0-9]{1,}).([0-9]{1,}))");
 
-    var major = result[2];
-    var minor = result[3];
-    var patch = result[4];
+    let major = result[2];
+    let minor = result[3];
+    let patch = result[4];
+    let revision = 0;
+    if(result.length > 5){
+        revision = result[5];
+    }
 
-    var minFullVersion = major + minor + patch;
+    let minFullVersion = major + minor + patch + revision
 
     console.log("Version string details:");
     console.log("");
@@ -31,10 +35,12 @@ try {
     console.log("versionMajor: " + major);
     console.log("versionMinor: " + minor);
     console.log("versionPatch: " + patch);
+    console.log("revision: " + revision);
 
     tl.setVariable("versionMajor", major);
     tl.setVariable("versionMinor", minor);
     tl.setVariable("versionPatch", patch);
+    tl.setVariable("revisionNumber", revision);
     tl.setVariable("fullVersionMin", minFullVersion);
     tl.setVariable("fullVersion", result[1]);
 } catch (err) {
