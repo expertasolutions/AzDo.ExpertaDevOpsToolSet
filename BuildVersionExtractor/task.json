@@ -5,7 +5,7 @@
     "description": "Task to extract version number digit from a string",
     "helpMarkDown": "",
     "category": "Utility",
-    "preview": true,
+    "preview": false,
     "author": "Solutions Experta Inc.",
     "version": {
         "Major": 0,
