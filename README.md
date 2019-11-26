@@ -6,7 +6,7 @@ If you have any comment/suggestion, please feel free to share it with us.
 # Tasks include
 
 ## VersionExtractor
-![VersionExtrator](_screenShots/VersionExtrator_v1.jpg)
+![VersionExtrator](_screenShots/VersionExtrator_v1.png)
 #### Output variables
 - versionMajor
 - versionMinor
@@ -17,7 +17,7 @@ If you have any comment/suggestion, please feel free to share it with us.
 *** Build name require to have v0.0.0 format ***
 
 ## ACRCredentials
-![ACRCredentials](_screenShots/acrCredential_v1.jpg)
+![ACRCredentials](_screenShots/acrCredential_v1.png)
 ## Action Type
 - Show: Get the current credentials information
 - Renew: Renew the current credentials information access
@@ -27,20 +27,20 @@ If you have any comment/suggestion, please feel free to share it with us.
 - password2
 
 ## ACRAKSAccess
-![ACRAKSAccess](_screenShots/ACRAKSAccess_v2.jpg)
+![ACRAKSAccess](_screenShots/ACRAKSAccess_v2.png)
 
 ## AzureAppInsight
-![AppInsight](_screenShots/appInsight_v2.jpg)
+![AppInsight](_screenShots/appInsight_v2.png)
 #### Output variables
 - instrumentationKey
 
 ## FileContentToBase64
-![FileContentToBase64](_screenShots/FileContentToBase64_v2.jpg)
+![FileContentToBase64](_screenShots/FileContentToBase64_v2.png)
 #### Output variables
 - base64Content
 
 ## ManageKeyVaultSecrets
-![ManageKeyVaultSecrets](_screenShots/manageKeyVaultSecrets_v2-preview.jpg)
+![ManageKeyVaultSecrets](_screenShots/manageKeyVaultSecrets_v2-preview.png)
 #### Secrets file path (expected file format content)
 ```json
 [
