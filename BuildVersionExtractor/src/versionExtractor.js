@@ -32,7 +32,6 @@ try {
     if(partNumber.length === 4){
         revision = result[5];
     }
-
     let minFullVersion = major + minor + patch;
     if(revision != 0) {
         minFullVersion += minFullVersion + revision;
