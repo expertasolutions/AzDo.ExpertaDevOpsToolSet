@@ -49,7 +49,7 @@ try {
     tl.setVariable("versionPatch", patch);
     tl.setVariable("revisionNumber", revision);
     tl.setVariable("fullVersionMin", minFullVersion);
-    tl.setVariable("fullVersion", result[1]);
+    tl.setVariable("fullVersion", result[0]);
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
