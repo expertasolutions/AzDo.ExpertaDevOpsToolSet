@@ -18,7 +18,7 @@ If you have any comment/suggestion, please feel free to share it with us.
 
 ## ACRCredentials
 ![ACRCredentials](_screenShots/acrCredential_v1.png)
-## Action Type
+### Action Type
 - Show: Get the current credentials information
 - Renew: Renew the current credentials information access
 #### Output variables
