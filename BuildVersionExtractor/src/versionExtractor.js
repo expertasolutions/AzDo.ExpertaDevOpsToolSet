@@ -19,7 +19,7 @@ try {
     let partNumber = stringToAnalyze.split('.');
     let result = undefined;
     if(partNumber.length === 2) {
-        result = stringToAnalyze.match("\w*-v(([0-9]*).([0-9]*)");
+        result = stringToAnalyze.match("\w*-v(([0-9]*).([0-9]*))");
     } else if(partNumber.length === 3) {
         result = stringToAnalyze.match("\w*-v(([0-9]*).([0-9]*).([0-9]*))");
     } else if (partNumber.length === 4){
