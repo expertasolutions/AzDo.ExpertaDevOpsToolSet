@@ -16,18 +16,19 @@ try {
     
     console.log("Current string analyzed: " + stringToAnalyze);
 
-    let result = stringToAnalyze.match("\w*-v([0-9]{1,}).([0-9]{1,3}).([0-9]*).([0-9]*)");
+    let result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]{1,3}).([0-9]*).([0-9]*))");
 
     if(result[4] === '') {
-        result = stringToAnalyze.match("\w*-v([0-9]{1,}).([0-9]{1,3}).([0-9]*)");
+        result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]{1,3}).([0-9]*))");
     }
 
-    let major = result[1];
-    let minor = result[2];
-    let patch = result[3];
+    let fullVersion = result[1];
+    let major = result[2];
+    let minor = result[3];
+    let patch = result[4];
     let revision = 0;
-    if(result.length > 4){
-        revision = result[4];
+    if(result.length > 5){
+        revision = result[5];
     }
 
     let minFullVersion = major + minor + patch;
@@ -37,7 +38,7 @@ try {
 
     console.log("Version string details:");
     console.log("");
-    console.log("fullVersion: " + result[0]);
+    console.log("fullVersion: " + fullVersion);
     console.log("fullVersionMin: " + minFullVersion);
     console.log("versionMajor: " + major);
     console.log("versionMinor: " + minor);
@@ -49,7 +50,7 @@ try {
     tl.setVariable("versionPatch", patch);
     tl.setVariable("revisionNumber", revision);
     tl.setVariable("fullVersionMin", minFullVersion);
-    tl.setVariable("fullVersion", result[0]);
+    tl.setVariable("fullVersion", fullVersion);
 } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message || 'run() failed');
 }
