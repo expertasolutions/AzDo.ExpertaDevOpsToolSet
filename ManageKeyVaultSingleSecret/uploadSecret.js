@@ -43,7 +43,7 @@ try {
         const keyvaultCreds = new ApplicationTokenCredentials(creds.clientId, creds.domain, creds.secret, 'https://vault.azure.net');
         const client = new SecretClient(url, keyvaultCreds);
         
-        client.setSecret(secretName, secretvalue)
+        client.setSecret(secretName, secretValue)
         .then(sb=> {
             console.log(secretName + " set in keyVault");
         }).catch(err=> {
