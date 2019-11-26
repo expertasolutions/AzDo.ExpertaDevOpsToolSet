@@ -16,10 +16,12 @@ try {
     
     console.log("Current string analyzed: " + stringToAnalyze);
 
-    let result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]{1,3}).([0-9]*).([0-9]*))");
-
-    if(result[4] === '') {
-        result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]{1,3}).([0-9]*))");
+    let partNumber = stringToAnalyze.split('.');
+    let result = undefined;
+    if(partNumber.length == 3) {
+        result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]*).([0-9]*))");
+    } else if (partNumber.length == 4){
+        result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]{1,3}).([0-9]*).([0-9]*))");
     }
 
     let fullVersion = result[1];
@@ -27,7 +29,7 @@ try {
     let minor = result[3];
     let patch = result[4];
     let revision = 0;
-    if(result.length > 5){
+    if(partNumber.length === 4){
         revision = result[5];
     }
 
