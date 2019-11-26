@@ -37,7 +37,7 @@ try {
 
     console.log("Version string details:");
     console.log("");
-    console.log("fullVersion: " + result[1]);
+    console.log("fullVersion: " + result[0]);
     console.log("fullVersionMin: " + minFullVersion);
     console.log("versionMajor: " + major);
     console.log("versionMinor: " + minor);
