@@ -11,6 +11,7 @@ If you have any comment/suggestion, please feel free to share it with us.
 - versionMajor
 - versionMinor
 - versionPatch
+- revisionNumber
 - fullVersion
 #### Important
 *** Build name require to have v0.0.0 format ***
@@ -53,5 +54,10 @@ If you have any comment/suggestion, please feel free to share it with us.
 	}
 ]
 ```
+#### Important
+*** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
+
+## ManageKeyVaultSingleSecret
+Image coming soon
 #### Important
 *** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
