@@ -18,7 +18,7 @@ If you have any comment/suggestion, please feel free to share it with us.
 
 ## ACRCredentials
 ![ACRCredentials](_screenShots/acrCredential_v1.png)
-## Action Type
+#### Action Type
 - Show: Get the current credentials information
 - Renew: Renew the current credentials information access
 #### Output variables
@@ -58,6 +58,6 @@ If you have any comment/suggestion, please feel free to share it with us.
 *** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
 
 ## ManageKeyVaultSingleSecret
-Image coming soon
+![ManageAzureKeyVaultSingleSecret](_screenShots/ManageAzureKeyVaultSingleSecret_v4-preview.png)
 #### Important
 *** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
