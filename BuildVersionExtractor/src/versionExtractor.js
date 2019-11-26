@@ -18,24 +18,27 @@ try {
 
     let partNumber = stringToAnalyze.split('.');
     let result = undefined;
-    if(partNumber.length == 3) {
-        result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]*).([0-9]*))");
-    } else if (partNumber.length == 4){
-        result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]*).([0-9]*).([0-9]*))");
+    if(partNumber.length === 2) {
+        result = stringToAnalyze.match("\w*-v(([0-9]*).([0-9]*)");
+    } else if(partNumber.length === 3) {
+        result = stringToAnalyze.match("\w*-v(([0-9]*).([0-9]*).([0-9]*))");
+    } else if (partNumber.length === 4){
+        result = stringToAnalyze.match("\w*-v(([0-9]*).([0-9]*).([0-9]*).([0-9]*))");
     }
 
     let fullVersion = result[1];
     let major = result[2];
     let minor = result[3];
-    let patch = result[4];
+    let patch = 0;
+    
     let revision = 0;
-    if(partNumber.length === 4){
+    if(partNumber.length >= 3){
+        patch = result[4];
+    } else if(partNumber.length === 4){
         revision = result[5];
     }
-    let minFullVersion = major + minor + patch;
-    if(revision != 0) {
-        minFullVersion += minFullVersion + revision;
-    }
+
+    let minFullVersion = major + minor + patch + revision;
 
     console.log("Version string details:");
     console.log("");
