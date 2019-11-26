@@ -58,6 +58,6 @@ If you have any comment/suggestion, please feel free to share it with us.
 *** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
 
 ## ManageKeyVaultSingleSecret
-![ManageAzureKeyVaultSingleSecret](_screenShots/manageAzureKeyVaultSingleSecret_v4-preview.png))
+![ManageAzureKeyVaultSingleSecret](_screenShots/ManageAzureKeyVaultSingleSecret_v4-preview.png)
 #### Important
 *** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
