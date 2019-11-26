@@ -21,7 +21,7 @@ try {
     if(partNumber.length == 3) {
         result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]*).([0-9]*))");
     } else if (partNumber.length == 4){
-        result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]{1,3}).([0-9]*).([0-9]*))");
+        result = stringToAnalyze.match("\w*-v(([0-9]{1,}).([0-9]*).([0-9]*).([0-9]*))");
     }
 
     let fullVersion = result[1];
