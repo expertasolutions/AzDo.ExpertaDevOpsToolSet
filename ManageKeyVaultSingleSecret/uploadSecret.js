@@ -16,6 +16,9 @@ const SecretClient = require('@azure/keyvault-secrets').SecretClient;
 const ApplicationTokenCredentials = require('@azure/ms-rest-nodeauth').ApplicationTokenCredentials;
 
 try {
+
+    tl.warning("Tasks is now deprecated...");
+
     let azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
     
     let subcriptionId = tl.getEndpointDataParameter(azureSubscriptionEndpoint, "subscriptionId", false);

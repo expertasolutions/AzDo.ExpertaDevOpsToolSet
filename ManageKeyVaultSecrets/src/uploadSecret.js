@@ -18,6 +18,8 @@ const ApplicationTokenCredentials = require('@azure/ms-rest-nodeauth').Applicati
 
 try {
 
+    tl.warning("Tasks is now deprecated...");
+
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
     
     var subcriptionId = tl.getEndpointDataParameter(azureSubscriptionEndpoint, "subscriptionId", false);
