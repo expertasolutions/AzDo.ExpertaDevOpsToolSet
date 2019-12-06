@@ -18,7 +18,7 @@ const ApplicationTokenCredentials = require('@azure/ms-rest-nodeauth').Applicati
 
 try {
 
-    tl.warning("Tasks is now deprecated...");
+    tl.Error("This task has been move to: https://marketplace.visualstudio.com/items?itemName=experta.AzureKeyVaultExtenion");
 
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
     
