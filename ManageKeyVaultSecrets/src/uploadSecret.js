@@ -17,6 +17,7 @@ const SecretClient = require('@azure/keyvault-secrets').SecretClient;
 const ApplicationTokenCredentials = require('@azure/ms-rest-nodeauth').ApplicationTokenCredentials;
 
 try {
+
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
     
     var subcriptionId = tl.getEndpointDataParameter(azureSubscriptionEndpoint, "subscriptionId", false);

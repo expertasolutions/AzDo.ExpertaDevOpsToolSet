@@ -5,6 +5,7 @@
     "description": "Create/Update Azure KeyVault secrets",
     "helpMarkDown": "",
     "preview": false,
+    "deprecated": true,
     "category": "Utility",
     "author": "Solutions Experta Inc.",
     "version": {
