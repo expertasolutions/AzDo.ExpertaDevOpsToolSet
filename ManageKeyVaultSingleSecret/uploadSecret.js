@@ -16,6 +16,9 @@ const SecretClient = require('@azure/keyvault-secrets').SecretClient;
 const ApplicationTokenCredentials = require('@azure/ms-rest-nodeauth').ApplicationTokenCredentials;
 
 try {
+
+    tl.setResult(tl.TaskResult.Failed, "This task has been move to: https://marketplace.visualstudio.com/items?itemName=experta.ExpertaAzureKeyVaultExtension");
+
     let azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
     
     let subcriptionId = tl.getEndpointDataParameter(azureSubscriptionEndpoint, "subscriptionId", false);
