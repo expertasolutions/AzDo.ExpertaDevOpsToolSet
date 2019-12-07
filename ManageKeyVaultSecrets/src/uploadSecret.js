@@ -18,7 +18,7 @@ const ApplicationTokenCredentials = require('@azure/ms-rest-nodeauth').Applicati
 
 try {
 
-    tl.setResult(tl.TaskResult.Failed, "This task has been move to: https://marketplace.visualstudio.com/items?itemName=experta.AzureKeyVaultExtenion");
+    tl.setResult(tl.TaskResult.Failed, "This task has been move to: https://marketplace.visualstudio.com/items?itemName=experta.ExpertaAzureKeyVaultExtension");
 
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
     
