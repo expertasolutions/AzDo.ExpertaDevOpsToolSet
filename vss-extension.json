@@ -23,7 +23,6 @@
     "Azure",
     "Kubernetes",
     "ContainerRegistries",
-    "KeyVault",
     "VersionExtrator",
     "AppInsight"
   ],
@@ -64,8 +63,6 @@
       { "path": "ACRAKSAccess" },
       { "path": "AzureAppInsight" },
       { "path": "FileContentToBase64" },
-      { "path": "ManageKeyVaultSecrets" },
-      { "path": "ManageKeyVaultSingleSecret"},
       { "path": "_screenShots", "addressable": true }
   ],
   "contributions": [
@@ -117,26 +114,6 @@
         ],
         "properties": {
             "name": "fileContentToBase64"
-        }
-      },
-      {
-        "id": "managekeyvaultsecrets-build-release-task",
-        "type": "ms.vss-distributed-task.task",
-        "targets": [
-            "ms.vss-distributed-task.tasks"
-        ],
-        "properties": {
-            "name": "manageKeyVaultSecrets"
-        }
-      },
-      {
-        "id": "managekeyvaultsinglesecret-build-release-task",
-        "type": "ms.vss-distributed-task.task",
-        "targets": [
-            "ms.vss-distributed-task.tasks"
-        ],
-        "properties": {
-            "name": "manageKeyVaultSingleSecret"
         }
       }
   ]

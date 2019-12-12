@@ -1,4 +1,4 @@
-name: ExpertaDevOpsToolSet-v4.$(date:yy)$(DayOfYear).$(rev:r)-$(Build.SourceBranchName)
+name: ExpertaDevOpsToolSet-v5.$(date:yy)$(DayOfYear).$(rev:r)-$(Build.SourceBranchName)
 trigger:
 - master
 - Issue*
@@ -50,18 +50,6 @@ steps:
   displayName: 'npm install FileContentToBase64'
   inputs:
     workingDir: FileContentToBase64
-    verbose: false
-
-- task: Npm@1
-  displayName: 'npm install ManageKeyVaultSecrets'
-  inputs:
-    workingDir: ManageKeyVaultSecrets
-    verbose: false
-
-- task: Npm@1
-  displayName: 'npm install ManageKeyVaultSingleSecret'
-  inputs:
-    workingDir: ManageKeyVaultSingleSecret
     verbose: false
 
 - task: PackageAzureDevOpsExtension@2
