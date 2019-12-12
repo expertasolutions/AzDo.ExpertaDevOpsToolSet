@@ -1,0 +1,82 @@
+name: ExpertaDevOpsToolSet-v4.$(date:yy)$(DayOfYear).$(rev:r)-$(Build.SourceBranchName)
+trigger:
+- master
+- Issue*
+
+pr:
+- master
+
+pool:
+  name: MacNetCorePools
+  demands: npm
+workspace:
+ clean: true
+
+steps:
+- task: VersionExtractor@4
+  name: versionExtractor
+  displayName: 'Version extractor digit'
+  inputs:
+    stringToAnalyze: '$(Build.BuildNumber)'
+
+- task: TfxInstaller@2
+  displayName: 'Use Node CLI for Azure DevOps (tfx-cli): v0.6.x'
+
+- task: Npm@1
+  displayName: 'npm install ACRAKSAccess'
+  inputs:
+    workingDir: ACRAKSAccess
+    verbose: false
+
+- task: Npm@1
+  displayName: 'npm install ACRCredentials'
+  inputs:
+    workingDir: ACRCredentials
+    verbose: false
+
+- task: Npm@1
+  displayName: 'npm install AzureAppInsight'
+  inputs:
+    workingDir: AzureAppInsight
+    verbose: false
+
+- task: Npm@1
+  displayName: 'npm install BuildVersionExtractor'
+  inputs:
+    workingDir: BuildVersionExtractor
+    verbose: false
+
+- task: Npm@1
+  displayName: 'npm install FileContentToBase64'
+  inputs:
+    workingDir: FileContentToBase64
+    verbose: false
+
+- task: Npm@1
+  displayName: 'npm install ManageKeyVaultSecrets'
+  inputs:
+    workingDir: ManageKeyVaultSecrets
+    verbose: false
+
+- task: Npm@1
+  displayName: 'npm install ManageKeyVaultSingleSecret'
+  inputs:
+    workingDir: ManageKeyVaultSingleSecret
+    verbose: false
+
+- task: PackageAzureDevOpsExtension@2
+  displayName: 'Package Extension: '
+  inputs:
+    extensionVersion: '$(versionExtractor.fullVersion)'
+    updateTasksVersion: true
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: '*.vsix'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+

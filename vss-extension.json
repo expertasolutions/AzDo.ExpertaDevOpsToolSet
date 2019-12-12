@@ -48,8 +48,8 @@
   },
   "badges":[
     {
-      "href":"https://dev.azure.com/experta/Community/_build?definitionId=226&_a=summary",
-      "uri": "https://dev.azure.com/experta/Community/_apis/build/status/CD-GitHub-ExpertaDevOpsToolSet?branchName=master" ,
+      "href":"https://dev.azure.com/experta/Community/_build?definitionId=239&_a=summary",
+      "uri": "https://dev.azure.com/experta/Community/_apis/build/status/expertasolutions.ExpertaDevOpsToolSet?branchName=master" ,
       "description":"master branch build"
     },
     {
