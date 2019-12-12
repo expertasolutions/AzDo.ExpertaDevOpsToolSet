@@ -40,26 +40,3 @@ If you have any comment/suggestion, please feel free to share it with us.
 ![FileContentToBase64](_screenShots/FileContentToBase64_v2.png)
 #### Output variables
 - base64Content
-
-## ManageKeyVaultSecrets (Deprecated)
-![ManageKeyVaultSecrets](_screenShots/manageKeyVaultSecrets_v2-preview.png)
-#### Secrets file path (expected file format content)
-```json
-[
-	{
-		"secret": "my_first_secret",
-		"value": "my_first_secret_value"
-	},
-	{
-		"secret": "my_second_secret",
-		"value": "my_second_secret_value"
-	}
-]
-```
-#### Important
-*** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
-
-## ManageKeyVaultSingleSecret (Deprecated)
-![ManageAzureKeyVaultSingleSecret](_screenShots/ManageAzureKeyVaultSingleSecret_v4-preview.png)
-#### Important
-*** Ensure that your subscription service principal have proper access policies rights on your Azure Key Vault ***
