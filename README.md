@@ -3,6 +3,8 @@ This is our current customs Azure DevOps tasks toolbox. Theses tasks has been sp
 Eventually, we will publish each of these tasks separately.
 If you have any comment/suggestion, please feel free to share it with us.
 
+![MasterBuildStatus](https://dev.azure.com/experta/Community/_apis/build/status/expertasolutions.ExpertaDevOpsToolSet?branchName=master)
+
 # Tasks include
 
 ## VersionExtractor
