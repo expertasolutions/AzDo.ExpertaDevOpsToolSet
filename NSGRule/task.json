@@ -1,0 +1,72 @@
+{
+  "id": "b46069aa-79fb-4ecc-97d9-0131e29bf3cd",
+    "name": "NsgRulesManager",
+    "friendlyName": "NsgRulesManager",
+    "description": "Task to Add/Remove NSG Single Rule",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "preview": false,
+    "author": "Solutions Experta Inc.",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 0
+    },
+    "instanceNameFormat": "Add/Remove single NSG Rule",
+    "groups": [],
+    "inputs": [
+        {
+          "name": "azureSubscriptionEndpoint",
+          "type": "connectedService:AzureRM",
+          "label": "Azure subscription",
+          "helpMarkDown": "Select the Azure Resource Manager subscription, which contains Azure Container Registry.Note: To configure new service connection, select the Azure subscription from the list and click 'Authorize'. If your subscription is not listed or if you want to use an existing Service Principal, you can setup an Azure service connection using 'Add' or 'Manage' button.",
+          "defaultValue": "",
+          "required": true
+        },
+        {
+          "name": "resourceGroupName",
+          "label": "Azure KeyVault resource group",
+          "type": "pickList",
+          "defaultValue": "",
+          "required": true,
+          "helpMarkDown": "",
+          "properties": {
+            "EditableOptions":true
+          }
+        },
+        {
+          "name": "nsgName",
+          "label": "Azure Network Security Group",
+          "type": "pickList",
+          "defaultValue": "",
+          "required": true,
+          "helpMarkDown":"",
+          "properties": {
+            "EditableOptions": true
+          }
+        }
+    ],
+    "dataSourceBindings" : [
+      {
+        "target": "resourceGroupName",
+        "endpointId": "$(azureSubscriptionEndpoint)",
+        "endpointUrl": "{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/providers/Microsoft.KeyVault/vaults?api-version=2018-02-14",
+        "resultSelector": "jsonpath:$.value[*]",
+        "resultTemplate": "{{{ #extractResource id resourcegroups}}}"
+      },
+      {
+        "target": "nsgName",
+        "endpointId":"$(azureSubscriptionEndpoint)",
+        "endpointUrl":"{{{endpoint.url}}}/subscriptions/{{{endpoint.subscriptionId}}}/resourceGroups/$(resourceGroupName)/providers/Microsoft.KeyVault/vaults?api-version=2018-02-14",
+        "resultSelector":"jsonpath:$.value[*]",
+        "resultTemplate":"{{{name}}}"
+      }
+    ],
+    "outputVariables" : [],
+    "execution": {
+        "Node": {
+          "target": "nsgrules.js",
+          "argumentFormat": ""
+        }
+      }
+}

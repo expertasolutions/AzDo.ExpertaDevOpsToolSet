@@ -40,3 +40,6 @@ If you have any comment/suggestion, please feel free to share it with us.
 ![FileContentToBase64](_screenShots/FileContentToBase64_v2.png)
 #### Output variables
 - base64Content
+
+## NsgRule (preview)
+in development...

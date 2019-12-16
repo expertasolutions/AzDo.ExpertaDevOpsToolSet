@@ -52,6 +52,12 @@ steps:
     workingDir: FileContentToBase64
     verbose: false
 
+- task: Npm@1
+  displayName: 'npm install NSGRule'
+  inputs:
+    workingDir: NSGRule
+    verbose: false
+
 - task: PackageAzureDevOpsExtension@2
   displayName: 'Package Extension: '
   inputs:
