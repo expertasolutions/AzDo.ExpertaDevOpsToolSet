@@ -55,8 +55,10 @@ steps:
 - task: Npm@1
   displayName: 'npm install NSGRule'
   inputs:
+    command: custom
     workingDir: NSGRule
     verbose: false
+    customCommand: 'run publishExt'
 
 - task: PackageAzureDevOpsExtension@2
   displayName: 'Package Extension: '
