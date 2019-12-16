@@ -5,7 +5,7 @@
     "description": "Task to Add/Remove NSG Single Rule",
     "helpMarkDown": "",
     "category": "Utility",
-    "preview": false,
+    "preview": true,
     "author": "Solutions Experta Inc.",
     "version": {
         "Major": 0,
@@ -13,7 +13,16 @@
         "Patch": 0
     },
     "instanceNameFormat": "Add/Remove single NSG Rule",
-    "groups": [],
+    "groups": [
+      {
+        "name": "nsgSource",
+        "displayName": "NSG Source"
+      },
+      {
+        "name": "nsgTarget",
+        "displayName": "NSG Target"
+      }
+    ],
     "inputs": [
         {
           "name": "azureSubscriptionEndpoint",
@@ -25,7 +34,7 @@
         },
         {
           "name": "resourceGroupName",
-          "label": "Azure KeyVault resource group",
+          "label": "Azure NSG resource group",
           "type": "pickList",
           "defaultValue": "",
           "required": true,
@@ -44,6 +53,32 @@
           "properties": {
             "EditableOptions": true
           }
+        },
+        {
+          "name": "nsgPriority",
+          "label": "Priority",
+          "type": "string",
+          "defaultValue": 100,
+          "required": true,
+          "groupName": "nsgSource"
+        },
+        {
+          "name": "allowedSourceIPs",
+          "label": "Allowed Source IPs",
+          "type": "string",
+          "defaultValue": "*",
+          "required": true,
+          "helpMarkDown": "",
+          "groupName": "nsgSource"
+        },
+        {
+          "name": "AllowedSourcePorts",
+          "label": "Allowed Source Ports",
+          "type": "string",
+          "required": true,
+          "defaultValue": "*",
+          "helpMarkDown": "",
+          "groupName": "nsgSource"
         }
     ],
     "dataSourceBindings" : [
@@ -65,7 +100,7 @@
     "outputVariables" : [],
     "execution": {
         "Node": {
-          "target": "nsgrules.js",
+          "target": "nsgrule.js",
           "argumentFormat": ""
         }
       }
