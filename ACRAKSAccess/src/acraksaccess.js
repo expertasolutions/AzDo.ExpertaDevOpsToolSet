@@ -16,6 +16,7 @@ const auth = require('@azure/arm-authorization');
 const graph = require('@azure/graph');
 
 try {
+
     var acrSubscriptionEndpoint = tl.getInput("acrSubscriptionEndpoint", true);
     var acrSubcriptionId = tl.getEndpointDataParameter(acrSubscriptionEndpoint, "subscriptionId", false);
     var acrServicePrincipalId = tl.getEndpointAuthorizationParameter(acrSubscriptionEndpoint, "serviceprincipalid", false);

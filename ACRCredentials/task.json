@@ -5,6 +5,7 @@
     "description": "Show/Renew Azure Container registries password",
     "helpMarkDown": "",
     "preview": false,
+    "deprecated": true,
     "category": "Utility",
     "author": "Solutions Experta Inc.",
     "version": {
