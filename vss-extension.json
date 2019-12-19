@@ -43,7 +43,7 @@
   },
   "content": {
     "details": { "path": "README.md" },
-    "license": { "path": "license" }
+    "license": { "path": "LICENSE" }
   },
   "badges":[
     {

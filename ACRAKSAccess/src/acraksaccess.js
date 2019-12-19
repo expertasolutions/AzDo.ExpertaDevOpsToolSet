@@ -15,7 +15,10 @@ const resourceManagement = require('@azure/arm-resources');
 const auth = require('@azure/arm-authorization');
 const graph = require('@azure/graph');
 
+tl.setResult(tl.TaskResult.Failed, 'This tasks has been deprecated and replace by the extension here: https://marketplace.visualstudio.com/items?itemName=experta.AzureContainerRegistryExtensions');
+
 try {
+
     var acrSubscriptionEndpoint = tl.getInput("acrSubscriptionEndpoint", true);
     var acrSubcriptionId = tl.getEndpointDataParameter(acrSubscriptionEndpoint, "subscriptionId", false);
     var acrServicePrincipalId = tl.getEndpointAuthorizationParameter(acrSubscriptionEndpoint, "serviceprincipalid", false);

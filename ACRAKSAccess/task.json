@@ -5,6 +5,7 @@
     "description": "Set ACR Access to Kubernetes cluster",
     "helpMarkDown": "",
     "preview": false,
+    "deprecated": true,
     "category": "Utility",
     "author": "Solutions Experta Inc.",
     "version": {

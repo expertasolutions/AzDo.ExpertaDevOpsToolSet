@@ -18,7 +18,7 @@ If you have any comment/suggestion, please feel free to share it with us.
 #### Important
 *** Build name require to have v0.0.0 format ***
 
-## ACRCredentials
+## ACRCredentials - Deprecated
 ![ACRCredentials](_screenShots/acrCredential_v1.png)
 #### Action Type
 - Show: Get the current credentials information
@@ -28,7 +28,7 @@ If you have any comment/suggestion, please feel free to share it with us.
 - password
 - password2
 
-## ACRAKSAccess
+## ACRAKSAccess - Deprecated
 ![ACRAKSAccess](_screenShots/ACRAKSAccess_v2.png)
 
 ## AzureAppInsight
