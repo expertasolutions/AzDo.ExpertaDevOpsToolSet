@@ -13,6 +13,8 @@ var tl = require('azure-pipelines-task-lib');
 const msRestAzureAuth = require('@azure/ms-rest-nodeauth');
 const ContainerRegistryManagementClient = require('@azure/arm-containerregistry').ContainerRegistryManagementClient;
 
+tl.setResult(tl.TaskResult.Failed, 'This tasks has been deprecated and replace by the extension here: https://marketplace.visualstudio.com/items?itemName=experta.AzureContainerRegistryExtensions');
+
 try {
     var azureSubscriptionEndpoint = tl.getInput("azureSubscriptionEndpoint", true);
     
