@@ -21,8 +21,6 @@
     "DevOps",
     "Toolsset",
     "Azure",
-    "Kubernetes",
-    "ContainerRegistries",
     "VersionExtrator",
     "AppInsight"
   ],
@@ -59,8 +57,6 @@
   ],
   "files": [
       { "path": "BuildVersionExtractor" },
-      { "path": "ACRCredentials" },
-      { "path": "ACRAKSAccess" },
       { "path": "AzureAppInsight" },
       { "path": "FileContentToBase64" },
       { "path": "_screenShots", "addressable": true }
@@ -75,26 +71,6 @@
           "properties": {
               "name": "BuildVersionExtractor"
           }
-      },
-      {
-        "id": "acrcredentials-build-release-task",
-        "type": "ms.vss-distributed-task.task",
-        "targets": [
-            "ms.vss-distributed-task.tasks"
-        ],
-        "properties": {
-            "name": "acrcredentials"
-        }
-      },
-      {
-        "id": "acraksaccess-build-release-task",
-        "type": "ms.vss-distributed-task.task",
-        "targets": [
-            "ms.vss-distributed-task.tasks"
-        ],
-        "properties": {
-            "name": "acraksaccess"
-        }
       },
       {
         "id": "azappinsight-build-release-task",
