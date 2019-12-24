@@ -18,19 +18,6 @@ If you have any comment/suggestion, please feel free to share it with us.
 #### Important
 *** Build name require to have v0.0.0 format ***
 
-## ACRCredentials - Deprecated
-![ACRCredentials](_screenShots/acrCredential_v1.png)
-#### Action Type
-- Show: Get the current credentials information
-- Renew: Renew the current credentials information access
-#### Output variables
-- username
-- password
-- password2
-
-## ACRAKSAccess - Deprecated
-![ACRAKSAccess](_screenShots/ACRAKSAccess_v2.png)
-
 ## AzureAppInsight
 ![AppInsight](_screenShots/appInsight_v2.png)
 #### Output variables
