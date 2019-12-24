@@ -23,18 +23,6 @@ steps:
   displayName: 'Use Node CLI for Azure DevOps (tfx-cli): v0.6.x'
 
 - task: Npm@1
-  displayName: 'npm install ACRAKSAccess'
-  inputs:
-    workingDir: ACRAKSAccess
-    verbose: false
-
-- task: Npm@1
-  displayName: 'npm install ACRCredentials'
-  inputs:
-    workingDir: ACRCredentials
-    verbose: false
-
-- task: Npm@1
   displayName: 'npm install AzureAppInsight'
   inputs:
     workingDir: AzureAppInsight
