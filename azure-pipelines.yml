@@ -52,6 +52,8 @@ steps:
     repositoryName: '$(Build.Repository.Name)'
     action: 'create'
     target: '$(Build.SourceVersion)'
+    tagSource: 'userSpecifiedTag'
+    tag: '$(build.BuildNumber)'
     title: '$(build.BuildNumber)'
     releaseNotesFilePath: '$(Build.SourcesDirectory)\ReleaseNotes.md'
     isDraft: true
