@@ -25,14 +25,11 @@
     "AppInsight"
   ],
   "links":{
-    "support": { 
-        "uri": "https://github.com/expertasolutions/ExpertaDevOpsToolSet/issues"
-    },
-    "privacypolicy": { "uri": "http://experta.ca/privacy/azuredevopsprivacy" } 
+    "support": { "uri": "https://github.com/expertasolutions/ExpertaDevOpsToolSet/issues" },
+    "privacypolicy": { "uri": "http://experta.ca/privacy/azuredevopsprivacy" }
   },
   "repository": {
-    "type" : "git",
-    "uri" : "https://github.com/expertasolutions/ExpertaDevOpsToolSet"
+    "type" : "git", "uri" : "https://github.com/expertasolutions/ExpertaDevOpsToolSet"
   },
   "categories": [
       "Azure Pipelines"
