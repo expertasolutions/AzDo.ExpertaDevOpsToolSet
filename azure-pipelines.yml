@@ -46,6 +46,18 @@ steps:
     extensionVersion: '$(versionExtractor.fullVersion)'
     updateTasksVersion: true
 
+- task: GitHubRelease@1
+  inputs:
+    gitHubConnection: 'ExpertaSolutionsGitHub'
+    repositoryName: '$(Build.Repository.Name)'
+    action: 'edit'
+    target: '$(Build.SourceVersion)'
+    title: '$(build.BuildNumber)'
+    releaseNotesFilePath: '$(Build.SourcesDirectory)\ReleaseNotes.md'
+    isDraft: true
+    addChangeLog: false
+  displayName: 'Publish Artifact: drop'
+
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
   inputs:
@@ -54,5 +66,3 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-
