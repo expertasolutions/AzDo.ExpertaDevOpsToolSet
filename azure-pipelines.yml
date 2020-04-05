@@ -55,7 +55,7 @@ steps:
     tagSource: 'userSpecifiedTag'
     tag: '$(build.BuildNumber)'
     title: '$(build.BuildNumber)'
-    releaseNotesFilePath: '$(Build.SourcesDirectory)\ReleaseNotes.md'
+    releaseNotesFilePath: '$(Build.SourcesDirectory)/ReleaseNotes.md'
     isDraft: true
     addChangeLog: false
   displayName: 'Publish Artifact: drop'
