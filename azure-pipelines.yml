@@ -46,32 +46,13 @@ steps:
     extensionVersion: '$(versionExtractor.fullVersion)'
     updateTasksVersion: true
 
-- task: GitHubRelease@1
-  inputs:
-    gitHubConnection: 'ExpertaSolutionsGitHub'
-    repositoryName: '$(Build.Repository.Name)'
-    action: 'create'
 - task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
     Contents: |
       *.vsix
       ReleaseNotes.md
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-    target: '$(Build.SourceVersion)'
-    tagSource: 'userSpecifiedTag'
-    tag: '$(versionExtractor.fullVersion)'
-    title: '$(versionExtractor.fullVersion)'
-    releaseNotesFilePath: '$(Build.SourcesDirectory)/ReleaseNotes.md'
-    isDraft: true
-    addChangeLog: false
-  displayName: 'Publish Artifact: drop'
-
-- task: CopyFiles@2
-  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
-    Contents: '*.vsix'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
